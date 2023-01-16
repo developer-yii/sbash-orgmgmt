@@ -1,0 +1,29 @@
+{
+    "name": "sbash/orgmgmt",
+    "description": "Organization management for Laravel Project",
+    "type": "package",
+    "keywords": ["organization", "management", "sbash"],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sbash\\Orgmgmt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Navnit Patel",
+            "email": "navnit.amcodr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/framework": "^8.12"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [                
+                "Sbash\\Orgmgmt\\Providers\\OrganizationProvider"
+            ]            
+        }
+    }    
+}
