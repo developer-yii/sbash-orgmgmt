@@ -15,10 +15,10 @@ class CreateUserOrganizationsTable extends Migration
     {
         Schema::create('user_organizations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->string('user_id');
             $table->integer('organization_id');
             $table->string('user_type');
-            $table->string('access_type');
+            $table->tinyInteger('access_type');
         });
     }
 

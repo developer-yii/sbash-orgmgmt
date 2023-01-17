@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Sbash\Orgmgmt\Controllers\Controller;
 use Sbash\Orgmgmt\Models\Organization;
 use Sbash\Orgmgmt\Models\OrgInvitationLog;
+use Sbash\Orgmgmt\Models\UserOrganization;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
@@ -163,6 +164,16 @@ class OrganizationController extends Controller
       $org = Organization::where('user_id',$user->id)->where('deleted_at',null)->first();
       if($org)
       {
+
+        $toUser = User::where('email',$request->email)->first();
+        $existCheck = UserOrganization::where('user_id',$toUser->id)->where('organization_id',$org->id)->first();
+        if($existCheck)
+        {
+          $validation->getMessageBag()->add('email', 'Email already member of organization');
+          $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
+          return response()->json($result);
+        }
+
         $orgInvitation = new OrgInvitationLog;
         $orgInvitation->organization_id = $org->id;
         $orgInvitation->to_email = $request->email;
@@ -177,7 +188,7 @@ class OrganizationController extends Controller
             'organization_name' => $org->name,
             'organization_email' => $org->email,
             'user_name' => $user->name,
-            'url' => URL::temporarySignedRoute('invite-link', now()->addMinutes(2), ['org' => $org->short_name]),
+            'url' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email]),
         ];
         Mail::to($toEmail)->send(new InviteMail($data,$from));        
 
@@ -192,9 +203,35 @@ class OrganizationController extends Controller
     }
   }
 
-  public function joinOrganization(Request $request,$org)
+  public function joinOrganization(Request $request, $org, $email)
   {
-    echo $org;
-    print_r($request->all());die;
+    if($email && $org)
+    {
+      $user = User::where('email',$email)->first();
+      $organization = Organization::where('short_name',$org)->where('deleted_at',null)->first();
+
+      $existCheck = UserOrganization::where('user_id',$user->id)->where('organization_id',$organization->id)->first();
+      $exists = false;
+      $joinSuccess = false; 
+      if($existCheck)
+      {
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists'));
+      }
+      $userOrg = new UserOrganization;
+      $userOrg->user_id = $user->id;
+      $userOrg->organization_id = $organization->id;
+      $userOrg->user_type = 'users';
+      $userOrg->access_type = 2; // 1 for owner, 2 for member
+      $r = $userOrg->save();
+
+      if($r)
+      {
+        $joinSuccess = true;
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess'));
+      }
+      else{
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess')); 
+      }
+    }    
   }
 }

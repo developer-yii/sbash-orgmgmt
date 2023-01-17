@@ -21,7 +21,7 @@ class InviteMail extends Mailable
 
     public function build()
     {        
-        $subject1 = 'Invitation to Join '.$this->data['organization_name'];
+        $subject1 = 'Invitation to Join '.$this->data['organization_name'].' on SFlow.';
         return $this->from($this->fromEmail)
                ->subject($subject1)
                ->view('orgmgmt::emails.invite')
