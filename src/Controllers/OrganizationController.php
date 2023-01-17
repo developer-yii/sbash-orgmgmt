@@ -68,6 +68,13 @@ class OrganizationController extends Controller
                 'logo' => $image_name,
                 'user_id' => \Auth::user()->id,      
               ]);
+
+              $userOrg = new UserOrganization;
+              $userOrg->user_id = \Auth::user()->id;
+              $userOrg->organization_id = $r->id;
+              $userOrg->user_type = 'users';
+              $userOrg->access_type = 1; // 1 for owner, 2 for member
+              $userOrg->save();
           }
 
           else{
@@ -93,6 +100,21 @@ class OrganizationController extends Controller
                 'logo' => $image_name,
                 'user_id' => \Auth::user()->id,      
               ]);
+              $uId = \Auth::user()->id;
+
+              if($r)
+              {
+                $userOrg = UserOrganization::where('user_id',$uId)->where('organization_id',$org->id)->first();
+                if(!$userOrg)
+                {
+                  $userOrg = new UserOrganization;
+                  $userOrg->user_id = \Auth::user()->id;
+                  $userOrg->organization_id = $org->id;
+                  $userOrg->user_type = 'users';
+                  $userOrg->access_type = 1; // 1 for owner, 2 for member
+                  $userOrg->save();
+                }
+              }
           }
 
           if($r)
@@ -164,6 +186,13 @@ class OrganizationController extends Controller
       $org = Organization::where('user_id',$user->id)->where('deleted_at',null)->first();
       if($org)
       {
+        //validation for own email
+        if($user->email == $request->email)
+        {
+          $validation->getMessageBag()->add('email', 'You are already owner of organization');
+          $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
+          return response()->json($result); 
+        }
 
         $toUser = User::where('email',$request->email)->first();
         $existCheck = UserOrganization::where('user_id',$toUser->id)->where('organization_id',$org->id)->first();
@@ -227,10 +256,10 @@ class OrganizationController extends Controller
       if($r)
       {
         $joinSuccess = true;
-        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess'));
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists'));
       }
       else{
-        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess')); 
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists')); 
       }
     }    
   }
