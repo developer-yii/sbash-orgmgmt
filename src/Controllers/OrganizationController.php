@@ -14,6 +14,8 @@ use App\Models\User;
 use Sbash\Orgmgmt\Mail\InviteMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use DataTables;
+use DB;
 
 class OrganizationController extends Controller
 {
@@ -262,5 +264,76 @@ class OrganizationController extends Controller
         return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists')); 
       }
     }    
+  }
+
+  public function members(Request $request)
+  {
+    return view('orgmgmt::organizations.members');
+  }
+
+  public function getMembers(Request $request)
+  {
+    $user = \Auth::user();
+    $org = Organization::where('user_id',$user->id)->first();
+
+    $result = DB::table('user_organizations')
+            ->leftJoin('users','user_organizations.user_id','=','users.id')
+            ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')
+            ->where('user_organizations.organization_id',$org->id)           
+            ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "OWNER" WHEN 2 THEN "MEMBER" ELSE "" END) AS member_type'))
+            ->orderBy('users.name','asc');
+
+      if ($request->ajax()) {
+        return DataTables::queryBuilder($result)          
+          ->addColumn('actions', function ($data) {
+            $button = '<button class="btn btn-primary waves-effect waves-light edit" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="Edit type" data-member="'.$data->access_type.'"><i class="fa fa-edit"></i></button>';            
+            return $button;
+          })->rawColumns(['actions'])
+          ->toJson();
+      }
+  }
+
+  public function changeMemberType(Request $request)
+  {
+    $rules = [
+      'member_type' => 'required',                              
+    ];
+
+    $messages = [
+      'member_type.required' => 'Select member type',
+    ];
+
+    $validation = Validator::make($request->all(), $rules, $messages);
+
+    if ($validation->fails()) {      
+        $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
+        return response()->json($result);
+    }
+    else
+    {
+      if($request->id_edit)
+      {
+        $userOrg = UserOrganization::find($request->id_edit);
+        if($userOrg)
+        {
+          $org = Organization::find($userOrg->organization_id);
+
+          if($org->user_id == $userOrg->user_id)
+          {
+            $validation->getMessageBag()->add('member_type', 'You can not change organizations main owners type');
+            $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
+            return response()->json($result);
+          }
+
+          $userOrg->access_type = $request->member_type;
+          $userOrg->save();
+          
+          $result = ['status' => true, 'message' => 'Member type changed', 'data' => []];
+          return response()->json($result);
+        }
+      }
+      $result = ['status' => false, 'message' => 'Member type change failed', 'data' => []];
+      return response()->json($result);
+    }
   }
 }

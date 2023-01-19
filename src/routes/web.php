@@ -12,6 +12,11 @@ Route::group(['middleware' => ['web','auth']], function() {
 
     Route::get('/Organization/invite', [OrganizationController::class, 'invite'])->name('organization.invite');
     Route::post('/Organization/sendInvite', [OrganizationController::class, 'sendInvite'])->name('organization.send.invite');
+
+    Route::get('/Organization/members', [OrganizationController::class, 'members'])->name('organization.members');
+    Route::get('Organization/get', [OrganizationController::class,'getMembers'])->name('organization.members.list');
+    Route::post('/Organization/changeMemberType', [OrganizationController::class, 'changeMemberType'])->name('organization.changeMemberType');
+
 });
 
 Route::group(['middleware' => ['web','signed']], function() {
