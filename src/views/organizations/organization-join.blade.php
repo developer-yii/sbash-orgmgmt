@@ -20,13 +20,13 @@
   </div>
   <!-- User name -->
   @if($joinSuccess && !$exists)
-    <div class="lockscreen-name"><h2>You have successfully joined Organization</h2></div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-1') }}</h2></div>
     <div class="lockscreen-name">{{ $email.' joined '.$org }}</div>
   @elseif($joinSuccess && !$exists)
-    <div class="lockscreen-name"><h2>Organization join failed</h2></div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-2') }}</h2></div>
   @else
-    <div class="lockscreen-name"><h2>Already Member of Organization</h2></div>
-    <div class="lockscreen-name">{{$email}} is already member of {{ $org}}</div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-3') }}</h2></div>
+    <div class="lockscreen-name">{{$email}} {{ __('orgmgmt::organization.orgjoin.text-4') }} {{ $org}}</div>
   @endif
 
   <!-- START LOCK SCREEN ITEM -->
@@ -38,21 +38,21 @@
   </div>
   <!-- /.lockscreen-item -->
   <div class="help-block text-center">
-    Login to SFlow, click below link
+    {{ __('orgmgmt::organization.orgjoin.text-5') }}
   </div>
   <div class="text-center">
-    <a href="{{ route('login')}}">Sign in</a>
+    <a href="{{ route('login')}}">{{ __('orgmgmt::organization.form.signin') }}</a>
   </div>
   <div class="lockscreen-footer text-center">
-    Copyright &copy; 2022-{{ date('Y')}} <b><a href="https://sbash.io" class="text-black">SBash.io</a></b><br>
-    All rights reserved
+    {{ __('orgmgmt::organization.orgjoin.copyright') }} &copy; 2022-{{ date('Y')}} <b><a href="https://sbash.io" class="text-black">SBash.io</a></b><br>
+    {{ __('orgmgmt::organization.orgjoin.right_reserved') }}
   </div>
 </div>
 <!-- /.center -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+{{-- <script src="../../plugins/jquery/jquery.min.js"></script> --}}
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
 </body>
 </html>

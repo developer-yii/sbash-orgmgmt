@@ -4,6 +4,7 @@ $(document).ready(function() {
         serverSide: true,
         scrollX: true,
         fixedColumns: true,
+        language: lang,
         ajax: {
             url: memberListUrl,
             type: 'GET'
@@ -36,7 +37,7 @@ $(document).ready(function() {
     $(document).on('submit', '#forms', function(event) {
         event.preventDefault();
         var $this = $(this);
-        var buttonLoading = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Processing...';
+        var buttonLoading = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> '+btnProcessing+'...';
         var buttonSave = 'Change';
 
         $.ajax({

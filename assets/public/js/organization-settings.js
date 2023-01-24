@@ -56,7 +56,7 @@ $(document).ready(function() {
       
       if(!($('#short_name_available').is(':checked')))
 			{
-				$('.short_name_error').html('Entered short name is not available');
+				$('.short_name_error').html(short_name_error);
 				return;
 			}		
 			$('.short_name_error').html('');

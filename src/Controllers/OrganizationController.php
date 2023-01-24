@@ -121,12 +121,12 @@ class OrganizationController extends Controller
 
           if($r)
           {
-              $result = ['status' => true, 'message' =>'Organization update success'];
+              $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
               return response()->json($result);
           }
           else
           {
-              $result = ['status' => false, 'message' =>'Organization update failed'];
+              $result = ['status' => false, 'message' =>trans('orgmgmt::organization.notification.org_add_fail')];
               return response()->json($result);
           }
       }
@@ -173,7 +173,7 @@ class OrganizationController extends Controller
     ];
 
     $messages = [
-      'email.exists' => 'Email is not registered in system',
+      'email.exists' => trans('orgmgmt::organization.validation.email_not_registered'),
     ];
 
     $validation = Validator::make($request->all(), $rules, $messages);
@@ -191,7 +191,7 @@ class OrganizationController extends Controller
         //validation for own email
         if($user->email == $request->email)
         {
-          $validation->getMessageBag()->add('email', 'You are already owner of organization');
+          $validation->getMessageBag()->add('email', trans('orgmgmt::organization.validation.owner_org'));
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
           return response()->json($result); 
         }
@@ -200,7 +200,7 @@ class OrganizationController extends Controller
         $existCheck = UserOrganization::where('user_id',$toUser->id)->where('organization_id',$org->id)->first();
         if($existCheck)
         {
-          $validation->getMessageBag()->add('email', 'Email already member of organization');
+          $validation->getMessageBag()->add('email', trans('orgmgmt::organization.validation.already_registered'));
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
           return response()->json($result);
         }
@@ -223,11 +223,11 @@ class OrganizationController extends Controller
         ];
         Mail::to($toEmail)->send(new InviteMail($data,$from));        
 
-        $result = ['status' => true, 'message' => 'Invitation link sent', 'data' => []];
+        $result = ['status' => true, 'message' => trans('orgmgmt::organization.validation.invi_sent'), 'data' => []];
         return response()->json($result);
       }
       else{
-        $validation->getMessageBag()->add('email', 'Organization not created, Please save Organization details in Organization/settings');
+        $validation->getMessageBag()->add('email', trans('orgmgmt::organization.validation.org_text_1'));
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
         return response()->json($result);   
       }
@@ -268,7 +268,43 @@ class OrganizationController extends Controller
 
   public function members(Request $request)
   {
-    return view('orgmgmt::organizations.members');
+    $lang = $this->get_DataTable_LanguageBlock();
+    return view('orgmgmt::organizations.members',compact('lang'));
+  }
+
+  public function get_DataTable_LanguageBlock()
+  {
+    $result = "
+             {
+              // url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
+              // url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/de_de.json'
+              'sEmptyTable': '" . __('event.table.empty') . "',
+              'sInfo': '" . __('event.table.info.sh') . " ' + '_START_ ' + '" . __('event.table.info.to') . " ' +
+                ' _END_' + ' " . __('event.table.info.of') . " ' + '_TOTAL_' +
+                ' " . __('event.table.info.ent') . "',
+              'sInfoEmpty': '" . __('event.table.empty') . "',
+              'sInfoFiltered': '(" . __('event.table.filter.pre') . " _MAX_ " . __('event.table.filter.post') . ")',
+              'sInfoPostFix': '',
+              'sInfoThousands': '" . __('event.table.thousand_separator') . "',
+              'sLengthMenu': '" . __('event.table.info.length_a') . " ' + '_MENU_' +
+                ' " . __('event.table.info.length_b') . "',
+              'sLoadingRecords': '" . __('event.table.loading') . "',
+              'sProcessing': '" . __('event.table.processing') . "',
+              'sSearch': '" . __('event.table.sc') . "',
+              'sZeroRecords': '" . __('event.table.nr') . "',
+              'oPaginate': {
+                'sFirst': 'First',
+                'sLast': 'Last',
+                'sNext': '" . __('event.table.paginate.next') . "',
+                'sPrevious': '" . __('event.table.paginate.prev') . "',
+              },
+              'oAria': {
+                'sSortAscending': ': activate to sort column ascending',
+                'sSortDescending': ': activate to sort column descending'
+              }
+            }";
+
+    return $result;
   }
 
   public function getMembers(Request $request)
@@ -300,7 +336,7 @@ class OrganizationController extends Controller
     ];
 
     $messages = [
-      'member_type.required' => 'Select member type',
+      'member_type.required' => trans('orgmgmt::organization.validation.sel_mem_type'),
     ];
 
     $validation = Validator::make($request->all(), $rules, $messages);
@@ -320,7 +356,7 @@ class OrganizationController extends Controller
 
           if($org->user_id == $userOrg->user_id)
           {
-            $validation->getMessageBag()->add('member_type', 'You can not change organizations main owners type');
+            $validation->getMessageBag()->add('member_type', trans('orgmgmt::organization.validation.org_val_1'));
             $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
             return response()->json($result);
           }
@@ -328,11 +364,11 @@ class OrganizationController extends Controller
           $userOrg->access_type = $request->member_type;
           $userOrg->save();
           
-          $result = ['status' => true, 'message' => 'Member type changed', 'data' => []];
+          $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.mem_type_changed'), 'data' => []];
           return response()->json($result);
         }
       }
-      $result = ['status' => false, 'message' => 'Member type change failed', 'data' => []];
+      $result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.mem_type_change_fail'), 'data' => []];
       return response()->json($result);
     }
   }

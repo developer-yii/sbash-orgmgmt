@@ -19,6 +19,7 @@ class OrganizationProvider extends ServiceProvider
         ], 'public');
         $this->loadViewsFrom(__DIR__.'/../views', 'orgmgmt');
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadTranslationsFrom(__DIR__.'/../../lang', 'orgmgmt');
 
         $this->publishes([
 	        __DIR__.'/../views' => resource_path('views'),

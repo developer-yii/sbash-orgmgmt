@@ -5,13 +5,13 @@
   <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-    <h1>Organization Members</h1>
+    <h1>{{ __('orgmgmt::organization.header.org_members') }}</h1>
     </div>
     <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home"></i></a></li>
-      <li class="breadcrumb-item active">Organization</li>
-      <li class="breadcrumb-item active">Organization Members</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.organization') }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.org_members') }}</li>
     </ol>
     </div>
   </div>  
@@ -32,8 +32,8 @@
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Member Type</th>
-                  <th>Action</th>
+                  <th>{{ __('orgmgmt::organization.table.member_type') }}</th>
+                  <th>{{ __('orgmgmt::organization.table.action') }}</th>
                 </tr>
               </thead>
             </table>
@@ -59,18 +59,18 @@
         <input type="hidden" name="id_edit" id="id_edit" />
         <div class="modal-body">
           <div class="form-group">
-            <label>Member Type</label>
+            <label>{{ __('orgmgmt::organization.table.member_type') }}</label>
             <select class="form-control" name="member_type" id="member_type">
-              <option value="1">Owner</option>
-              <option value="2">Member</option>              
+              <option value="1">{{ __('orgmgmt::organization.form.owner') }}</option>
+              <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>              
             </select>
             <span class="error"></span>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" id="btn-close" class="btn btn-secondary waves-effect"
-            data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+            data-dismiss="modal">{{ __('orgmgmt::organization.form.close') }}</button>
+          <button type="submit" class="btn btn-primary waves-effect waves-light">{{ __('orgmgmt::organization.form.save') }}</button>
         </div>
       </form>
     </div><!-- /.modal-content -->
@@ -83,6 +83,9 @@
 <script>
   var memberListUrl = "{{ route('organization.members.list')}}";
   var changeMemTypeUrl = "{{ route('organization.changeMemberType') }}";  
+  var btnChange = "{{ __('orgmgmt::organization.form.change') }}";
+  var btnProcessing = "{{ __('orgmgmt::organization.form.processing') }}";
+  var lang = {!! $lang !!}
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-members.js')}}"></script>
