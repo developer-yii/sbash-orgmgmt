@@ -44,6 +44,10 @@ return [
 		'org_text_1' => 'Organisation nicht erstellt. Bitte speichern Sie die Organisationsdetails in Organisation/Einstellungen',
 		'mem_type_changed' => 'Mitgliedstyp geändert',
 		'mem_type_change_fail' => 'Änderung des Mitgliedstyps fehlgeschlagen',
+		'no_view_set_perm' => 'Sie sind nicht berechtigt, die Einstellungen anzuzeigen',
+		'no_invite_org_perm' => 'Sie haben keine Berechtigung zum Einladen in die Organisation',
+		'no_member_view_perm' => 'Sie sind nicht berechtigt, Organisationsmitglieder anzuzeigen',
+		'no_member_type_change_perm' => 'Sie sind nicht berechtigt, den Mitgliedstyp zu ändern',
 	],
 	'validation' => [
 		'email_not_registered' => 'E-Mail ist nicht im System registriert',

@@ -21,6 +21,10 @@ class OrganizationController extends Controller
 {
   public function settings(Request $request)
   {
+      if (!auth()->user()->can('organization_settings_view')) {
+        return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_view_set_perm')]);
+      }
+
       $org = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->first();
 
       return view('orgmgmt::organizations.settings',compact('org'));
@@ -163,6 +167,9 @@ class OrganizationController extends Controller
 
   public function invite(Request $request)
   {
+    if (!auth()->user()->can('invite_to_organization')) {
+      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_invite_org_perm')]);
+    }
     return view('orgmgmt::organizations.invite');
   }
 
@@ -268,6 +275,18 @@ class OrganizationController extends Controller
 
   public function members(Request $request)
   {
+
+    if (!auth()->user()->can('organization_member_list')) {
+      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
+    }
+
+    $orgId = isset(\Auth::user()->organization->id)?\Auth::user()->organization->id:'';
+
+    if(!$orgId)
+    {      
+      return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
+    }
+
     $lang = $this->get_DataTable_LanguageBlock();
     return view('orgmgmt::organizations.members',compact('lang'));
   }
@@ -331,6 +350,11 @@ class OrganizationController extends Controller
 
   public function changeMemberType(Request $request)
   {
+    if(!auth()->user()->can('member_type_change'))
+    {
+      return response()->json(['message' => trans('orgmgmt::organization.notification.no_member_type_change_perm')], 422);
+    }
+    
     $rules = [
       'member_type' => 'required',                              
     ];

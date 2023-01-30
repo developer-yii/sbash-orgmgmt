@@ -44,6 +44,10 @@ return [
 		'org_text_1' => 'Organization not created, Please save Organization details in Organization/settings',
 		'mem_type_changed' => 'Member type changed',
 		'mem_type_change_fail' => 'Member type change failed',
+		'no_view_set_perm' => 'You dont have permission to view settings',
+		'no_invite_org_perm' => 'You dont have permission for invite to Organization',
+		'no_member_view_perm' => 'You dont have permission to view Organization members',
+		'no_member_type_change_perm' => 'You dont have permission to change member type',
 	],
 	'validation' => [
 		'email_not_registered' => 'Email is not registered in system',

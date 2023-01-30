@@ -24,5 +24,9 @@ class OrganizationProvider extends ServiceProvider
         $this->publishes([
 	        __DIR__.'/../views' => resource_path('views'),
 	    ]);
+
+        $this->publishes([
+            __DIR__ . '/../../database/seeders/OrganizationPermission.php' => database_path('seeders/OrganizationPermission.php'),
+        ], 'usermgmt');
     }
 }
