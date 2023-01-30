@@ -278,25 +278,25 @@ class OrganizationController extends Controller
              {
               // url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
               // url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/de_de.json'
-              'sEmptyTable': '" . __('event.table.empty') . "',
-              'sInfo': '" . __('event.table.info.sh') . " ' + '_START_ ' + '" . __('event.table.info.to') . " ' +
-                ' _END_' + ' " . __('event.table.info.of') . " ' + '_TOTAL_' +
-                ' " . __('event.table.info.ent') . "',
-              'sInfoEmpty': '" . __('event.table.empty') . "',
-              'sInfoFiltered': '(" . __('event.table.filter.pre') . " _MAX_ " . __('event.table.filter.post') . ")',
+              'sEmptyTable': '" . __('orgmgmt::event.table.empty') . "',
+              'sInfo': '" . __('orgmgmt::event.table.info.sh') . " ' + '_START_ ' + '" . __('orgmgmt::event.table.info.to') . " ' +
+                ' _END_' + ' " . __('orgmgmt::event.table.info.of') . " ' + '_TOTAL_' +
+                ' " . __('orgmgmt::event.table.info.ent') . "',
+              'sInfoEmpty': '" . __('orgmgmt::event.table.empty') . "',
+              'sInfoFiltered': '(" . __('orgmgmt::event.table.filter.pre') . " _MAX_ " . __('orgmgmt::event.table.filter.post') . ")',
               'sInfoPostFix': '',
-              'sInfoThousands': '" . __('event.table.thousand_separator') . "',
-              'sLengthMenu': '" . __('event.table.info.length_a') . " ' + '_MENU_' +
-                ' " . __('event.table.info.length_b') . "',
-              'sLoadingRecords': '" . __('event.table.loading') . "',
-              'sProcessing': '" . __('event.table.processing') . "',
-              'sSearch': '" . __('event.table.sc') . "',
-              'sZeroRecords': '" . __('event.table.nr') . "',
+              'sInfoThousands': '" . __('orgmgmt::event.table.thousand_separator') . "',
+              'sLengthMenu': '" . __('orgmgmt::event.table.info.length_a') . " ' + '_MENU_' +
+                ' " . __('orgmgmt::event.table.info.length_b') . "',
+              'sLoadingRecords': '" . __('orgmgmt::event.table.loading') . "',
+              'sProcessing': '" . __('orgmgmt::event.table.processing') . "',
+              'sSearch': '" . __('orgmgmt::event.table.sc') . "',
+              'sZeroRecords': '" . __('orgmgmt::event.table.nr') . "',
               'oPaginate': {
                 'sFirst': 'First',
                 'sLast': 'Last',
-                'sNext': '" . __('event.table.paginate.next') . "',
-                'sPrevious': '" . __('event.table.paginate.prev') . "',
+                'sNext': '" . __('orgmgmt::event.table.paginate.next') . "',
+                'sPrevious': '" . __('orgmgmt::event.table.paginate.prev') . "',
               },
               'oAria': {
                 'sSortAscending': ': activate to sort column ascending',
