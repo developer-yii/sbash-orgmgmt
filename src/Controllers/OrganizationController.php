@@ -223,7 +223,7 @@ class OrganizationController extends Controller
         ];
         Mail::to($toEmail)->send(new InviteMail($data,$from));        
 
-        $result = ['status' => true, 'message' => trans('orgmgmt::organization.validation.invi_sent'), 'data' => []];
+        $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.invi_sent'), 'data' => []];
         return response()->json($result);
       }
       else{
