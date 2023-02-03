@@ -11,4 +11,8 @@ class Organization extends Model
 
   // Disable Laravel's mass assignment protection
   protected $guarded = [];
+
+  public function user(){
+    return $this->belongsTo('App\Models\User');
+  }
 }

@@ -7,10 +7,16 @@ return [
 	    'org_setting' => 'Organisationseinstellungen',
 	    'invite_org' => 'Zur Organisation einladen',
 	    'org_members' => 'Organisationsmitglieder',
+	    'org_list' => 'Organisationsliste',
 	  ],
+	'label' => [
+		'org_edit' => 'Organisation bearbeiten',
+	],
 	'table' =>[
 		'member_type' => 'Mitgliedstyp',
 		'action' => 'Handlung',
+		'user' => 'Benutzer',
+		'created' => 'Hergestellt in',
 	],
 	'form' => [
 		'organization_name' => 'Organisationsname',
@@ -48,6 +54,10 @@ return [
 		'no_invite_org_perm' => 'Sie haben keine Berechtigung zum Einladen in die Organisation',
 		'no_member_view_perm' => 'Sie sind nicht berechtigt, Organisationsmitglieder anzuzeigen',
 		'no_member_type_change_perm' => 'Sie sind nicht berechtigt, den Mitgliedstyp zu ändern',
+		'no_org_list_perm' => 'Sie sind nicht berechtigt, Organisationen anzuzeigen',
+		'no_org_edit_perm' => 'Sie sind nicht berechtigt, Organisationen zu bearbeiten',
+		'no_org_found' => 'Organisation nicht gefunden!',
+		'no_mem_list_perm' => 'Sie sind nicht berechtigt, Mitglieder aufzulisten',
 	],
 	'validation' => [
 		'email_not_registered' => 'E-Mail ist nicht im System registriert',

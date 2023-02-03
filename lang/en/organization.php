@@ -7,10 +7,16 @@ return [
 	    'org_setting' => 'Organization Settings',
 	    'invite_org' => 'Invite to Organization',
 	    'org_members' => 'Organization Members',
+	    'org_list' => 'Organization List',
+	],
+	'label' => [
+		'org_edit' => 'Organization Edit',
 	],
 	'table' =>[
 		'member_type' => 'Member Type',
 		'action' => 'Action',
+		'user' => 'User',
+		'created' => 'Created At',
 	],
 	'form' => [
 		'organization_name' => 'Organization Name',
@@ -48,6 +54,10 @@ return [
 		'no_invite_org_perm' => 'You dont have permission for invite to Organization',
 		'no_member_view_perm' => 'You dont have permission to view Organization members',
 		'no_member_type_change_perm' => 'You dont have permission to change member type',
+		'no_org_list_perm' => 'You dont have permission to view Organizations',
+		'no_org_edit_perm' => 'You dont have permission to edit Organizations',
+		'no_org_found' => 'Organization not found!',
+		'no_mem_list_perm' => 'You dont have permission to list Members',
 	],
 	'validation' => [
 		'email_not_registered' => 'Email is not registered in system',
