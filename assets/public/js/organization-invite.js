@@ -37,7 +37,7 @@ $(document).ready(function() {
         error: function(error) {
         	$this.find('button[type="submit"]').html(buttonSave);
           	$this.find('button[type="submit"]').prop('disabled', false);
-          	toastr.error(error.message, errIcon)
+            toastr.error(error.responseJSON.message, errIcon)          	
         }
       })
     })
