@@ -47,7 +47,6 @@ return [
 		'org_add_success' => 'Organisationsaktualisierung erfolgreich',
 		'org_add_fail' => 'Organisationsaktualisierung fehlgeschlagen',
 		'invi_sent' => 'Einladungslink gesendet',
-		'org_text_1' => 'Organisation nicht erstellt. Bitte speichern Sie die Organisationsdetails in Organisation/Einstellungen',
 		'mem_type_changed' => 'Mitgliedstyp geändert',
 		'mem_type_change_fail' => 'Änderung des Mitgliedstyps fehlgeschlagen',
 		'no_view_set_perm' => 'Sie sind nicht berechtigt, die Einstellungen anzuzeigen',
@@ -61,6 +60,7 @@ return [
 	],
 	'validation' => [
 		'email_not_registered' => 'E-Mail ist nicht im System registriert',
+		'org_text_1' => 'Organisation nicht erstellt. Bitte speichern Sie die Organisationsdetails in Organisation/Einstellungen',
 		'owner_org' => 'Sie sind bereits Eigentümer der Organisation',
 		'already_registered' => 'E-Mail bereits Mitglied der Organisation',
 		'org_val_1' => 'Sie können den Haupteigentümertyp der Organisation nicht ändern',

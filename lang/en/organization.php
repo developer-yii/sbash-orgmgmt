@@ -47,7 +47,6 @@ return [
 		'org_add_success' => 'Organization update success',
 		'org_add_fail' => 'Organization update failed',	
 		'invi_sent' => 'Invitation link sent',	
-		'org_text_1' => 'Organization not created, Please save Organization details in Organization/settings',
 		'mem_type_changed' => 'Member type changed',
 		'mem_type_change_fail' => 'Member type change failed',
 		'no_view_set_perm' => 'You dont have permission to view settings',
@@ -61,6 +60,7 @@ return [
 	],
 	'validation' => [
 		'email_not_registered' => 'Email is not registered in system',
+		'org_text_1' => 'Organization not created, Please save Organization details in Organization/settings',
 		'owner_org' => 'You are already owner of organization',
 		'already_registered' => 'Email already member of organization',
 		'org_val_1' => 'You can not change organizations main owners type',
