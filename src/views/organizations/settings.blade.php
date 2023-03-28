@@ -151,7 +151,7 @@
               <div class="row">
                 <div class="col-2"></div>
                 <div class="col-4 text-right">
-                  <button type="button" class="btn btn-secondary cancel-btn">{{ __('orgmgmt::organization.form.cancel') }}</button>
+                  <a href="{{ route('home')}}" type="button" class="btn btn-secondary cancel-btn">{{ __('orgmgmt::organization.form.cancel') }}</a>
                   <button type="submit" class="btn btn-success">{{ __('orgmgmt::organization.form.save') }}</button>
                 </div>
               </div>

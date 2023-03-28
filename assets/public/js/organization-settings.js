@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-	$(document).on('click','.cancel-btn', function(e){
-		e.preventDefault();		
-		window.location.reload();
-	});	
+	// $(document).on('click','.cancel-btn', function(e){
+	// 	e.preventDefault();		
+	// 	window.location.reload();
+	// });	
 
 	$(document).on('keyup','#short_name',function(e){
 		e.preventDefault();
