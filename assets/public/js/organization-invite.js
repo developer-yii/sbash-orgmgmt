@@ -39,6 +39,10 @@ $(document).ready(function() {
               window.location.reload();
               return;
           }
+          if (error.status === 554) {
+              toastr.error("Email address not verified. Please check your email address and try again.");
+              return;
+          }
         	$this.find('button[type="submit"]').html(buttonSave);
           	$this.find('button[type="submit"]').prop('disabled', false);
             toastr.error(error.responseJSON.message, errIcon)          	
