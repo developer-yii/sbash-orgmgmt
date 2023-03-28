@@ -31,7 +31,11 @@ $(document).ready(function() {
         	console.warn('Failed');
         }
       },
-      error: function(xhr) {        
+      error: function(xhr) {  
+        if (xhr.status === 419) {
+            window.location.reload();
+            return;
+        }      
       }
     })
 	});

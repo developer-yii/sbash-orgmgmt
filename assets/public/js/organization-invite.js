@@ -35,6 +35,10 @@ $(document).ready(function() {
           }
         },
         error: function(error) {
+          if (error.status === 419) {
+              window.location.reload();
+              return;
+          }
         	$this.find('button[type="submit"]').html(buttonSave);
           	$this.find('button[type="submit"]').prop('disabled', false);
             toastr.error(error.responseJSON.message, errIcon)          	

@@ -88,6 +88,10 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr) {
+                if (xhr.status === 419) {
+                    window.location.reload();
+                    return;
+                }
                 $this.find('button[type="submit"]').html(buttonSave);
                 $this.find('button[type="submit"]').prop('disabled', false);
                 toastr.error(xhr.responseJSON.message)
