@@ -42,6 +42,7 @@ return [
 		'change' => 'Change',
 		'signin' => 'Sign in',
 		'save' => 'Save',
+		'double_optin' => 'Opt In for Mail Communication',
 	],
 	'notification' => [
 		'org_add_success' => 'Organization update success',

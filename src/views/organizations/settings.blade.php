@@ -126,6 +126,20 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
+                  <label for="double_optin" class="">{{ __('orgmgmt::organization.form.double_optin') }}
+                  </label>
+                </div>
+                <div class="col-4"> 
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input custom-control-input-success" id="double_optin" name="double_optin" {{ ($org->double_optin)?"checked":"" }}>
+                    <label for="double_optin" class="custom-control-label"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row g-3 align-items-center">
+                <div class="col-2">
                   <label for="logo" class="col-form-label">{{ __('orgmgmt::organization.form.upload_logo') }}</label>
                 </div>
                 <div class="col-4">

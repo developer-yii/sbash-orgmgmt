@@ -42,6 +42,7 @@ return [
 		'change' => 'Ändern',
 		'signin' => 'Einloggen',
 		'save' => 'Speichern',
+		'double_optin' => 'Melden Sie sich für die E-Mail-Kommunikation an',
 	],
 	'notification' => [
 		'org_add_success' => 'Organisationsaktualisierung erfolgreich',

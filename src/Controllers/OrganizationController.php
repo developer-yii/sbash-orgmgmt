@@ -70,7 +70,8 @@ class OrganizationController extends Controller
                 'short_name' => $request->short_name,
                 'email' => $email,
                 'email_forward' => $request->email_forward,              
-                'short_name_available' => ($request->short_name_available) ? 1 : 0,              
+                'short_name_available' => ($request->short_name_available) ? 1 : 0,
+                'double_optin' => ($request->double_optin) ? 1 : 0,
                 'logo' => $image_name,
                 'user_id' => \Auth::user()->id,      
               ]);
@@ -102,7 +103,8 @@ class OrganizationController extends Controller
                 'short_name' => $request->short_name,
                 'email' => $email,              
                 'email_forward' => $request->email_forward,              
-                'short_name_available' => ($request->short_name_available) ? 1 : 0,              
+                'short_name_available' => ($request->short_name_available) ? 1 : 0,
+                'double_optin' => ($request->double_optin) ? 1 : 0,              
                 'logo' => $image_name,
                 'user_id' => \Auth::user()->id,      
               ]);
