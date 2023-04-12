@@ -112,6 +112,11 @@ class OrganizationController extends Controller
 
               if($r)
               {
+                if(!isset(session('organization_id')) && !session('organization_id'))
+                {
+                  session(['organization_id' => $r->id]);
+                }
+                
                 $userOrg = UserOrganization::where('user_id',$uId)->where('organization_id',$org->id)->first();
                 if(!$userOrg)
                 {
