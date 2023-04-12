@@ -112,7 +112,7 @@ class OrganizationController extends Controller
 
               if($r)
               {
-                if(!isset(session('organization_id')) && !session('organization_id'))
+                if(!session()->has('organization_id') && !session('organization_id'))
                 {
                   session(['organization_id' => $r->id]);
                 }
