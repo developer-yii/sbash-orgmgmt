@@ -177,6 +177,12 @@ class OrganizationController extends Controller
     if (!auth()->user()->can('invite_to_organization')) {
       return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_invite_org_perm')]);
     }
+
+    if(!auth()->user()->isOwnerOfOrganization())
+    {
+      return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
+    }    
+
     return view('orgmgmt::organizations.invite');
   }
 
@@ -303,7 +309,7 @@ class OrganizationController extends Controller
       return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
     }
 
-    $orgId = isset(\Auth::user()->organization->id)?\Auth::user()->organization->id:'';
+    $orgId = \Auth::user()->organization->id ?? '';
 
     if(!$orgId)
     {      

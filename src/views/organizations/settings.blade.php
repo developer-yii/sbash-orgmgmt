@@ -131,7 +131,7 @@
                 </div>
                 <div class="col-4"> 
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input custom-control-input-success" id="double_optin" name="double_optin" {{ ($org->double_optin)?"checked":"" }}>
+                    <input type="checkbox" class="custom-control-input custom-control-input-success" id="double_optin" name="double_optin" {{ $org && $org->double_optin ? 'checked' : '' }}>
                     <label for="double_optin" class="custom-control-label"></label>
                   </div>
                 </div>
