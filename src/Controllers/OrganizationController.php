@@ -470,6 +470,35 @@ class OrganizationController extends Controller
 
   }
 
+  public function orgJoinList(Request $request)
+  {
+    $lang = $this->get_DataTable_LanguageBlock();
+    return view('orgmgmt::organizations.organization-list',compact('lang')); 
+  }
+
+  public function getOrgs(Request $request)
+  {
+    $results = Organization::with('user')          
+            ->where('deleted_at',null)          
+            ->get();
+
+    return DataTables::of($results)        
+      ->addColumn('user_name', function($data){          
+          return $data->user->name ?? '';
+      })
+      ->addColumn('organization_name', function ($data){
+          return $data->name ?? '';
+      })  
+      ->addColumn('actions', function ($data) {       
+        
+          $button = '<a class="btn btn-warning waves-effect waves-light ml-1 request-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->id.'" title="Request">Join</a>';
+                    
+        return $button;
+      })->rawColumns(['actions'])
+      ->toJson();
+
+  }
+
   public function edit(Request $request)
   {
       if (!auth()->user()->can('organization_edit')) {

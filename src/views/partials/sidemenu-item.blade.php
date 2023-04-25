@@ -23,6 +23,22 @@
 		    </a>
 		</li>
 		<li class="nav-item">
+		    <a href="{{ route('organization.join.list') }}" class="pl-4 nav-link">		    	
+		    	<i class="nav-icon fa fa-university"></i>
+		      	<p>
+		        	{{ __('orgmgmt::organization.header.join_organization') }}
+		    	</p>
+		    </a>
+		</li>
+		<li class="nav-item">
+		    <a href="{{ route('organization.request.list') }}" class="pl-4 nav-link">		    	
+		    	<i class="nav-icon fa fa-university"></i>
+		      	<p>
+		        	{{ __('orgmgmt::organization.header.join_requests') }}		        	
+		    	</p>
+		    </a>
+		</li>
+		<li class="nav-item">
 		    <a href="{{ route('organization.members') }}" class="pl-4 nav-link">
 		    	<i class="nav-icon fa fa-user-friends"></i>
 		      	<p>

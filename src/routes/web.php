@@ -1,6 +1,7 @@
 <?php
 
 use Sbash\Orgmgmt\Controllers\OrganizationController;
+use Sbash\Orgmgmt\Controllers\OrganizationRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web','auth']], function() {
@@ -16,6 +17,17 @@ Route::group(['middleware' => ['web','auth']], function() {
     Route::get('/Organization/members', [OrganizationController::class, 'members'])->name('organization.members');
     Route::get('Organization/members/get', [OrganizationController::class,'getMembers'])->name('organization.members.list');
     Route::post('/Organization/changeMemberType', [OrganizationController::class, 'changeMemberType'])->name('organization.changeMemberType');
+
+    Route::get('Organization/join/list', [OrganizationController::class,'orgJoinList'])->name('organization.join.list');
+    Route::get('Organization/join/get', [OrganizationController::class,'getOrgs'])->name('organizations.join.get');
+
+    Route::post('Organization/join/request', [OrganizationRequestController::class,'joinRequest'])->name('organizations.join.request');
+
+    Route::get('Organization/requests/list', [OrganizationRequestController::class,'index'])->name('organization.request.list');
+    Route::get('Organization/requests/get', [OrganizationRequestController::class,'getOrgRequests'])->name('organizations.request.get');
+    Route::post('Organization/requests/action', [OrganizationRequestController::class,'action'])->name('organizations.request.action');
+    Route::post('Organization/requests/details', [OrganizationRequestController::class,'details'])->name('organization.request.details');
+    
 
     Route::get('Organization/list', [OrganizationController::class,'list'])->name('organization.list');
     Route::get('Organization/get', [OrganizationController::class,'get'])->name('organizations.get');
