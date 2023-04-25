@@ -32,7 +32,7 @@
 		</li>
 		<li class="nav-item">
 		    <a href="{{ route('organization.request.list') }}" class="pl-4 nav-link">		    	
-		    	<i class="nav-icon fa fa-university"></i>
+		    	<i class="nav-icon fa fa-list"></i>
 		      	<p>
 		        	{{ __('orgmgmt::organization.header.join_requests') }}		        	
 		    	</p>
