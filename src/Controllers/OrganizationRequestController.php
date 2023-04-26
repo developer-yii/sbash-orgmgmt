@@ -6,6 +6,7 @@ use App\Models\OrganizationRequest;
 use Sbash\Orgmgmt\Models\OrganizationJoinRequest;
 use Sbash\Orgmgmt\Models\UserOrganization;
 use Sbash\Orgmgmt\Models\Organization;
+use App\Models\User;
 use Sbash\Orgmgmt\Controllers\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
