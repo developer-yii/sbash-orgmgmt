@@ -370,7 +370,7 @@ class OrganizationController extends Controller
     $result = DB::table('user_organizations')
             ->leftJoin('users','user_organizations.user_id','=','users.id')
             ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')
-            ->where('user_organizations.organization_id',$org->id)           
+            ->where('user_organizations.organization_id',session('organization_id'))           
             ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "OWNER" WHEN 2 THEN "MEMBER" ELSE "" END) AS member_type'))
             ->orderBy('users.name','asc');
 
