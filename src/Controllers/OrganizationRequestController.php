@@ -5,9 +5,11 @@ namespace Sbash\Orgmgmt\Controllers;
 use App\Models\OrganizationRequest;
 use Sbash\Orgmgmt\Models\OrganizationJoinRequest;
 use Sbash\Orgmgmt\Models\UserOrganization;
+use Sbash\Orgmgmt\Models\Organization;
 use Sbash\Orgmgmt\Controllers\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use DataTables;
 use DB;
 use Auth;
@@ -179,6 +181,22 @@ class OrganizationRequestController extends Controller
                             $userOrg->user_type = 'users';
                             $userOrg->access_type = 2; // 1 for owner, 2 for member
                             $userOrg->save();
+
+                            $orgObj = Organization::find($req->organization_id);
+                            $userObj = User::find($req->user_id);
+
+                            $userName = $userObj->name;                            
+
+                            $from = $orgObj->email;
+                            $name = $orgObj->name;
+                            $subject = 'Your request to Join Organization has Approved';
+
+                            Mail::send('orgmgmt::emails.request-approved',['userName' => $userName,'name' => $name], function ($message) use ($userObj,$subject,$from,$name) {
+                                $message->from($from,$name)
+                                        ->to($userObj->email)
+                                        ->subject($subject);
+                            });
+
                         }
                     }
                     if($res)
