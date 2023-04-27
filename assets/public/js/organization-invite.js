@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$(document).on('submit', '#invite_form', function(event) {
       event.preventDefault();
       $this = $(this);
-      var buttonLoading = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>'+invitingText;
+      var buttonLoading = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> '+invitingText;
       var buttonSave = inviteText;
 		
       $.ajax({
