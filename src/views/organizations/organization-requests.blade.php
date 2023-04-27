@@ -69,7 +69,7 @@
                   <option value="1">{{ __('orgmgmt::organization.form.approve') }}</option>
                   <option value="2">{{ __('orgmgmt::organization.form.reject') }}</option>
                 </select>
-                <span class="error"></span>
+                <span class="status_change error"></span>
               </div>              
             </div>
           </div>            

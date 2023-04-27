@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Sbash\Orgmgmt\Mail\InviteMail;
+use Sbash\Orgmgmt\Mail\InvitationActionMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use DataTables;
@@ -255,7 +256,8 @@ class OrganizationController extends Controller
             'organization_name' => $org->name,
             'organization_email' => $org->email,
             'user_name' => $user->name,
-            'url' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email]),
+            'urlApprove' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
+            'urlReject' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
         ];
         Mail::to($toEmail)->send(new InviteMail($data,$from));        
 
@@ -270,7 +272,7 @@ class OrganizationController extends Controller
     }
   }
 
-  public function joinOrganization(Request $request, $org, $email)
+  public function joinOrganization(Request $request, $org, $email, $action)
   {
     if($email && $org)
     {
@@ -279,25 +281,68 @@ class OrganizationController extends Controller
 
       $existCheck = UserOrganization::where('user_id',$user->id)->where('organization_id',$organization->id)->first();
       $exists = false;
-      $joinSuccess = false; 
+      $joinSuccess = false;
+      $alreadyAction = false;       
+
       if($existCheck)
       {
-        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists'));
+        $exists = true;
+        $alreadyAction = true;
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
       }
-      $userOrg = new UserOrganization;
-      $userOrg->user_id = $user->id;
-      $userOrg->organization_id = $organization->id;
-      $userOrg->user_type = 'users';
-      $userOrg->access_type = 2; // 1 for owner, 2 for member
-      $r = $userOrg->save();
 
-      if($r)
+      $invLogCheck = OrgInvitationLog::where('organization_id',$organization->id)
+                          ->where('to_email',$email)->where('invitation_status','!=',0)->first();
+
+      if($invLogCheck)
       {
-        $joinSuccess = true;
-        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists'));
+        $alreadyAction = true;
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
+      }
+
+      $invLog = OrgInvitationLog::where('organization_id',$organization->id)
+                          ->where('to_email',$email)
+                          ->update(['invitation_status' => ($action == 'approve' ? 1 : 2)]);      
+
+      if($action == 'approve')
+      {        
+        $userOrg = new UserOrganization;
+        $userOrg->user_id = $user->id;
+        $userOrg->organization_id = $organization->id;
+        $userOrg->user_type = 'users';
+        $userOrg->access_type = 2; // 1 for owner, 2 for member
+        if($userOrg->save())
+          $joinSuccess = true;
+      }      
+
+      $userOrgs = UserOrganization::where('organization_id',$organization->id)->where('access_type',1)->get();      
+
+      if(count($userOrgs))
+      {
+          $orgObj = Organization::find($organization->id);
+          
+          foreach($userOrgs as $uorg)
+          {
+              $userObj = User::find($uorg->user_id);
+              // Email organization owner for notification
+              $from = $orgObj->email;              
+              $data = [
+                  'organization_name' => $orgObj->name,
+                  'organization_email' => $orgObj->email,
+                  'sender_name' => $user->name,
+                  'user_name' => $userObj->name,
+                  'action' => $action
+              ];
+              Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));        
+          }
+      }
+
+      if($joinSuccess)
+      {        
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction'));
       }
       else{
-        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists')); 
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction')); 
       }
     }    
   }

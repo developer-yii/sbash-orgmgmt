@@ -95,6 +95,8 @@ return [
 		'text-3' => 'Already Member of Organization',
 		'text-4' => 'is already member of',
 		'text-5' => 'Login to Website, click below link',
+		'text-6' => 'Organization Joining Request Rejected!',
+		'text-7' => 'Organization Joining Request Already Rejected!',
 		'copyright' => 'Copyright',
 		'right_reserved' => 'All rights reserved',
 	],

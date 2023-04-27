@@ -95,6 +95,8 @@ return [
 		'text-3' => 'Bereits Mitglied der Organisation',
 		'text-4' => 'ist bereits Mitglied bei',
 		'text-5' => 'Melden Sie sich auf der Website an, klicken Sie auf den folgenden Link',
+		'text-6' => 'Organisationsbeitrittsantrag abgelehnt!',
+		'text-7' => 'Organisationsbeitrittsantrag bereits abgelehnt!',
 		'copyright' => 'Urheberrechte',
 		'right_reserved' => 'Alle Rechte vorbehalten',
 	],

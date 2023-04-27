@@ -38,6 +38,6 @@ Route::group(['middleware' => ['web','auth']], function() {
 });
 
 Route::group(['middleware' => ['web','signed']], function() {
-    Route::get('invite-link/{org}/{email}', [OrganizationController::class,'joinOrganization'])
+    Route::get('invite-link/{org}/{email}/{action}', [OrganizationController::class,'joinOrganization'])
    ->name('invite-link');   
 });

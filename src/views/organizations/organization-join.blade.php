@@ -19,11 +19,14 @@
     <a href="../../index2.html"><b>SBash</b>IO</a>
   </div>
   <!-- User name -->
-  @if($joinSuccess && !$exists)
+  @if($joinSuccess && !$exists && $action == 'approve')
     <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-1') }}</h2></div>
     <div class="lockscreen-name">{{ $email.' joined '.$org }}</div>
-  @elseif($joinSuccess && !$exists)
-    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-2') }}</h2></div>
+  @elseif(!$exists && $alreadyAction)
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-7') }}</h2></div>
+  @elseif(!$exists && !$joinSuccess && $action == 'reject')
+    {{-- <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-2') }}</h2></div> --}}
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-6') }}</h2></div>
   @else
     <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-3') }}</h2></div>
     <div class="lockscreen-name">{{$email}} {{ __('orgmgmt::organization.orgjoin.text-4') }} {{ $org}}</div>

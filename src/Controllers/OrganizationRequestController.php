@@ -11,6 +11,8 @@ use Sbash\Orgmgmt\Controllers\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Sbash\Orgmgmt\Mail\ApprovalNotificationMail;
+use Sbash\Orgmgmt\Mail\RequestActionMail;
 use DataTables;
 use DB;
 use Auth;
@@ -60,6 +62,26 @@ class OrganizationRequestController extends Controller
                 $joinRequest->user_id = $user->id;
                 $joinRequest->user_note = $request->note;
                 $r = $joinRequest->save();
+                
+                $userOrgs = UserOrganization::where('organization_id',$request->id)->where('access_type',1)->get();
+
+                if(count($userOrgs))
+                {
+                    $orgObj = Organization::find($request->id);
+                    foreach($userOrgs as $uorg)
+                    {
+                        $userObj = User::find($uorg->user_id);
+                        // Email organization owner for notification
+                        $from = $orgObj->email;
+                        $data = [
+                            'organization_name' => $orgObj->name,
+                            'organization_email' => $orgObj->email,
+                            'sender_name' => $user->name,
+                            'user_name' => $userObj->name,
+                        ];
+                        Mail::to($userObj->email)->send(new ApprovalNotificationMail($data,$from));        
+                    }
+                }
 
                 if($r)
                 {
@@ -171,6 +193,16 @@ class OrganizationRequestController extends Controller
                     $req->owner_note = $request->owner_note;
                     $req->action_by = auth()->user()->id;
                     $res = $req->save();
+
+                    // Email notification for actions
+                    $orgObj = Organization::find($req->organization_id);
+                    $userObj = User::find($req->user_id);
+
+                    $userName = $userObj->name;
+                    $from = $orgObj->email;
+                    $name = $orgObj->name;
+                    $note = $request->owner_note;
+
                     if($res && $request->status == 1)
                     {
                         $alreadyMember = UserOrganization::where('organization_id',$req->organization_id)->where('user_id',$req->user_id)->first();                       
@@ -182,24 +214,41 @@ class OrganizationRequestController extends Controller
                             $userOrg->user_type = 'users';
                             $userOrg->access_type = 2; // 1 for owner, 2 for member
                             $userOrg->save();
-
-                            $orgObj = Organization::find($req->organization_id);
-                            $userObj = User::find($req->user_id);
-
-                            $userName = $userObj->name;                            
-
-                            $from = $orgObj->email;
-                            $name = $orgObj->name;
+                            
                             $subject = 'Your request to Join Organization has Approved';
+                            $action = 'Approved';
 
-                            Mail::send('orgmgmt::emails.request-approved',['userName' => $userName,'name' => $name], function ($message) use ($userObj,$subject,$from,$name) {
-                                $message->from($from,$name)
-                                        ->to($userObj->email)
-                                        ->subject($subject);
-                            });
+                            // Email user a mail for invitation
+                            $toEmail = $request->email;                            
+                            $data = [
+                                'userName' => $userName,
+                                'name' => $name,
+                                'action' => $action,
+                                'note' => $note,
+                                'subject' => $subject,
+                            ];
+                            Mail::to($userObj->email)->send(new RequestActionMail($data,$from));
+                            // end                           
 
                         }
                     }
+                    else if($res && $request->status == 2)
+                    {
+                        $subject = 'Your request to Join Organization has Rejected';
+                        $action = 'Rejected';
+                        
+                        $data = [
+                            'userName' => $userName,
+                            'name' => $name,
+                            'action' => $action,
+                            'note' => $note,
+                            'subject' => $subject,
+                        ];
+
+                        Mail::to($userObj->email)->send(new RequestActionMail($data,$from));                        
+                    }
+                    // mail code ends
+
                     if($res)
                     {
                         $result = ['status' => true, 'message' => $msg];
