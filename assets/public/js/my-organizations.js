@@ -105,8 +105,7 @@ $(document).ready(function() {
 
     $(document).on('keyup','#short_name',function(e){
         e.preventDefault();
-        var name = $(this).val();
-        console.log(name);
+        var name = $(this).val();       
             
         $.ajax({
           url: checkNameUrl,
@@ -182,6 +181,10 @@ $(document).ready(function() {
                 $('#setting_form')[0].reset();                
                 $('#myModal').modal('hide');
                 $("#datatable").DataTable().ajax.reload();
+                if(!$('#edit_id').val())
+                {                    
+                    setTimeout(function(){ location.reload() }, 1500);
+                }
               }          
               else{            
                 first_input = "";
@@ -212,8 +215,7 @@ $(document).ready(function() {
             url: detailUrl+'?id='+id,
             type: 'GET',
             dataType: 'json',
-            success: function(result) {
-                console.log(result);
+            success: function(result) {                
                 if(result.status){                            
                     $('#setting_form').find('#name').val(result.detail.name);
                     $('#setting_form').find('#short_name').val(result.detail.short_name);
