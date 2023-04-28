@@ -50,86 +50,137 @@ class OrganizationController extends Controller
       }
       else
       {
+        if($request->id)
+        {
+          $org = Organization::find($request->id);          
 
-          $org = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->first();
+          $image_name = $org->logo;
 
-          if(!$org)
-          {
-              $image_name = '';
-              if ($request->hasFile('logo')) {
-                  $image = $request->file('logo');
-                  $image_name = time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
-                  $destinationPath = public_path('img/uploads/org_logo');
-                  $image->move($destinationPath, $image_name);
-              }
+          if ($request->hasFile('logo')) {
 
-              $email = trim($request->short_name);                
-              $email = $email.'@sbash.io';
-
-              $r = Organization::create([
-                'name' => $request->name,
-                'short_name' => $request->short_name,
-                'email' => $email,
-                'email_forward' => $request->email_forward,              
-                'short_name_available' => ($request->short_name_available) ? 1 : 0,
-                'double_optin' => ($request->double_optin) ? 1 : 0,
-                'logo' => $image_name,
-                'user_id' => \Auth::user()->id,      
-              ]);
-
-              $userOrg = new UserOrganization;
-              $userOrg->user_id = \Auth::user()->id;
-              $userOrg->organization_id = $r->id;
-              $userOrg->user_type = 'users';
-              $userOrg->access_type = 1; // 1 for owner, 2 for member
-              $userOrg->save();
-          }
-
-          else{
-
-              $image_name = $org->logo;
-
-              if ($request->hasFile('logo')) {
-                  $image = $request->file('logo');
-                  $image_name = time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
-                  $destinationPath = public_path('img/uploads/org_logo');
-                  $image->move($destinationPath, $image_name);
-              }
-
-              $email = trim($request->short_name);                
-              $email = $email.'@sbash.io';
-
-              $r = $org->update([
-                'name' => $request->name,
-                'short_name' => $request->short_name,
-                'email' => $email,              
-                'email_forward' => $request->email_forward,              
-                'short_name_available' => ($request->short_name_available) ? 1 : 0,
-                'double_optin' => ($request->double_optin) ? 1 : 0,              
-                'logo' => $image_name,
-                'user_id' => \Auth::user()->id,      
-              ]);
-              $uId = \Auth::user()->id;
-
-              if($r)
+              if($org->logo)
               {
-                if(!session()->has('organization_id') && !session('organization_id'))
-                {
-                  session(['organization_id' => $r->id]);
-                }
-                
-                $userOrg = UserOrganization::where('user_id',$uId)->where('organization_id',$org->id)->first();
-                if(!$userOrg)
-                {
-                  $userOrg = new UserOrganization;
-                  $userOrg->user_id = \Auth::user()->id;
-                  $userOrg->organization_id = $org->id;
-                  $userOrg->user_type = 'users';
-                  $userOrg->access_type = 1; // 1 for owner, 2 for member
-                  $userOrg->save();
+                $path = public_path('img/uploads/org_logo/'.$org->logo);
+                if (file_exists($path)) {
+                  unlink($path);
                 }
               }
+
+              $image = $request->file('logo');
+              $image_name = time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+              $destinationPath = public_path('img/uploads/org_logo');
+              $image->move($destinationPath, $image_name);
           }
+
+          $email = trim($request->short_name);                
+          $email = $email.'@sbash.io';
+          $uId = \Auth::user()->id;
+
+          $r = $org->update([
+            'name' => $request->name,
+            'short_name' => $request->short_name,
+            'email' => $email,              
+            'email_forward' => $request->email_forward,              
+            'short_name_available' => ($request->short_name_available) ? 1 : 0,   
+            'double_optin' => ($request->double_optin) ? 1 : 0,           
+            'logo' => $image_name,
+            'updated_by' => $uId,
+          ]);
+
+          if($r)
+          {
+              $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
+              return response()->json($result);
+          }
+          else
+          {
+              $result = ['status' => false, 'message' =>trans('orgmgmt::organization.notification.org_add_fail')];
+              return response()->json($result);
+          }
+        }
+
+          $orgs = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->get();
+
+          if(count($orgs) >= 2)
+          {
+            // return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.already_two_org_created')]);
+            return response()->json(['message' => trans('orgmgmt::organization.notification.already_two_org_created')], 422);
+          }
+
+          $image_name = '';
+          if ($request->hasFile('logo')) {
+              $image = $request->file('logo');
+              $image_name = time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+              $destinationPath = public_path('img/uploads/org_logo');
+              $image->move($destinationPath, $image_name);
+          }
+
+          $email = trim($request->short_name);                
+          $email = $email.'@sbash.io';
+
+          $r = Organization::create([
+            'name' => $request->name,
+            'short_name' => $request->short_name,
+            'email' => $email,
+            'email_forward' => $request->email_forward,              
+            'short_name_available' => ($request->short_name_available) ? 1 : 0,
+            'double_optin' => ($request->double_optin) ? 1 : 0,
+            'logo' => $image_name,
+            'user_id' => \Auth::user()->id,      
+          ]);
+
+          $userOrg = new UserOrganization;
+          $userOrg->user_id = \Auth::user()->id;
+          $userOrg->organization_id = $r->id;
+          $userOrg->user_type = 'users';
+          $userOrg->access_type = 1; // 1 for owner, 2 for member
+          $userOrg->save();         
+
+          // else{
+
+          //     $image_name = $org->logo;
+
+          //     if ($request->hasFile('logo')) {
+          //         $image = $request->file('logo');
+          //         $image_name = time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+          //         $destinationPath = public_path('img/uploads/org_logo');
+          //         $image->move($destinationPath, $image_name);
+          //     }
+
+          //     $email = trim($request->short_name);                
+          //     $email = $email.'@sbash.io';
+
+          //     $r = $org->update([
+          //       'name' => $request->name,
+          //       'short_name' => $request->short_name,
+          //       'email' => $email,              
+          //       'email_forward' => $request->email_forward,              
+          //       'short_name_available' => ($request->short_name_available) ? 1 : 0,
+          //       'double_optin' => ($request->double_optin) ? 1 : 0,              
+          //       'logo' => $image_name,
+          //       'user_id' => \Auth::user()->id,      
+          //     ]);
+          //     $uId = \Auth::user()->id;
+
+          //     if($r)
+          //     {
+          //       if(!session()->has('organization_id') && !session('organization_id'))
+          //       {
+          //         session(['organization_id' => $r->id]);
+          //       }
+                
+          //       $userOrg = UserOrganization::where('user_id',$uId)->where('organization_id',$org->id)->first();
+          //       if(!$userOrg)
+          //       {
+          //         $userOrg = new UserOrganization;
+          //         $userOrg->user_id = \Auth::user()->id;
+          //         $userOrg->organization_id = $org->id;
+          //         $userOrg->user_type = 'users';
+          //         $userOrg->access_type = 1; // 1 for owner, 2 for member
+          //         $userOrg->save();
+          //       }
+          //     }
+          // }
 
           if($r)
           {
@@ -578,7 +629,7 @@ class OrganizationController extends Controller
           'short_name_available' => 'sometimes',
           'short_name' => 'required_with:short_name_available,on',
           'email_forward' => 'required|email',
-          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000'                      
+          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000',
       ];
 
       $validation = Validator::make($request->all(), $rules);
@@ -621,6 +672,7 @@ class OrganizationController extends Controller
             'short_name_available' => ($request->short_name_available) ? 1 : 0,              
             'logo' => $image_name,
             'updated_by' => $uId,
+            'double_optin' => ($request->double_optin) ? 1 : 0,
           ]);
 
           if($r)
@@ -660,4 +712,45 @@ class OrganizationController extends Controller
     }
   }
 
+  public function mylist(Request $request)
+  {    
+    $lang = $this->get_DataTable_LanguageBlock();
+    return view('orgmgmt::organizations.my-organizations',compact('lang')); 
+  }
+
+  public function getMyList(Request $request)
+  {
+    $results = Organization::whereHas('user', function ($query) {
+                $query->where('id', auth()->user()->id);
+            })
+            ->get();
+
+    return DataTables::of($results)                
+      ->addColumn('actions', function ($data) {
+        $button = '<a class="btn btn-primary waves-effect waves-light edit" data-id="'.$data->id.'" target="_blank" href="javascript:void(0)" title="Edit"><i class="fa fa-edit"></i></a>';                    
+        return $button;
+      })->rawColumns(['actions'])
+      ->toJson();
+  }
+
+  public function details(Request $request)
+  {
+    if($request->id)
+    {
+      if(!auth()->user()->isOrganizationOwner($request->id))
+      {
+        return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_edit_perm')], 422);
+      }
+
+      $model = Organization::find($request->id);
+
+      $result = ['status' => true, 'message' => '', 'detail' => $model];
+      return response()->json($result);
+
+    }
+    else{
+      return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_found')], 422);
+    }
+
+  }
 }

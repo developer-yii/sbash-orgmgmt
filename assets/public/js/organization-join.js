@@ -20,27 +20,7 @@ $(document).ready(function() {
             {
                 data: 'email',
                 name: 'organizations.email'
-            },
-            {
-                data: 'email_forward',
-                name: 'organizations.email_forward'
-            },
-            {
-                data: 'user_name',
-                name: 'user_name'
-            },
-            {
-                data: 'created_at',
-                render: function(_,_, full) {
-                  var created_at = full['created_at'];
-                  var created_at = moment(created_at).format('DD MMM YYYY hh:mm A');
-                  
-                  if(created_at){
-                    return created_at;                                        
-                  }
-                  return "";
-                }
-            },
+            },            
             {
                 data: 'actions',
                 name: 'actions'

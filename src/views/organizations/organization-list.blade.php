@@ -31,10 +31,7 @@
                 <tr>
                   <th>Name</th>
                   <th>{{ __('orgmgmt::organization.form.short_name') }}</th>
-                  <th>Email</th>
-                  <th>{{ __('orgmgmt::organization.form.email_forward') }}</th>
-                  <th>{{ __('orgmgmt::organization.table.user') }}</th>                  
-                  <th>{{ __('orgmgmt::organization.table.created') }}</th>
+                  <th>Email</th>                  
                   <th>{{ __('orgmgmt::organization.table.action') }}</th>
                 </tr>
               </thead>

@@ -10,6 +10,7 @@ return [
 	    'org_list' => 'Organisationsliste',
 	    'join_organization' => 'Organisation beitreten',
 	    'join_requests' => 'Join-Anfragen',
+	    'my_org_list' => 'Meine Organisationen',
 	  ],
 	'label' => [
 		'org_edit' => 'Organisation bearbeiten',
@@ -22,6 +23,9 @@ return [
 		'user_name' => 'Nutzername',
 		'user_email' => 'Benutzer Email',
 		'status' => 'Status',
+	],
+	'page' => [
+		'add_organization' => 'Organisation hinzufügen',
 	],
 	'form' => [
 		'organization_name' => 'Organisationsname',
@@ -79,6 +83,7 @@ return [
 		'request_approved' => 'Anfrage genehmigt',
 		'request_rejected' => 'Anfrage zurückgewiesen',
 		'status_update_fail' => 'Statusänderung fehlgeschlagen',
+		'already_two_org_created' => 'Sie können nicht mehr als 2 Organisationen erstellen',
 	],
 	'validation' => [
 		'email_not_registered' => 'E-Mail ist nicht im System registriert',

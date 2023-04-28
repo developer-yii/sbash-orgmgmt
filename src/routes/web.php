@@ -11,6 +11,10 @@ Route::group(['middleware' => ['web','auth']], function() {
     Route::post('/Organization/addUpdate', [OrganizationController::class, 'addUpdate'])->name('organization.addUpdate');
     Route::post('/Organization/nameCheck', [OrganizationController::class, 'checkName'])->name('organization.checkName');
 
+    Route::get('/Organization/my-list', [OrganizationController::class, 'mylist'])->name('organization.mylist');
+    Route::get('Organization/mylistget', [OrganizationController::class,'getMyList'])->name('organizations.getmylist');
+    Route::get('/Organization/details', [OrganizationController::class, 'details'])->name('organization.details');
+
     Route::get('/Organization/invite', [OrganizationController::class, 'invite'])->name('organization.invite');
     Route::post('/Organization/sendInvite', [OrganizationController::class, 'sendInvite'])->name('organization.send.invite');
 

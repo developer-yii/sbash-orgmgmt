@@ -7,14 +7,14 @@
 	  </p>
 	</a>
 	<ul class="nav nav-treeview">	  
-		@role('User')
+		@role('User')			
 		<li class="nav-item">
-		    <a href="{{ route('organization.settings') }}" class="pl-4 nav-link">
+		    <a href="{{ route('organization.mylist') }}" class="pl-4 nav-link">
 		      <i class="fa fa-cogs nav-icon"></i>
-		      <p>{{ __('orgmgmt::organization.header.settings') }}</p>
+		      <p>{{ __('orgmgmt::organization.header.my_org_list') }}</p>
 		    </a>
 		</li>	
-		 <li class="nav-item">
+		<li class="nav-item">
 		    <a href="{{ route('organization.invite') }}" class="pl-4 nav-link">
 		    	<i class="nav-icon fa fa-user-plus"></i>
 		      	<p>

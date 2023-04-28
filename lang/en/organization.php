@@ -10,6 +10,7 @@ return [
 	    'org_list' => 'Organization List',
 	    'join_organization' => 'Join Organization',
 	    'join_requests' => 'Join Requests',
+	    'my_org_list' => 'My Organizations',
 	],
 	'label' => [
 		'org_edit' => 'Organization Edit',
@@ -22,6 +23,9 @@ return [
 		'user_name' => 'User Name',
 		'user_email' => 'User Email',
 		'status' => 'Status',
+	],
+	'page' => [
+		'add_organization' => 'Add Organisation',
 	],
 	'form' => [
 		'organization_name' => 'Organization Name',
@@ -79,6 +83,7 @@ return [
 		'request_approved' => 'Request Approved',
 		'request_rejected' => 'Request Rejected',
 		'status_update_fail' => 'Status change failed',
+		'already_two_org_created' => 'You can not create more than 2 Organization',
 	],
 	'validation' => [
 		'email_not_registered' => 'Email is not registered in system',
