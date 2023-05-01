@@ -93,6 +93,7 @@ return [
 		'org_val_1' => 'Sie können den Haupteigentümertyp der Organisation nicht ändern',
 		'sel_mem_type' => 'Mitgliedstyp auswählen',
 		'update_status' => 'Bitte aktualisieren Sie den Status',
+		'already_sent' => 'Einladung zum Beitritt zur Organisation wurde bereits gesendet',
 	],
 	'orgjoin' => [
 		'text-1' => 'Sie sind der Organisation erfolgreich beigetreten',

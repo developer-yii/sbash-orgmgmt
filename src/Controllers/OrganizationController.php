@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Sbash\Orgmgmt\Mail\InviteMail;
 use Sbash\Orgmgmt\Mail\InvitationActionMail;
+use Sbash\Orgmgmt\Mail\InviteNonRegisteredMail;
+use Sbash\Orgmgmt\Models\InvitedUser;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use DataTables;
@@ -245,14 +247,14 @@ class OrganizationController extends Controller
     }
 
     $rules = [
-      'email' => 'required|email|exists:users,email',                              
+      'email' => 'required|email',
     ];
 
-    $messages = [
-      'email.exists' => trans('orgmgmt::organization.validation.email_not_registered'),
-    ];
+    // $messages = [
+    //   'email.exists' => trans('orgmgmt::organization.validation.email_not_registered'),
+    // ];
 
-    $validation = Validator::make($request->all(), $rules, $messages);
+    $validation = Validator::make($request->all(), $rules);
 
     if ($validation->fails()) {      
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
@@ -260,6 +262,7 @@ class OrganizationController extends Controller
     }
     else
     {
+
       $user = \Auth::user();
 
       if(isset($request->id_edit) && $request->id_edit)
@@ -269,6 +272,49 @@ class OrganizationController extends Controller
       else
       {
         $org = Organization::where('user_id',$user->id)->where('deleted_at',null)->first();
+      }
+
+      // Check if invited email is registered or not
+      $existingUser = User::where('email',$request->email)->first();
+
+      $orgObj = Organization::find(session('organization_id'));
+
+      $oId = $orgObj->id ?? $org->id;
+
+      $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$oId)->where('is_registered',0)->first();      
+
+      if(!$existingUser && !$existingInvite)
+      {
+        $invitedUsr = new InvitedUser;
+        $invitedUsr->email = $request->email;
+        $invitedUsr->organization_id = session('organization_id') ?? $org->id;        
+        $invitedUsr->invited_by = $user->id;
+        $res = $invitedUsr->save();
+
+        // Email user a mail for invitation
+        $toEmail = $request->email;
+        $from = $user->email;
+        $data = [            
+            'organization_name' => $orgObj->name ?? $org->name,
+            'organization_email' => $orgObj->email ?? $org->email,
+            'user_name' => $user->name,            
+        ];
+        Mail::to($toEmail)->send(new InviteNonRegisteredMail($data,$from));      
+
+        if($res)
+        {          
+          $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.invi_sent'), 'data' => []];
+          return response()->json($result);
+        }
+        else{
+          $result = ['status' => false, 'message' => 'Something went wrong', 'data' => []];
+          return response()->json($result);   
+        }
+      }
+
+      if($existingInvite)
+      {        
+        return response()->json(['message' => trans('orgmgmt::organization.validation.already_sent')], 422);       
       }
 
       if($org)

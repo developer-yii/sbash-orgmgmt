@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InviteMail extends Mailable
+class InviteNonRegisteredMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,10 +21,10 @@ class InviteMail extends Mailable
 
     public function build()
     {        
-        $subject1 = 'Invitation to Join '.$this->data['organization_name'].'.';
+        $subject1 = 'Invitation to Register on'.config('app.name').'.';
         return $this->from($this->fromEmail)
                ->subject($subject1)
-               ->markdown('orgmgmt::emails.invite')
+               ->markdown('orgmgmt::emails.invitation-register')
                ->with(['data' => $this->data]);
     }
 }

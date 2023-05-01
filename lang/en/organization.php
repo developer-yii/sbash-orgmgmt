@@ -93,6 +93,7 @@ return [
 		'org_val_1' => 'You can not change organizations main owners type',
 		'sel_mem_type' => 'Select member type',
 		'update_status' => 'Please update status',
+		'already_sent' => 'Invite Already sent for joining organization',
 	],
 	'orgjoin' => [
 		'text-1' => 'You have successfully joined Organization',
