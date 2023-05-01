@@ -1,5 +1,5 @@
 @component('mail::message')
-#Hello,
+# Hello,
 
 You have been invited to join {{ $data['organization_name'] }} by {{ $data['user_name'] }}. 
 
