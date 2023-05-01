@@ -21,7 +21,7 @@ class InviteNonRegisteredMail extends Mailable
 
     public function build()
     {        
-        $subject1 = 'Invitation to Register on'.config('app.name').'.';
+        $subject1 = 'Invitation to Register on '.config('app.name').'.';
         return $this->from($this->fromEmail)
                ->subject($subject1)
                ->markdown('orgmgmt::emails.invitation-register')
