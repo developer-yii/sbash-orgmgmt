@@ -721,6 +721,7 @@ class OrganizationController extends Controller
             'logo' => $image_name,
             'updated_by' => $uId,
             'double_optin' => ($request->double_optin) ? 1 : 0,
+            'default_footer' => $request->default_footer,
           ]);
 
           if($r)

@@ -141,6 +141,17 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
+                  <label for="default_footer" class="col-form-label">{{ __('orgmgmt::organization.form.default_footer') }}</label>
+                </div>
+                <div class="col-8">
+                  <textarea class="form-control ckeditor" id="default_footer" name="default_footer" placeholder="{{ __('orgmgmt::organization.form.default_footer') }}">{{ $org->default_footer ?? $org->default_footer }}</textarea>
+                  <span class="error"></span>
+                </div>              
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row g-3 align-items-center">
+                <div class="col-2">
                   <label for="logo" class="col-form-label">{{ __('orgmgmt::organization.form.upload_logo') }}</label>
                 </div>
                 <div class="col-4">
