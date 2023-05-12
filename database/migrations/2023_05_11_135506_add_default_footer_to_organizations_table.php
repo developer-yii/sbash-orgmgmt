@@ -14,7 +14,7 @@ class AddDefaultFooterToOrganizationsTable extends Migration
     public function up()
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->text('default_footer')->nullable()->after('logo');
+            $table->longText('default_footer')->nullable()->after('logo');
         });
     }
 
