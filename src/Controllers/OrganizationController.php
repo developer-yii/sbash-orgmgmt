@@ -84,7 +84,8 @@ class OrganizationController extends Controller
             'email' => $email,              
             'email_forward' => $request->email_forward,              
             'short_name_available' => ($request->short_name_available) ? 1 : 0,   
-            'double_optin' => ($request->double_optin) ? 1 : 0,           
+            'double_optin' => ($request->double_optin) ? 1 : 0,     
+            'default_footer' => $request->default_footer,      
             'logo' => $image_name,
             'updated_by' => $uId,
           ]);
@@ -127,6 +128,7 @@ class OrganizationController extends Controller
             'email_forward' => $request->email_forward,              
             'short_name_available' => ($request->short_name_available) ? 1 : 0,
             'double_optin' => ($request->double_optin) ? 1 : 0,
+            'default_footer' => $request->default_footer,
             'logo' => $image_name,
             'user_id' => \Auth::user()->id,      
           ]);

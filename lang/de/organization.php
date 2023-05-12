@@ -61,6 +61,7 @@ return [
 		'approve' => 'Genehmigen',
 		'reject' => 'Ablehnen',
 		'approval' => 'Genehmigung',
+		'default_footer' => 'Standardfußzeile',
 	],
 	'notification' => [
 		'org_add_success' => 'Organisationsaktualisierung erfolgreich',

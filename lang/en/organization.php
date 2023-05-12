@@ -61,6 +61,7 @@ return [
 		'approve' => 'Approve',
 		'reject' => 'Reject',
 		'approval' => 'Approval',
+		'default_footer' => 'Default Footer',
 	],
 	'notification' => [
 		'org_add_success' => 'Organization update success',

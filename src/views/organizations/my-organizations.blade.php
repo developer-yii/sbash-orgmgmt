@@ -54,7 +54,7 @@
 </section>
 
 {{-- add organization modal --}}
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -150,6 +150,17 @@
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="email_forward" name="email_forward" placeholder="{{ __('orgmgmt::organization.form.email_forward') }}" value="">
+                <span class="error"></span>
+              </div>              
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row g-3 align-items-center">
+              <div class="col-2">
+                <label for="default_footer" class="col-form-label">{{ __('orgmgmt::organization.form.default_footer') }}</label>
+              </div>
+              <div class="col-8">
+                <textarea class="form-control ckeditor" id="default_footer" name="default_footer" placeholder="{{ __('orgmgmt::organization.form.default_footer') }}"></textarea>
                 <span class="error"></span>
               </div>              
             </div>
