@@ -49,6 +49,7 @@ $(document).ready(function() {
         $('#edit_id').val(0);
         $('#setting_form')[0].reset();
         $('#myModalLabel').html('Add Organization');
+        CKEDITOR.instances.default_footer.setData('');
         $('#uploadImages').html('');
         $('#img-prv').html('');
     })
@@ -223,6 +224,8 @@ $(document).ready(function() {
                     $('#public_page').html(publicpages);
                     $('#email').html(result.detail.email);
                     $('#email_forward').val(result.detail.email_forward);
+                    $('#default_footer').val(result.detail.default_footer);
+                    CKEDITOR.instances.default_footer.setData( result.default_footer );
                     if(result.detail.logo)
                     {
                         var htm = '';
