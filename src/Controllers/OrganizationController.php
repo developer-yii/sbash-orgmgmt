@@ -250,13 +250,14 @@ class OrganizationController extends Controller
 
     $rules = [
       'email' => 'required|email',
+      'invite_message' => 'required'
     ];
 
-    // $messages = [
-    //   'email.exists' => trans('orgmgmt::organization.validation.email_not_registered'),
-    // ];
+    $messages = [
+      'invite_message.required' => trans('orgmgmt::organization.validation.invite_message_required'),
+    ];
 
-    $validation = Validator::make($request->all(), $rules);
+    $validation = Validator::make($request->all(), $rules, $messages);
 
     if ($validation->fails()) {      
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
@@ -289,6 +290,7 @@ class OrganizationController extends Controller
       {
         $invitedUsr = new InvitedUser;
         $invitedUsr->email = $request->email;
+        $invitedUsr->invite_message = $request->invite_message;
         $invitedUsr->organization_id = session('organization_id') ?? $org->id;        
         $invitedUsr->invited_by = $user->id;
         $res = $invitedUsr->save();
@@ -299,7 +301,8 @@ class OrganizationController extends Controller
         $data = [            
             'organization_name' => $orgObj->name ?? $org->name,
             'organization_email' => $orgObj->email ?? $org->email,
-            'user_name' => $user->name,            
+            'user_name' => $user->name,      
+            'invite_message' => $request->invite_message,      
         ];
         Mail::to($toEmail)->send(new InviteNonRegisteredMail($data,$from));      
 
@@ -344,6 +347,7 @@ class OrganizationController extends Controller
         $orgInvitation = new OrgInvitationLog;
         $orgInvitation->organization_id = $org->id;
         $orgInvitation->to_email = $request->email;
+        $orgInvitation->invite_message = $request->invite_message;
         $orgInvitation->invited_by = $user->id;
         $orgInvitation->save();
 
@@ -355,6 +359,7 @@ class OrganizationController extends Controller
             'organization_name' => $org->name,
             'organization_email' => $org->email,
             'user_name' => $user->name,
+            'invite_message' => $request->invite_message,
             'urlApprove' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
             'urlReject' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
         ];

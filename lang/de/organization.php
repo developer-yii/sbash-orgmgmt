@@ -62,6 +62,7 @@ return [
 		'reject' => 'Ablehnen',
 		'approval' => 'Genehmigung',
 		'default_footer' => 'Standardfußzeile',
+		'invite_note' => 'Einladungsnotiz',
 	],
 	'notification' => [
 		'org_add_success' => 'Organisationsaktualisierung erfolgreich',
@@ -95,6 +96,7 @@ return [
 		'sel_mem_type' => 'Mitgliedstyp auswählen',
 		'update_status' => 'Bitte aktualisieren Sie den Status',
 		'already_sent' => 'Einladung zum Beitritt zur Organisation wurde bereits gesendet',
+		'invite_message_required' => 'Eine Einladungsnotiz ist erforderlich',
 	],
 	'orgjoin' => [
 		'text-1' => 'Sie sind der Organisation erfolgreich beigetreten',

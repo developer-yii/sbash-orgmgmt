@@ -62,6 +62,7 @@ return [
 		'reject' => 'Reject',
 		'approval' => 'Approval',
 		'default_footer' => 'Default Footer',
+		'invite_note' => 'Invite Note',
 	],
 	'notification' => [
 		'org_add_success' => 'Organization update success',
@@ -95,6 +96,7 @@ return [
 		'sel_mem_type' => 'Select member type',
 		'update_status' => 'Please update status',
 		'already_sent' => 'Invite Already sent for joining organization',
+		'invite_message_required' => 'Invite note is required',
 	],
 	'orgjoin' => [
 		'text-1' => 'You have successfully joined Organization',

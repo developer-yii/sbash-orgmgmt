@@ -3,6 +3,9 @@
 
 You are invited to Join {{ $data['organization_name'] }} by {{ $data['user_name'] }}.
 
+<p>following is inviters note:</p>                           
+<p><i>{{$data['invite_message']}}<i></p> 
+
 Kindly take action
 
 <div style="display: inline-block">

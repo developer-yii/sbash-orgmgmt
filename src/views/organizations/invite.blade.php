@@ -41,7 +41,17 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">                
                 <div class="col-6">
+                  <label for="invite_message">{{__('orgmgmt::organization.form.email')}}</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('orgmgmt::organization.form.enter_email') }}" />
+                  <span class="error"></span>
+                </div>              
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row g-3 align-items-center">                
+                <div class="col-6">
+                  <label for="invite_message">{{__('orgmgmt::organization.form.invite_note')}}</label>
+                  <textarea class="form-control" id="invite_message" name="invite_message"/></textarea>
                   <span class="error"></span>
                 </div>              
               </div>
