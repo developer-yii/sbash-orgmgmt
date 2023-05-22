@@ -14,7 +14,7 @@ class AddInviteMessageToOrganizationInvitationLogTable extends Migration
     public function up()
     {
         Schema::table('organization_invitation_log', function (Blueprint $table) {
-            $table->text('invited_message')->nullable()->after('to_email');
+            $table->text('invite_message')->nullable()->after('to_email');
         });
     }
 
@@ -26,7 +26,7 @@ class AddInviteMessageToOrganizationInvitationLogTable extends Migration
     public function down()
     {
         Schema::table('organization_invitation_log', function (Blueprint $table) {
-            $table->dropColumn('invited_message');
+            $table->dropColumn('invite_message');
         });
     }
 }
