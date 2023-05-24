@@ -15,7 +15,7 @@
     </div>
     <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
-      <li class="breadcrumb-item"><a href="{{ url('administrator/dashboard') }}"><i class="fa fa-home"></i></a></li>
+      <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home"></i></a></li>
       <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.organization') }}</li>
       <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.invite_org') }}</li>
     </ol>
