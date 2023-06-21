@@ -275,16 +275,15 @@ class OrganizationController extends Controller
       else
       {
         $org = Organization::where('user_id',$user->id)->where('deleted_at',null)->first();
+        if(session('organization_id')){
+          $org = Organization::find(session('organization_id'));
+        }
       }
 
       // Check if invited email is registered or not
       $existingUser = User::where('email',$request->email)->first();
 
-      $orgObj = Organization::find(session('organization_id'));
-
-      $oId = $orgObj->id ?? $org->id;
-
-      $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$oId)->where('is_registered',0)->first();      
+      $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$org->id)->where('is_registered',0)->first();      
 
       if(!$existingUser && !$existingInvite)
       {
@@ -299,8 +298,8 @@ class OrganizationController extends Controller
         $toEmail = $request->email;
         $from = $user->email;
         $data = [            
-            'organization_name' => $orgObj->name ?? $org->name,
-            'organization_email' => $orgObj->email ?? $org->email,
+            'organization_name' => $org->name,
+            'organization_email' => $org->email,
             'user_name' => $user->name,      
             'invite_message' => $request->invite_message,      
         ];
