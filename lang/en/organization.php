@@ -25,7 +25,7 @@ return [
 		'status' => 'Status',
 	],
 	'page' => [
-		'add_organization' => 'Add Organisation',
+		'add_organization' => 'Add Organization',
 	],
 	'form' => [
 		'organization_name' => 'Organization Name',
