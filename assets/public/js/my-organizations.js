@@ -52,6 +52,8 @@ $(document).ready(function() {
         CKEDITOR.instances.default_footer.setData('');
         $('#uploadImages').html('');
         $('#img-prv').html('');
+        $('#public_page').html('');
+        $('#email').html('');
     })
 
     $(document).on('submit', '#forms', function(event) {
