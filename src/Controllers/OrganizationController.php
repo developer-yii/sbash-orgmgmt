@@ -17,11 +17,20 @@ use Sbash\Orgmgmt\Mail\InviteNonRegisteredMail;
 use Sbash\Orgmgmt\Models\InvitedUser;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
 use DataTables;
 use DB;
 
 class OrganizationController extends Controller
 {
+
+  public function __construct()
+  {
+    if (Route::hasMiddleware('check.subscription') && Route::hasMiddleware('preventBackHistory')) {
+      $this->middleware(['check.subscription', 'preventBackHistory']);
+    }
+  }
+
   public function settings(Request $request)
   {
       if (!auth()->user()->can('organization_settings_view')) {
