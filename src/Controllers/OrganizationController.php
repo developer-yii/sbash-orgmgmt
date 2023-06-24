@@ -25,10 +25,8 @@ class OrganizationController extends Controller
 {
 
   public function __construct()
-  {
-    if (Route::hasMiddleware('check.subscription') && Route::hasMiddleware('preventBackHistory')) {
-      $this->middleware(['check.subscription', 'preventBackHistory']);
-    }
+  {        
+      $this->middleware(['check.subscription', 'preventBackHistory']);        
   }
 
   public function settings(Request $request)
