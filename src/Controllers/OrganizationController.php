@@ -25,8 +25,10 @@ class OrganizationController extends Controller
 {
 
   public function __construct()
-  {        
-      $this->middleware(['check.subscription', 'preventBackHistory']);        
+  {   
+      if(class_exists('App\Http\Middleware\CheckSubscription') && class_exists('App\Http\Middleware\PreventBackHistory')){        
+        $this->middleware(['check.subscription', 'preventBackHistory']);        
+      }     
   }
 
   public function settings(Request $request)
