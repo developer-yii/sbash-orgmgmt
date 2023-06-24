@@ -97,6 +97,7 @@ return [
 		'update_status' => 'Please update status',
 		'already_sent' => 'Invite Already sent for joining organization',
 		'invite_message_required' => 'Invite note is required',
+		'select_image_file' => 'Please select an image file.'
 	],
 	'orgjoin' => [
 		'text-1' => 'You have successfully joined Organization',

@@ -97,6 +97,7 @@ return [
 		'update_status' => 'Bitte aktualisieren Sie den Status',
 		'already_sent' => 'Einladung zum Beitritt zur Organisation wurde bereits gesendet',
 		'invite_message_required' => 'Eine Einladungsnotiz ist erforderlich',
+		'select_image_file' => 'Bitte wählen Sie eine Bilddatei aus.'
 	],
 	'orgjoin' => [
 		'text-1' => 'Sie sind der Organisation erfolgreich beigetreten',

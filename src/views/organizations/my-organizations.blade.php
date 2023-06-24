@@ -209,12 +209,12 @@
   var checkNameUrl = "{{ route('organization.checkName')}}"
   var addUpdateUrl = "{{ route('organization.addUpdate')}}";
   var short_name_error = "{{ __('orgmgmt::organization.form.short_name_not_available') }}";
+  var select_image_file = "{{ __('orgmgmt::organization.validation.select_image_file') }}";
   var successMsg = "{{ __('orgmgmt::organization.form.success') }}";
   var errIcon = "{{ __('orgmgmt::organization.form.error') }}";
   var checkNameUrl = "{{ route('organization.checkName')}}";
   var logoUrl = "{{ asset('img/uploads/org_logo')}}";
   var url = "{{url('')}}";
-  console.log('url: '+url);
   var lang = {!! $lang !!}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" crossorigin="anonymous"></script>

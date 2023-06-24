@@ -146,7 +146,7 @@ $(document).ready(function() {
         // Check if the selected file is an image
         if (!file.type.startsWith('image/')) {
             // Handle the case where the selected file is not an image
-            $(this).closest('.form-group').find('.error').html('Please select an image file.');
+            $(this).closest('.form-group').find('.error').html(select_image_file);
 
             // Reset the file input
             $('#logo').val('');
