@@ -19,6 +19,13 @@ use Auth;
 
 class OrganizationRequestController extends Controller
 {
+    public function __construct()
+    {
+        if (Route::hasMiddleware('check.subscription') && Route::hasMiddleware('preventBackHistory')) {
+          $this->middleware(['check.subscription', 'preventBackHistory']);
+        }
+    }
+
     public function joinRequest(Request $request)
     {
         $user = \Auth::user();
