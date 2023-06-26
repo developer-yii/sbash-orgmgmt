@@ -48,7 +48,7 @@ class OrganizationController extends Controller
       $rules = [
           'name' => 'required|max:100',
           'short_name_available' => 'sometimes',
-          'short_name' => 'required_with:short_name_available,on',
+          'short_name' => 'required_with:short_name_available,on|max:50|string|alpha_num',
           'email_forward' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
           'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000'                      
       ];
@@ -688,7 +688,7 @@ class OrganizationController extends Controller
     $rules = [
           'name' => 'required|max:100',
           'short_name_available' => 'sometimes',
-          'short_name' => 'required_with:short_name_available,on',
+          'short_name' => 'required_with:short_name_available,on|max:50|string|alpha_num',
           'email_forward' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
           'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000',
       ];
