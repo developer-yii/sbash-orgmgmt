@@ -49,7 +49,7 @@ class OrganizationController extends Controller
           'name' => 'required|max:100',
           'short_name_available' => 'sometimes',
           'short_name' => 'required_with:short_name_available,on',
-          'email_forward' => 'required|email',
+          'email_forward' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
           'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000'                      
       ];
 
