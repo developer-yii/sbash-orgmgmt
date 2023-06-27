@@ -69,6 +69,14 @@
               </div>              
             </div>
           </div>            
+          <div class="form-group">
+            <div class="row g-3 align-items-center">                
+              <div class="col-md-12">
+                <textarea class="form-control" id="invite_message" name="invite_message" data-lt-tmp-id="lt-619729" spellcheck="false" data-gramm="false"></textarea>
+                <span class="error"></span>
+              </div>              
+            </div>
+          </div>            
         </div>
         <div class="modal-footer">
           <button type="button" id="btn-close" class="btn btn-secondary waves-effect"
