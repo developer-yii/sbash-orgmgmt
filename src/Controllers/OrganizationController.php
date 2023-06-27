@@ -50,10 +50,14 @@ class OrganizationController extends Controller
           'short_name_available' => 'sometimes',
           'short_name' => 'required_with:short_name_available,on|max:50|string|alpha_num',
           'email_forward' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
-          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000'                      
+          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2048'                      
       ];
 
-      $validation = Validator::make($request->all(), $rules);
+      $messages = [
+        'logo.max' => 'The logo must not be greater than 2MB size.'
+      ];
+
+      $validation = Validator::make($request->all(), $rules, $messages);
 
       if ($validation->fails()) {      
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
@@ -690,10 +694,14 @@ class OrganizationController extends Controller
           'short_name_available' => 'sometimes',
           'short_name' => 'required_with:short_name_available,on|max:50|string|alpha_num',
           'email_forward' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
-          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2000',
+          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2048',
       ];
 
-      $validation = Validator::make($request->all(), $rules);
+      $messages = [
+        'logo.max' => 'The logo must not be greater than 2MB size.'
+      ];
+
+      $validation = Validator::make($request->all(), $rules, $messages);
 
       if ($validation->fails()) {      
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];

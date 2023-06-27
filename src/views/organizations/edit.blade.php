@@ -198,6 +198,7 @@
   var successMsg = "{{ __('orgmgmt::organization.form.success') }}";
   var errIcon = "{{ __('orgmgmt::organization.form.error') }}";
   var checkNameUrl = "{{ route('organization.checkName')}}";  
+  var select_image_file = "{{ __('orgmgmt::organization.validation.select_image_file') }}";
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-edit.js')}}"></script>

@@ -38,6 +38,25 @@ $(document).ready(function() {
 	});
 
 	$('#logo').change(function(){
+
+      var file = this.files[0];
+    
+      // Check if the selected file is an image
+      if (!file.type.startsWith('image/')) {
+          // Handle the case where the selected file is not an image
+          $(this).closest('.form-group').find('.error').html(select_image_file);
+
+          // Reset the file input
+          $('#logo').val('');
+          
+          // Remove the file name from the input field
+          $('.custom-file-label').text('Choose file');
+          
+          return;            
+      }
+      // clear error if any
+      $(this).closest('.form-group').find('.error').html('');
+
 	    var cHtml = '<img id="preview-image" src="" alt="preview image" style="max-height: 100px;">';
 	    $('.upload_file').remove();
 	    $('#img-prv').html(cHtml);
