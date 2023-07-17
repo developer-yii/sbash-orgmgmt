@@ -62,6 +62,7 @@
             <label>{{ __('orgmgmt::organization.table.member_type') }}</label>
             <select class="form-control" name="member_type" id="member_type">
               <option value="1">{{ __('orgmgmt::organization.form.owner') }}</option>
+              <option value="3">{{ __('orgmgmt::organization.form.admin') }}</option>              
               <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>              
             </select>
             <span class="error"></span>

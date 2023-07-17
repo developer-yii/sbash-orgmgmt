@@ -35,6 +35,7 @@ return [
 		'email' => 'Email',
 		'invite' => 'Invite',
 		'owner' => 'Owner',
+		'admin' => 'Admin',
 		'member' => 'Member',
 		'inviting' => 'Inviting',
 		'request' => 'Send Request',
