@@ -550,7 +550,7 @@ class OrganizationController extends Controller
 
   public function changeMemberType(Request $request)
   {
-    if(!auth()->user()->can('member_type_change') && !auth()->user()->isOrganizationOwner(session('organization_id')))
+    if(!auth()->user()->isOrganizationOwner(session('organization_id')))
     {
       return response()->json(['message' => trans('orgmgmt::organization.notification.no_member_type_change_perm')], 422);
     }
