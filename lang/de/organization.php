@@ -87,6 +87,10 @@ return [
 		'request_rejected' => 'Anfrage zurückgewiesen',
 		'status_update_fail' => 'Statusänderung fehlgeschlagen',
 		'already_two_org_created' => 'Sie können nicht mehr als 2 Organisationen erstellen',
+		'member_remove_success' => 'Mitglied erfolgreich aus der Organisation entfernt',
+		'member_remove_failed' => 'Das Entfernen des Mitglieds ist fehlgeschlagen',
+		'no_member_remove_perm' => 'Sie sind nicht berechtigt, ein Mitglied zu entfernen',
+		'cant_remove_owner' => 'Sie können den Organisationseigentümer nicht entfernen',
 	],
 	'validation' => [
 		'email_not_registered' => 'E-Mail ist nicht im System registriert',
@@ -110,5 +114,10 @@ return [
 		'text-7' => 'Organisationsbeitrittsantrag bereits abgelehnt!',
 		'copyright' => 'Urheberrechte',
 		'right_reserved' => 'Alle Rechte vorbehalten',
+	],
+	'alert' => [
+		'are_you_sure' => 'Möchten Sie den Benutzer wirklich aus der Organisation entfernen?',
+		'are_you_sure_sub' => 'Sie werden dies nicht rückgängig machen können!',
+		'confirm_btn' => 'Ja, Benutzer entfernen'
 	],
 ];

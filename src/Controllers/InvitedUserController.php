@@ -20,5 +20,45 @@ use Auth;
 
 class InvitedUserController extends Controller
 {
-	
+	public function remove(Request $request)
+	{
+		$user = Auth::user();		
+
+		if($request->id)
+		{
+			if($this->isOrganizationAdmins())
+			{				
+				$userOrganization = UserOrganization::find($request->id);				
+
+				if($userOrganization->access_type == 1)
+				{
+					$result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.cant_remove_owner')];
+      				return response()->json($result);
+				}
+
+				$r = $userOrganization->delete();
+
+				if($r)
+				{
+					$result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.member_remove_success')];
+      				return response()->json($result);	
+				}else {
+					$result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.member_remove_failed')];
+      				return response()->json($result);	
+				}
+			} else {
+				return response()->json(['message' => trans('orgmgmt::organization.notification.no_member_remove_perm')], 422);
+			}
+		}
+	}
+
+	public function isOrganizationAdmins()
+	{
+		$orgAdmin = UserOrganization::where('organization_id', session('organization_id'))->where('user_id', auth()->user()->id)->whereIn('access_type', [1,3])->first();
+		if($orgAdmin)
+		{
+			return true;
+		}
+		return false;
+	}
 }

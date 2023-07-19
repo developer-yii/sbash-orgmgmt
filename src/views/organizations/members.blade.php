@@ -87,6 +87,12 @@
   var btnChange = "{{ __('orgmgmt::organization.form.change') }}";
   var btnProcessing = "{{ __('orgmgmt::organization.form.processing') }}";
   var lang = {!! $lang !!}
+  var removeMemberUrl = "{{ route('organization.member.remove')}}";
+  var alert1 = "{{ __('orgmgmt::organization.alert.are_you_sure') }}";
+  var alertsub = "{{ __('orgmgmt::organization.alert.are_you_sure_sub') }}";
+  var cancelText = "{{ __('orgmgmt::organization.form.cancel') }}";
+  var confirmText = "{{ __('orgmgmt::organization.alert.confirm_btn') }}";
+  var ErrorText = "{{ __('orgmgmt::organization.form.error') }}";
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-members.js')}}"></script>

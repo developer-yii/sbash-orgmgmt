@@ -2,6 +2,7 @@
 
 use Sbash\Orgmgmt\Controllers\OrganizationController;
 use Sbash\Orgmgmt\Controllers\OrganizationRequestController;
+use Sbash\Orgmgmt\Controllers\InvitedUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web','auth']], function() {
@@ -39,6 +40,9 @@ Route::group(['middleware' => ['web','auth']], function() {
     Route::get('/organization/edit', [OrganizationController::class, 'edit'])->name('organization.edit');
     Route::post('/organization/editUpdate', [OrganizationController::class, 'editUpdate'])->name('organization.editUpdate');
     Route::get('/organization/members', [OrganizationController::class,'memberlist'])->name('org.members.list');
+
+    Route::post('/organization/remove-member', [InvitedUserController::class, 'remove'])->name('organization.member.remove');
+
 });
 
 Route::group(['middleware' => ['web','signed']], function() {

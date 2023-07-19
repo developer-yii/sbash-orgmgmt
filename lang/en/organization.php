@@ -87,6 +87,10 @@ return [
 		'request_rejected' => 'Request Rejected',
 		'status_update_fail' => 'Status change failed',
 		'already_two_org_created' => 'You can not create more than 2 Organization',
+		'member_remove_success' => 'Member Successfully removed from Organiziation',
+		'member_remove_failed' => 'Member removal failed',
+		'no_member_remove_perm' => 'You dont have permission to remove Member',
+		'cant_remove_owner' => 'You cant remove Organization owner',
 	],
 	'validation' => [
 		'email_not_registered' => 'Email is not registered in system',
@@ -111,5 +115,10 @@ return [
 		'copyright' => 'Copyright',
 		'right_reserved' => 'All rights reserved',
 	],
+	'alert' => [
+		'are_you_sure' => 'Are you sure to remove user from Organiziation?',
+		'are_you_sure_sub' => 'You wont be able to reverse this!',
+		'confirm_btn' => 'Yes, Remove User'
+	]
 
 ];

@@ -95,5 +95,51 @@ $(document).ready(function() {
             
     })
 
+    $(document).on('click', '.remove', function() {
+        let id = $(this).attr('id');
+        
+        Swal.fire({
+            title: alert1,
+            text: alertsub,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: cancelText,
+            confirmButtonText: confirmText
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: removeMemberUrl,
+                type: "post",
+                data: {
+                    id: id,       
+                    _token: $('meta[name="_token"]').attr('content')         
+                },
+                success: function(res, status) {
+                    if (status = '200') {
+                        toastr.success(res.message);
+                        $("#datatable").DataTable().ajax.reload();                
+                    }
+                    if(res.status == false)
+                    {
+                        toastr.error(res.message, ErrorText);
+                    }
+                },
+                error: function(xhr) {        
+                    console.log(xhr);
+                    if (xhr.status === 419) {
+                        window.location.reload();
+                        return;
+                    }      
+                    if(xhr.status !== 0)
+                    {
+                        toastr.error(xhr.responseJSON.message, ErrorText);              
+                    }
+                }
+            }) // ajax end
+        } // confirm end
+        }) // promise end
+    }) // click event end
 
 });

@@ -541,7 +541,10 @@ class OrganizationController extends Controller
              $button = '';
             if (auth()->user()->can('member_type_change')) {
               $button .= '<button class="btn btn-primary waves-effect waves-light edit" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="Edit type" data-member="'.$data->access_type.'"><i class="fa fa-edit"></i></button>';           
+              $button .= '<button class="btn btn-danger waves-effect waves-light ml-2 remove" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="remove from member"><i class="fa-solid fa-right-from-bracket"></i></button>';           
             }
+            
+            
             return $button;
           })->rawColumns(['actions'])
           ->toJson();
