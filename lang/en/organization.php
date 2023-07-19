@@ -17,6 +17,7 @@ return [
 	],
 	'table' =>[
 		'member_type' => 'Member Type',
+		'access_type' => 'Access Type',
 		'action' => 'Action',
 		'user' => 'User',
 		'created' => 'Created At',

@@ -33,6 +33,19 @@ $(document).ready(function() {
                 name: 'email_forward'
             },            
             {
+                data: 'access_type',
+                name: 'access_type',
+                render: function(_,_, full) {                    
+                    if (full['user_organizations'][0]['access_type'] === 1) {
+                        return 'Owner';
+                    } else if (full['user_organizations'][0]['access_type'] === 3) {
+                        return 'Admin';
+                    } else {
+                        return '';
+                    }
+                }
+            },
+            {
                 data: 'created_at',
                 render: function(_,_, full) {
                   var created_at = full['created_at'];

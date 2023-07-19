@@ -800,7 +800,15 @@ class OrganizationController extends Controller
     $results = Organization::whereHas('user', function ($query) {
                 $query->where('id', auth()->user()->id);
             })
-            ->get();
+            ->whereHas('userOrganizations', function ($query) {
+                $query->whereIn('access_type', [1, 3]);
+            })
+            ->with(['userOrganizations' => function ($query) {
+                $query->whereIn('access_type', [1, 3]);
+            }])
+            ->get();            
+
+    \Log::info($results);
 
     return DataTables::of($results)                
       ->addColumn('actions', function ($data) {
@@ -814,7 +822,7 @@ class OrganizationController extends Controller
   {
     if($request->id)
     {
-      if(!auth()->user()->isOrganizationOwner($request->id))
+      if(!$this->isOrganizationAdmins($request->id))
       {
         return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_edit_perm')], 422);
       }
@@ -831,9 +839,11 @@ class OrganizationController extends Controller
 
   }
 
-  public function isOrganizationAdmins()
+  public function isOrganizationAdmins($organizationId = null)
   {
-    $orgAdmin = UserOrganization::where('organization_id', session('organization_id'))->where('user_id', auth()->user()->id)->whereIn('access_type', [1,3])->first();
+    $organizationId = $organizationId ?? session('organization_id');    
+
+    $orgAdmin = UserOrganization::where('organization_id', $organizationId)->where('user_id', auth()->user()->id)->whereIn('access_type', [1,3])->first();
     if($orgAdmin)
     {
       return true;

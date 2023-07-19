@@ -21,4 +21,9 @@ class Organization extends Model
       return $this->hasMany(OrganizationJoinRequest::class);
   }
 
+  public function userOrganizations()
+  {
+      return $this->hasMany(UserOrganization::class);
+  }
+
 }

@@ -17,6 +17,7 @@ return [
 	],
 	'table' =>[
 		'member_type' => 'Mitgliedstyp',
+		'access_type' => 'Zugangsart',
 		'action' => 'Handlung',
 		'user' => 'Benutzer',
 		'created' => 'Hergestellt in',
