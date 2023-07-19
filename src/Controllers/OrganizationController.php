@@ -470,7 +470,7 @@ class OrganizationController extends Controller
       return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
     }
 
-    $orgId = \Auth::user()->organization->id ?? '';
+    $orgId = session('organization_id');
 
     if(!$orgId)
     {      
