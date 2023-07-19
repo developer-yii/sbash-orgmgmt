@@ -472,7 +472,8 @@ class OrganizationController extends Controller
 
     if(!$this->isOrganizationAdmins())
     {      
-      return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
+      // return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
+      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
     }
 
     $lang = $this->get_DataTable_LanguageBlock();
