@@ -470,9 +470,7 @@ class OrganizationController extends Controller
       return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
     }
 
-    $orgId = session('organization_id');
-
-    if(!$orgId)
+    if(!$this->isOrganizationAdmins())
     {      
       return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
     }
@@ -830,5 +828,15 @@ class OrganizationController extends Controller
       return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_found')], 422);
     }
 
+  }
+
+  public function isOrganizationAdmins()
+  {
+    $orgAdmin = UserOrganization::where('organization_id', session('organization_id'))->where('user_id', auth()->user()->id)->whereIn('access_type', [1,3])->first();
+    if($orgAdmin)
+    {
+      return true;
+    }
+    return false;
   }
 }
