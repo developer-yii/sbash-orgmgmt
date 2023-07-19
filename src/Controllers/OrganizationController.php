@@ -797,18 +797,15 @@ class OrganizationController extends Controller
 
   public function getMyList(Request $request)
   {
-    $results = Organization::whereHas('user', function ($query) {
-                $query->where('id', auth()->user()->id);
-            })
-            ->whereHas('userOrganizations', function ($query) {
-                $query->whereIn('access_type', [1, 3]);
+    $results = Organization::whereHas('userOrganizations', function ($query) {
+                $query->where('user_id', auth()->user()->id)
+                      ->whereIn('access_type', [1, 3]);
             })
             ->with(['userOrganizations' => function ($query) {
-                $query->whereIn('access_type', [1, 3]);
+                $query->where('user_id', auth()->user()->id)
+                      ->whereIn('access_type', [1, 3]);
             }])
-            ->get();            
-
-    \Log::info($results);
+            ->get();           
 
     return DataTables::of($results)                
       ->addColumn('actions', function ($data) {
