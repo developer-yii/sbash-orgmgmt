@@ -166,7 +166,7 @@ class OrganizationRequestController extends Controller
         if ($request->ajax())
         {
             $rules = [
-                'owner_note' => 'required',                                    
+                'owner_note' => 'max:1000',                                    
             ];
 
             $validation = Validator::make($request->all(), $rules);

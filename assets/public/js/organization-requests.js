@@ -85,7 +85,9 @@ $(document).ready(function() {
                     $('.error').html("");
                     $.each(res.message, function(key) {
                         if (first_input == "") first_input = key;
-                        $('.' + key).closest('.form-group').find('.error').html(res.message[key]);
+                        if(key == 'status_change')
+                            $('.' + key).closest('.form-group').find('.error').html(res.message[key]);
+                        $('#' + key).closest('.form-group').find('.error').html(res.message[key]);
                     });
                     $('#forms').find("." + first_input).focus();                    
                 }
