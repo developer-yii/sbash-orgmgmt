@@ -524,13 +524,16 @@ class OrganizationController extends Controller
     else
     {      
       $user = \Auth::user();
-      $org = Organization::where('user_id',$user->id)->first();
+      if(session('organization_id'))
+        $org = Organization::find(session('organization_id'));
+      else
+        $org = Organization::where('user_id',$user->id)->first();
     }
 
     $result = DB::table('user_organizations')
             ->leftJoin('users','user_organizations.user_id','=','users.id')
             ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')            
-            ->where('user_organizations.organization_id',session('organization_id') ?? $org->id)           
+            ->where('user_organizations.organization_id', $org->id)           
             ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "OWNER" WHEN 3 THEN "ADMIN" WHEN 2 THEN "MEMBER" ELSE "" END) AS member_type'))
             ->orderBy('users.name','asc');
 
