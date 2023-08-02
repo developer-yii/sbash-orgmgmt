@@ -315,6 +315,7 @@ class OrganizationController extends Controller
             'organization_email' => $org->email,
             'user_name' => $user->name,      
             'invite_message' => $request->invite_message,      
+            'email' => $request->email
         ];
         Mail::to($toEmail)->send(new InviteNonRegisteredMail($data,$from));      
 

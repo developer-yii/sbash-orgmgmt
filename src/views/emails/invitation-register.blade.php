@@ -8,7 +8,7 @@ You have been invited to join {{ $data['organization_name'] }} by {{ $data['user
 
 To join, please register on our system using the button below:
 
-@component('mail::button', ['url' => route('register')])
+@component('mail::button', ['url' => route('register').'?email='.$data['email']])
 Register
 @endcomponent
 
