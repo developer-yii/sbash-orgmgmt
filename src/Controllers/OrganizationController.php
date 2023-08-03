@@ -258,12 +258,12 @@ class OrganizationController extends Controller
         $invitedUsr = new InvitedUser;
         $invitedUsr->email = $request->email;
         $invitedUsr->invite_message = $request->invite_message;
-        $invitedUsr->organization_id = session('organization_id') ?? $org->id;        
+        $invitedUsr->organization_id = $org->id;        
         $invitedUsr->invited_by = $user->id;
         $res = $invitedUsr->save();        
 
         $orgInvitation1 = new OrgInvitationLog;
-        $orgInvitation1->organization_id = session('organization_id') ?? $org->id;
+        $orgInvitation1->organization_id = $org->id;
         $orgInvitation1->to_email = $request->email;
         $orgInvitation1->invite_message = $request->invite_message;
         $orgInvitation1->invited_by = $user->id;
