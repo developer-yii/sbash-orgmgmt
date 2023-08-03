@@ -14,6 +14,7 @@ use App\Models\User;
 use Sbash\Orgmgmt\Mail\InviteMail;
 use Sbash\Orgmgmt\Mail\InvitationActionMail;
 use Sbash\Orgmgmt\Mail\InviteNonRegisteredMail;
+use Sbash\Orgmgmt\Mail\InviteNonRegisteredUserMail;
 use Sbash\Orgmgmt\Models\InvitedUser;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -153,52 +154,6 @@ class OrganizationController extends Controller
           $userOrg->access_type = 1; // 1 for owner, 2 for member
           $userOrg->save();         
 
-          // else{
-
-          //     $image_name = $org->logo;
-
-          //     if ($request->hasFile('logo')) {
-          //         $image = $request->file('logo');
-          //         $image_name = time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
-          //         $destinationPath = public_path('img/uploads/org_logo');
-          //         $image->move($destinationPath, $image_name);
-          //     }
-
-          //     $email = trim($request->short_name);                
-          //     $email = $email.'@sbash.io';
-
-          //     $r = $org->update([
-          //       'name' => $request->name,
-          //       'short_name' => $request->short_name,
-          //       'email' => $email,              
-          //       'email_forward' => $request->email_forward,              
-          //       'short_name_available' => ($request->short_name_available) ? 1 : 0,
-          //       'double_optin' => ($request->double_optin) ? 1 : 0,              
-          //       'logo' => $image_name,
-          //       'user_id' => \Auth::user()->id,      
-          //     ]);
-          //     $uId = \Auth::user()->id;
-
-          //     if($r)
-          //     {
-          //       if(!session()->has('organization_id') && !session('organization_id'))
-          //       {
-          //         session(['organization_id' => $r->id]);
-          //       }
-                
-          //       $userOrg = UserOrganization::where('user_id',$uId)->where('organization_id',$org->id)->first();
-          //       if(!$userOrg)
-          //       {
-          //         $userOrg = new UserOrganization;
-          //         $userOrg->user_id = \Auth::user()->id;
-          //         $userOrg->organization_id = $org->id;
-          //         $userOrg->user_type = 'users';
-          //         $userOrg->access_type = 1; // 1 for owner, 2 for member
-          //         $userOrg->save();
-          //       }
-          //     }
-          // }
-
           if($r)
           {
               $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
@@ -305,19 +260,30 @@ class OrganizationController extends Controller
         $invitedUsr->invite_message = $request->invite_message;
         $invitedUsr->organization_id = session('organization_id') ?? $org->id;        
         $invitedUsr->invited_by = $user->id;
-        $res = $invitedUsr->save();
+        $res = $invitedUsr->save();        
+
+        $orgInvitation1 = new OrgInvitationLog;
+        $orgInvitation1->organization_id = session('organization_id') ?? $org->id;
+        $orgInvitation1->to_email = $request->email;
+        $orgInvitation1->invite_message = $request->invite_message;
+        $orgInvitation1->invited_by = $user->id;
+        $orgInvitation1->save();
 
         // Email user a mail for invitation
         $toEmail = $request->email;
         $from = $user->email;
-        $data = [            
+        
+        $data = [
+            'organization_id' => $org->id,
             'organization_name' => $org->name,
             'organization_email' => $org->email,
-            'user_name' => $user->name,      
-            'invite_message' => $request->invite_message,      
-            'email' => $request->email
+            'user_name' => $user->name,
+            'invite_message' => $request->invite_message,
+            'email' => $request->email,
+            'urlApprove' => URL::temporarySignedRoute('register-signed', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
+            'urlReject' => URL::temporarySignedRoute('invite-rejected', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
         ];
-        Mail::to($toEmail)->send(new InviteNonRegisteredMail($data,$from));      
+        Mail::to($toEmail)->send(new InviteNonRegisteredUserMail($data,$from));      
 
         if($res)
         {          
@@ -396,10 +362,10 @@ class OrganizationController extends Controller
       $user = User::where('email',$email)->first();
       $organization = Organization::where('short_name',$org)->where('deleted_at',null)->first();
 
-      $existCheck = UserOrganization::where('user_id',$user->id)->where('organization_id',$organization->id)->first();
       $exists = false;
       $joinSuccess = false;
       $alreadyAction = false;       
+      $existCheck = UserOrganization::where('user_id',$user->id)->where('organization_id',$organization->id)->first();
 
       if($existCheck)
       {

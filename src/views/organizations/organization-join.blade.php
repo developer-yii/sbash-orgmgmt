@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SBash | SFlow</title>
+  <title>{{ env('APP_NAME')}} </title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -40,12 +40,15 @@
 
   </div>
   <!-- /.lockscreen-item -->
+  @if($action != 'reject' || $exists)
   <div class="help-block text-center">
     {{ __('orgmgmt::organization.orgjoin.text-5') }}
   </div>
+  
   <div class="text-center">
     <a href="{{ route('login')}}">{{ __('orgmgmt::organization.form.signin') }}</a>
   </div>
+  @endif
   <div class="lockscreen-footer text-center">
     {{ __('orgmgmt::organization.orgjoin.copyright') }} &copy; 2022-{{ date('Y')}} <b><a href="https://sbash.io" class="text-black">SBash.io</a></b><br>
     {{ __('orgmgmt::organization.orgjoin.right_reserved') }}

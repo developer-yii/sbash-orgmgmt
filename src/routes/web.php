@@ -3,6 +3,8 @@
 use Sbash\Orgmgmt\Controllers\OrganizationController;
 use Sbash\Orgmgmt\Controllers\OrganizationRequestController;
 use Sbash\Orgmgmt\Controllers\InvitedUserController;
+use Sbash\Orgmgmt\Controllers\OrganizationInviteActionConttoller;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web','auth']], function() {
@@ -48,4 +50,14 @@ Route::group(['middleware' => ['web','auth']], function() {
 Route::group(['middleware' => ['web','signed']], function() {
     Route::get('invite-link/{org}/{email}/{action}', [OrganizationController::class,'joinOrganization'])
    ->name('invite-link');   
+});
+
+Route::group(['middleware' => ['web','signed']], function() {
+    Route::get('register-signed/{org}/{email}/{action}', [RegisterController::class,'showRegistrationForm'])
+   ->name('register-signed');   
+});
+
+Route::group(['middleware' => ['web','signed']], function() {
+    Route::get('invite-rejected/{org}/{email}/{action}', [OrganizationInviteActionConttoller::class,'rejectJoin'])
+   ->name('invite-rejected');   
 });

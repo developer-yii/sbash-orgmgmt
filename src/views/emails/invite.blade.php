@@ -10,7 +10,7 @@ Kindly take action
 
 <div style="display: inline-block">
 @component('mail::button', ['url' => $data['urlApprove'], 'color' => 'success'])
-Approve
+Accept
 @endcomponent
 </div>
 
