@@ -3,6 +3,11 @@ $(document).ready(function() {
     const params = new URLSearchParams(window.location.search);
     if (params.has('modal') && params.get('modal') === 'open') {
         $('#myModal').modal('show');
+        // Get the URL without the query parameters
+        const baseUrl = window.location.href.split('?')[0];
+        
+        // Replace the current URL without the query parameters
+        window.history.replaceState({}, document.title, baseUrl);
     }
 
     $('#datatable').DataTable({
