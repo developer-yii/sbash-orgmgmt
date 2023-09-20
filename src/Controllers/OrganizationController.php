@@ -158,7 +158,7 @@ class OrganizationController extends Controller
           $projectAlias = config('app.project_alias');
           if($projectAlias !== null && $projectAlias == 'sFlow')
           {
-            $directory = new App\Models\Directory;
+            $directory = new \App\Models\Directory;
             $directory->name = $request->name;
             $directory->organization_id = $r->id;
             $directory->responsible_person = \Auth::user()->id;
@@ -167,7 +167,7 @@ class OrganizationController extends Controller
             $directory->created_by = \Auth::user()->id;
             $directory->save();
 
-            $branch = new App\Models\Branch;
+            $branch = new \App\Models\Branch;
             $branch->text = $request->name;
             $branch->organization_id = $r->id;                
             $branch->type = 'default';                
