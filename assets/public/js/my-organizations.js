@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('modal') && params.get('modal') === 'open') {
+        $('#myModal').modal('show');
+    }
+
     $('#datatable').DataTable({
         processing: true,
         serverSide: true,
