@@ -155,7 +155,8 @@ class OrganizationController extends Controller
           $userOrg->save();         
 
           // create default process and template on organization create
-          if(isset(config('app.project_alias')) && config('app.project_alias') == 'sFlow')
+          $projectAlias = config('app.project_alias');
+          if($projectAlias !== null && $projectAlias == 'sFlow')
           {
             $directory = new App\Models\Directory;
             $directory->name = $request->name;
