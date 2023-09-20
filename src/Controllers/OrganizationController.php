@@ -164,13 +164,15 @@ class OrganizationController extends Controller
             $directory->responsible_person = \Auth::user()->id;
             $directory->type = 'default';
             $directory->status = 0;
+            $directory->is_protected = 1;
             $directory->created_by = \Auth::user()->id;
             $directory->save();
 
             $branch = new \App\Models\Branch;
             $branch->text = $request->name;
             $branch->organization_id = $r->id;                
-            $branch->type = 'default';                
+            $branch->type = 'default';   
+            $branch->is_protected = 1;             
             $branch->responsible_person = \Auth::user()->id;
             $branch->created_by = \Auth::user()->id;
             $branch->save();
