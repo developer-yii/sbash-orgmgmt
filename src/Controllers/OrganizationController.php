@@ -154,6 +154,27 @@ class OrganizationController extends Controller
           $userOrg->access_type = 1; // 1 for owner, 2 for member
           $userOrg->save();         
 
+          // create default process and template on organization create
+          if(isset(config('app.project_alias')) && config('app.project_alias') == 'sFlow')
+          {
+            $directory = new App\Models\Directory;
+            $directory->name = $request->name;
+            $directory->organization_id = $r->id;
+            $directory->responsible_person = \Auth::user()->id;
+            $directory->type = 'default';
+            $directory->status = 0;
+            $directory->created_by = \Auth::user()->id;
+            $directory->save();
+
+            $branch = new App\Models\Branch;
+            $branch->text = $request->name;
+            $branch->organization_id = $r->id;                
+            $branch->type = 'default';                
+            $branch->responsible_person = \Auth::user()->id;
+            $branch->created_by = \Auth::user()->id;
+            $branch->save();
+          }
+
           if($r)
           {
               $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
