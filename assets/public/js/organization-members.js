@@ -117,7 +117,7 @@ $(document).ready(function() {
                     _token: $('meta[name="_token"]').attr('content')         
                 },
                 success: function(res, status) {
-                    if (status = '200') {
+                    if(res.status == true) {
                         toastr.success(res.message);
                         $("#datatable").DataTable().ajax.reload();                
                     }
@@ -127,7 +127,6 @@ $(document).ready(function() {
                     }
                 },
                 error: function(xhr) {        
-                    console.log(xhr);
                     if (xhr.status === 419) {
                         window.location.reload();
                         return;
