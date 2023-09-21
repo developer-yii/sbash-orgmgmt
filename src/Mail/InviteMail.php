@@ -22,7 +22,7 @@ class InviteMail extends Mailable
     public function build()
     {        
         $subject1 = 'Invitation to Join '.$this->data['organization_name'].'.';
-        return $this->from($this->fromEmail)
+        return $this->from($this->data['organization_email'])
                ->subject($subject1)
                ->markdown('orgmgmt::emails.invite')
                ->with(['data' => $this->data]);
