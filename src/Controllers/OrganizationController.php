@@ -173,6 +173,7 @@ class OrganizationController extends Controller
             $branch->organization_id = $r->id;                
             $branch->type = 'default';   
             $branch->is_protected = 1;             
+            $branch->is_template = 1;             
             $branch->responsible_person = \Auth::user()->id;
             $branch->created_by = \Auth::user()->id;
             $branch->save();
