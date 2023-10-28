@@ -405,6 +405,7 @@ class OrganizationController extends Controller
         return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
       }
 
+      // for invitation check
       $invLogCheck = OrgInvitationLog::where('organization_id',$organization->id)
                           ->where('to_email',$email)->where('invitation_status','!=',0)->first();
 
@@ -413,6 +414,10 @@ class OrganizationController extends Controller
         $alreadyAction = true;
         return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
       }
+
+      //to add member_type in User organization
+      $invLogCheckZero = OrgInvitationLog::where('organization_id',$organization->id)
+                          ->where('to_email',$email)->where('invitation_status','=',0)->first();
 
       $invLog = OrgInvitationLog::where('organization_id',$organization->id)
                           ->where('to_email',$email)
@@ -424,7 +429,7 @@ class OrganizationController extends Controller
         $userOrg->user_id = $user->id;
         $userOrg->organization_id = $organization->id;
         $userOrg->user_type = 'users';
-        $userOrg->access_type = $invLogCheck->member_type ?? 2; // 1 for owner, 2 for member
+        $userOrg->access_type = $invLogCheckZero->member_type ?? 2; // 1 for owner, 2 for member
         if($userOrg->save())
           $joinSuccess = true;
       }      
