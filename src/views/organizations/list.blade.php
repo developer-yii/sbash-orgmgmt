@@ -64,15 +64,25 @@
           <div class="form-group">
             <div class="row g-3 align-items-center">                
               <div class="col-md-12">
+                <label>{{ __('orgmgmt::organization.form.email') }}</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('orgmgmt::organization.form.enter_email') }}" />
                 <span class="error"></span>
               </div>              
             </div>
-          </div>            
+          </div>  
+          <div class="form-group">              
+              <label>{{ __('orgmgmt::organization.table.member_type') }}</label>
+              <select class="form-control" name="member_type" id="member_type">              
+                <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>              
+                <option value="4">{{ __('orgmgmt::organization.form.contributor') }}</option>              
+              </select>
+              <span class="error"></span>                
+            </div>          
           <div class="form-group">
             <div class="row g-3 align-items-center">                
               <div class="col-md-12">
-                <textarea class="form-control" id="invite_message" name="invite_message" data-lt-tmp-id="lt-619729" spellcheck="false" data-gramm="false"></textarea>
+                <label>{{ __('orgmgmt::organization.form.invite_note') }}</label>
+                <textarea class="form-control" id="invite_message" name="invite_message" data-lt-tmp-id="lt-619729" spellcheck="false" data-gramm="false" placeholder="{{ __('orgmgmt::organization.form.invite_note') }}"></textarea>
                 <span class="error"></span>
               </div>              
             </div>
