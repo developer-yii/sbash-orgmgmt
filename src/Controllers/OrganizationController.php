@@ -623,10 +623,9 @@ class OrganizationController extends Controller
       ->addColumn('user_name', function($data){          
           return $data->user->name ?? '';
       })  
-      ->addColumn('actions', function ($data) {
-        $editRoute = route('organization.edit').'?name='.$data->short_name;
+      ->addColumn('actions', function ($data) {        
         $listRoute = route('org.members.list').'?name='.$data->short_name;
-        $button = '<a class="btn btn-primary waves-effect waves-light edit" target="_blank" href="' . $editRoute . '" data-toggle="tooltip" data-placement="right" title="Edit"><i class="fa fa-edit"></i></a>';
+        $button = '<a class="btn btn-primary waves-effect waves-light edit" target="_blank" data-id="'.$data->id.'" data-toggle="tooltip" data-placement="right" title="Edit"><i class="fa fa-edit"></i></a>';
         $button .= '<a class="btn btn-success waves-effect waves-light ml-1" target="_blank" href="' . $listRoute . '" data-toggle="tooltip" data-placement="right" title="members"><i class="fa fa-users"></i></a>';
         if (auth()->user()->can('invite_to_organization')) {
           $button .= '<a class="btn btn-warning waves-effect waves-light ml-1 invite-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->id.'" data-placement="right" title="Invite"><i class="fa fa-paper-plane"></i></a>';
@@ -818,7 +817,7 @@ class OrganizationController extends Controller
   {
     if($request->id)
     {
-      if(!$this->isOrganizationAdmins($request->id))
+      if(!$this->isOrganizationAdmins($request->id) && !auth()->user()->can('organization_edit'))
       {
         return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_edit_perm')], 422);
       }
