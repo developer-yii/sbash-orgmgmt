@@ -424,7 +424,7 @@ class OrganizationController extends Controller
         $userOrg->user_id = $user->id;
         $userOrg->organization_id = $organization->id;
         $userOrg->user_type = 'users';
-        $userOrg->access_type = 2; // 1 for owner, 2 for member
+        $userOrg->access_type = $invLogCheck->member_type ?? 2; // 1 for owner, 2 for member
         if($userOrg->save())
           $joinSuccess = true;
       }      
