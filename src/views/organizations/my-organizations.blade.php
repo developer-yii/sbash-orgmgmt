@@ -169,6 +169,31 @@
           <div class="form-group">
             <div class="row g-3 align-items-center">
               <div class="col-2">
+                <label for="description" class="col-form-label">{{ __('orgmgmt::organization.form.description') }}</label>
+              </div>
+              <div class="col-8">
+                <textarea class="form-control ckeditor" id="description" name="description" placeholder="{{ __('orgmgmt::organization.form.description') }}"></textarea>
+                <span class="error"></span>
+              </div>              
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row g-3 align-items-center">
+              <div class="col-2">
+                <label for="organizationinfo" class="" title="Display organization info on events page">{{ __('orgmgmt::organization.form.organizationinfo') }}
+                </label>
+              </div>
+              <div class="col-4"> 
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input custom-control-input-success" id="organizationinfo" name="organizationinfo">
+                  <label for="organizationinfo" class="custom-control-label"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row g-3 align-items-center">
+              <div class="col-2">
                 <label for="logo" class="col-form-label">{{ __('orgmgmt::organization.form.upload_logo') }}</label>
               </div>
               <div class="col-4">

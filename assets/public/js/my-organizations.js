@@ -81,6 +81,7 @@ $(document).ready(function() {
         $('#setting_form')[0].reset();
         $('#myModalLabel').html('Add Organization');
         CKEDITOR.instances.default_footer.setData('');
+        CKEDITOR.instances.description.setData('');
         $('#uploadImages').html('');
         $('#img-prv').html('');
         $('#public_page').html('');
@@ -277,7 +278,8 @@ $(document).ready(function() {
                     $('#email').html(result.detail.email);
                     $('#email_forward').val(result.detail.email_forward);
                     $('#default_footer').val(result.detail.default_footer);
-                    CKEDITOR.instances.default_footer.setData( result.default_footer );
+                    CKEDITOR.instances.default_footer.setData( result.default_footer );                    
+                    CKEDITOR.instances.description.setData( result.detail.description );
                     if(result.detail.logo)
                     {
                         var htm = '';
@@ -288,6 +290,11 @@ $(document).ready(function() {
                     if(result.detail.double_optin)
                     {
                         $('#double_optin').prop('checked',true).trigger('change');
+                    }
+
+                    if(result.detail.show_organization_info)
+                    {
+                        $('#organizationinfo').prop('checked',true).trigger('change');
                     }                    
 
                     $('#myModal').modal('show');

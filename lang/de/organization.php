@@ -65,6 +65,8 @@ return [
 		'approval' => 'Genehmigung',
 		'default_footer' => 'Standardfußzeile',
 		'invite_note' => 'Einladungsnotiz',
+		'description' => 'Beschreibung',
+		'organizationinfo' => 'Organisationsinformationen anzeigen'
 	],
 	'notification' => [
 		'org_add_success' => 'Organisationsaktualisierung erfolgreich',
@@ -121,4 +123,7 @@ return [
 		'are_you_sure_sub' => 'Sie werden dies nicht rückgängig machen können!',
 		'confirm_btn' => 'Ja, Benutzer entfernen'
 	],
+	'title' => [
+		'organizationinfo' => 'Organisationsinformationen auf der Veranstaltungsseite anzeigen'
+	]
 ];

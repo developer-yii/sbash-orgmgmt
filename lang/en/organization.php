@@ -65,6 +65,8 @@ return [
 		'approval' => 'Approval',
 		'default_footer' => 'Default Footer',
 		'invite_note' => 'Invite Note',
+		'description' => 'Description',
+		'organizationinfo' => 'Display Organiziation Information'
 	],
 	'notification' => [
 		'org_add_success' => 'Organization update success',
@@ -120,6 +122,9 @@ return [
 		'are_you_sure' => 'Are you sure to remove user from Organiziation?',
 		'are_you_sure_sub' => 'You wont be able to reverse this!',
 		'confirm_btn' => 'Yes, Remove User'
+	],
+	'title' => [
+		'organizationinfo' => 'Display organization info on events page'
 	]
 
 ];
