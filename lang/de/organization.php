@@ -38,6 +38,7 @@ return [
 		'owner' => 'Inhaber',
 		'admin' => 'Administrator',
 		'member' => 'Mitglied',
+		'contributor' => 'Mitwirkender',
 		'inviting' => 'Einladend',
 		'request' => 'Anfrage senden',
 		'requesting' => 'Anfrage wird versendet',

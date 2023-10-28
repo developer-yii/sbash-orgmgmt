@@ -50,6 +50,18 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">                
                 <div class="col-6">
+                  <label>{{ __('orgmgmt::organization.table.member_type') }}</label>
+                  <select class="form-control" name="member_type" id="member_type">              
+                    <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>              
+                    <option value="4">{{ __('orgmgmt::organization.form.contributor') }}</option>              
+                  </select>
+                  <span class="error"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row g-3 align-items-center">                
+                <div class="col-6">
                   <label for="invite_message">{{__('orgmgmt::organization.form.invite_note')}}</label>
                   <textarea class="form-control" id="invite_message" name="invite_message"/></textarea>
                   <span class="error"></span>

@@ -38,6 +38,7 @@ return [
 		'owner' => 'Owner',
 		'admin' => 'Admin',
 		'member' => 'Member',
+		'contributor' => 'Contributor',
 		'inviting' => 'Inviting',
 		'request' => 'Send Request',
 		'requesting' => 'Sending Request',

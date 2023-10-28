@@ -295,6 +295,7 @@ class OrganizationController extends Controller
         $orgInvitation1->organization_id = $org->id;
         $orgInvitation1->to_email = $request->email;
         $orgInvitation1->invite_message = $request->invite_message;
+        $orgInvitation1->member_type = $request->member_type;
         $orgInvitation1->invited_by = $user->id;
         $orgInvitation1->save();
 
@@ -356,6 +357,7 @@ class OrganizationController extends Controller
         $orgInvitation->organization_id = $org->id;
         $orgInvitation->to_email = $request->email;
         $orgInvitation->invite_message = $request->invite_message;
+        $orgInvitation->member_type = $request->member_type;
         $orgInvitation->invited_by = $user->id;
         $orgInvitation->save();
 
@@ -530,7 +532,7 @@ class OrganizationController extends Controller
             ->leftJoin('users','user_organizations.user_id','=','users.id')
             ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')            
             ->where('user_organizations.organization_id', $org->id)           
-            ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "OWNER" WHEN 3 THEN "ADMIN" WHEN 2 THEN "MEMBER" ELSE "" END) AS member_type'))
+            ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "OWNER" WHEN 3 THEN "ADMIN" WHEN 2 THEN "MEMBER" WHEN 4 THEN "CONTRIBUTOR" ELSE "" END) AS member_type'))
             ->orderBy('users.name','asc');
 
       if ($request->ajax()) {
