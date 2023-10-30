@@ -63,7 +63,8 @@
             <select class="form-control" name="member_type" id="member_type">
               <option value="1">{{ __('orgmgmt::organization.form.owner') }}</option>
               <option value="3">{{ __('orgmgmt::organization.form.admin') }}</option>
-              <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>              
+              <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>  
+              <option value="4">{{ __('orgmgmt::organization.form.contributor') }}</option>            
             </select>
             <span class="error"></span>
           </div>
