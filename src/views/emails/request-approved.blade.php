@@ -1,9 +1,9 @@
 @component('mail::message')
-<h2>Hello {{$data['userName']}},</h2>
-<p>Your request to Join {{ $data['name'] }} has been {{$data['action']}}.</p> 
-<p>following is owners note:</p>                           
+<h2>{{('orgmgmt')['mails']['hello']}} {{$data['userName']}},</h2>
+<p>{{('orgmgmt')['mails']['your_request_to_join']}} {{ $data['name'] }} {{('orgmgmt')['mails']['has_been']}} {{$data['action']}}.</p> 
+<p>{{('orgmgmt')['mails']['owners_note']}}:</p>                           
 <p><i>{{$data['note']}}<i></p> 
  
-Thanks,<br>
-<p>Team {{$data['name']}}</p>
+{{('orgmgmt')['mails']['thanks']}},<br>
+<p>{{('orgmgmt')['mails']['team']}} {{$data['name']}}</p>
 @endcomponent

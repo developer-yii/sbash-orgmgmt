@@ -11,13 +11,13 @@
   <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-    <h1>{{ __('orgmgmt::organization.header.invite_org') }}</h1>
+    <h1>{{ __('orgmgmt')['header']['invite_org'] }}</h1>
     </div>
     <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home"></i></a></li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.organization') }}</li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.invite_org') }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['organization'] }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['invite_org'] }}</li>
     </ol>
     </div>
   </div>
@@ -41,8 +41,8 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">                
                 <div class="col-6">
-                  <label for="invite_message">{{__('orgmgmt::organization.form.email')}}</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('orgmgmt::organization.form.enter_email') }}" />
+                  <label for="invite_message">{{__('orgmgmt')['form']['email']}}</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('orgmgmt')['form']['enter_email'] }}" />
                   <span class="error"></span>
                 </div>              
               </div>
@@ -50,10 +50,10 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">                
                 <div class="col-6">
-                  <label>{{ __('orgmgmt::organization.table.member_type') }}</label>
+                  <label>{{ __('orgmgmt')['table']['member_type'] }}</label>
                   <select class="form-control" name="member_type" id="member_type">              
-                    <option value="2">{{ __('orgmgmt::organization.form.member') }}</option>              
-                    <option value="4">{{ __('orgmgmt::organization.form.contributor') }}</option>              
+                    <option value="2">{{ __('orgmgmt')['form']['member'] }}</option>              
+                    <option value="4">{{ __('orgmgmt')['form']['contributor'] }}</option>              
                   </select>
                   <span class="error"></span>
                 </div>
@@ -62,7 +62,7 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">                
                 <div class="col-6">
-                  <label for="invite_message">{{__('orgmgmt::organization.form.invite_note')}}</label>
+                  <label for="invite_message">{{__('orgmgmt')['form']['invite_note']}}</label>
                   <textarea class="form-control" id="invite_message" name="invite_message"/></textarea>
                   <span class="error"></span>
                 </div>              
@@ -71,7 +71,7 @@
             <div class="form-group">
               <div class="row">                
                 <div class="col-6 text-right">                  
-                  <button type="submit" class="btn btn-success">{{ __('orgmgmt::organization.form.invite') }}</button>
+                  <button type="submit" class="btn btn-success">{{ __('orgmgmt')['form']['invite'] }}</button>
                 </div>
               </div>
             </div>
@@ -87,10 +87,10 @@
 @section('app-js')
 <script>
   var inviteUrl = "{{ route('organization.send.invite')}}";
-  var successMsg = "{{ __('orgmgmt::organization.form.success') }}";
-  var errIcon = "{{ __('orgmgmt::organization.form.error') }}";  
-  var inviteText = "{{ __('orgmgmt::organization.form.invite') }}";
-  var invitingText = "{{ __('orgmgmt::organization.form.inviting') }}";
+  var successMsg = "{{ __('orgmgmt')['form']['success'] }}";
+  var errIcon = "{{ __('orgmgmt')['form']['error'] }}";  
+  var inviteText = "{{ __('orgmgmt')['form']['invite'] }}";
+  var invitingText = "{{ __('orgmgmt')['form']['inviting'] }}";
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-invite.js')}}"></script>

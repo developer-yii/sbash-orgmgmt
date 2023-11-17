@@ -1,25 +1,25 @@
 @component('mail::message')
-# Hi,
+# {{('orgmgmt')['mails']['hello']}},
 
-You are invited to Join {{ $data['organization_name'] }} by {{ $data['user_name'] }}.
+{{('orgmgmt')['mails']['invitation_to_join']}} {{ $data['organization_name'] }} {{('orgmgmt')['mails']['by']}} {{ $data['user_name'] }}.
 
-<p>following is inviters note:</p>                           
+<p>{{('orgmgmt')['mails']['following_is_inviter_note']}}:</p>                           
 <p><i>{{$data['invite_message']}}<i></p> 
 
-Kindly take action
+{{('orgmgmt')['mails']['kindly_take_action']}}
 
 <div style="display: inline-block">
 @component('mail::button', ['url' => $data['urlApprove'], 'color' => 'success'])
-Accept
+{{('orgmgmt')['mails']['btn']['accept']}}
 @endcomponent
 </div>
 
 <div style="display: inline-block; margin-left: 10px">
 @component('mail::button', ['url' => $data['urlReject'], 'color' => 'error'])
-Reject
+{{('orgmgmt')['mails']['btn']['reject']}}
 @endcomponent
 </div>
 
-Thanks,<br>
-Team {{$data['organization_name']}}
+{{('orgmgmt')['mails']['thanks']}},<br>
+{{('orgmgmt')['mails']['team']}} {{$data['organization_name']}}
 @endcomponent

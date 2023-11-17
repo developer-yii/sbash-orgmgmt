@@ -1,7 +1,7 @@
 @component('mail::message')
-<h2>Hello {{$data['user_name']}},</h2>
-<p>Your invitation to Join {{ $data['organization_name'] }} has been {{($data['action'] == 'approve')?'Accepted':'Rejected'}} by {{ $data['sender_name']}}.</p> 
+<h2>{{('orgmgmt')['mails']['hello']}} {{$data['user_name']}},</h2>
+<p>{{('orgmgmt')['mails']['invitation_to_join']}} {{ $data['organization_name'] }} {{('orgmgmt')['mails']['has_been']}} {{($data['action'] == 'approve')?'Accepted':'Rejected'}} {{('orgmgmt')['mails']['by']}} {{ $data['sender_name']}}.</p> 
  
-Thanks,<br>
-Team {{$data['organization_name']}}
+{{('orgmgmt')['mails']['thanks']}},<br>
+{{('orgmgmt')['mails']['team']}} {{$data['organization_name']}}
 @endcomponent
