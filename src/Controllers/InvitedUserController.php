@@ -32,7 +32,7 @@ class InvitedUserController extends Controller
 
 				if($userOrganization->access_type == 1)
 				{
-					$result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.cant_remove_owner')];
+					$result = ['status' => false, 'message' => __('orgmgmt')['notification']['cant_remove_owner']];
       				return response()->json($result);
 				}
 
@@ -40,14 +40,14 @@ class InvitedUserController extends Controller
 
 				if($r)
 				{
-					$result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.member_remove_success')];
+					$result = ['status' => true, 'message' => __('orgmgmt')['notification']['member_remove_success']];
       				return response()->json($result);	
 				}else {
-					$result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.member_remove_failed')];
+					$result = ['status' => false, 'message' => __('orgmgmt')['notification']['member_remove_failed']];
       				return response()->json($result);	
 				}
 			} else {
-				return response()->json(['message' => trans('orgmgmt::organization.notification.no_member_remove_perm')], 422);
+				return response()->json(['message' => __('orgmgmt')['notification']['no_member_remove_perm']], 422);
 			}
 		}
 	}

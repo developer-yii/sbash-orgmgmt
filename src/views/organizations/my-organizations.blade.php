@@ -40,7 +40,7 @@
                   <th>{{ __('orgmgmt')['form']['short_name'] }}</th>
                   <th>Email</th>
                   <th>{{ __('orgmgmt')['form']['email_forward'] }}</th>    
-                  <th>{{ __('orgmgmt')['table']['access_type']') }}</th>                             
+                  <th>{{ __('orgmgmt')['table']['access_type'] }}</th>                             
                   <th>{{ __('orgmgmt')['table']['created'] }}</th>
                   <th>{{ __('orgmgmt')['table']['action'] }}</th>
                 </tr>
@@ -235,9 +235,9 @@
   var checkNameUrl = "{{ route('organization.checkName')}}"
   var addUpdateUrl = "{{ route('organization.addUpdate')}}";
   var short_name_error = "{{ __('orgmgmt')['form']['short_name_not_available'] }}";
-  var select_image_file = "{{ __('orgmgmt::organization.validation.select_image_file') }}";
-  var successMsg = "{{ __('orgmgmt::organization.form.success') }}";
-  var errIcon = "{{ __('orgmgmt::organization.form.error') }}";
+  var select_image_file = "{{ __('orgmgmt')['validation']['select_image_file'] }}";
+  var successMsg = "{{ __('orgmgmt')['form']['success'] }}";
+  var errIcon = "{{ __('orgmgmt')['form']['error'] }}";
   var checkNameUrl = "{{ route('organization.checkName')}}";
   var logoUrl = "{{ asset('img/uploads/org_logo')}}";
   var url = "{{url('')}}";

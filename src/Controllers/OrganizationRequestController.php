@@ -46,7 +46,7 @@ class OrganizationRequestController extends Controller
 
             if($exists)
             {
-                $validation->errors()->add('already_member',trans('orgmgmt::organization.notification.already_member'));
+                $validation->errors()->add('already_member',__('orgmgmt')['notification']['already_member']);
                 
                 $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                 return response()->json($result);
@@ -56,7 +56,7 @@ class OrganizationRequestController extends Controller
 
             if($checkReq)
             {
-                $validation->errors()->add('already_requested',trans('orgmgmt::organization.notification.already_requested'));
+                $validation->errors()->add('already_requested',__('orgmgmt')['notification']['already_requested']);
                 
                 $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                 return response()->json($result);
@@ -92,11 +92,11 @@ class OrganizationRequestController extends Controller
 
                 if($r)
                 {
-                    $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.join_request'), 'data' => []];
+                    $result = ['status' => true, 'message' => __('orgmgmt')['notification']['join_request'], 'data' => []];
                     return response()->json($result);
                 }
                 else{
-                    $result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.join_request_failed'), 'data' => []];
+                    $result = ['status' => false, 'message' => __('orgmgmt')['notification']['join_request_failed'], 'data' => []];
                     return response()->json($result);
                 }
             }
@@ -180,7 +180,7 @@ class OrganizationRequestController extends Controller
                 $req = OrganizationJoinRequest::find($request->id);
                 if($req->is_approved == $request->status)
                 {
-                    $validation->errors()->add('status_change', trans('orgmgmt::organization.validation.update_status'));
+                    $validation->errors()->add('status_change', __('orgmgmt')['validation']['update_status']);
                     
                     $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                     return response()->json($result);
@@ -189,11 +189,11 @@ class OrganizationRequestController extends Controller
                     $msg = '';
                     if($request->status == 1)
                     {
-                        $msg = trans('orgmgmt::organization.notification.request_approved');
+                        $msg = __('orgmgmt')['notification']['request_approved'];
                     }
                     else if($request->status == 2)
                     {
-                        $msg = trans('orgmgmt::organization.notification.request_rejected');
+                        $msg = __('orgmgmt')['notification']['request_rejected'];
                     }
 
                     $req->is_approved = $request->status;
@@ -262,7 +262,7 @@ class OrganizationRequestController extends Controller
                         return response()->json($result);
                     }
                     else{
-                        $result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.status_update_fail')];
+                        $result = ['status' => false, 'message' => __('orgmgmt')['notification']['status_update_fail']];
                         return response()->json($result);
                     }
                 }

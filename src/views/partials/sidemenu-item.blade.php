@@ -2,7 +2,7 @@
 	<a href="#" class="nav-link">
 	  <i class="nav-icon fa fa-building"></i>
 	  <p>
-	    {{ __('orgmgmt::organization.header.organization') }}
+	    {{ __('orgmgmt')['header']['organization'] }}
 	    <i class="fas fa-angle-left right"></i>                
 	  </p>
 	</a>
@@ -11,7 +11,7 @@
 		<li class="nav-item">
 		    <a href="{{ route('organization.mylist') }}" class="pl-4 nav-link">
 		      <i class="fa fa-cogs nav-icon"></i>
-		      <p>{{ __('orgmgmt::organization.header.my_org_list') }}</p>
+		      <p>{{ __('orgmgmt')['header']['my_org_list'] }}</p>
 		    </a>
 		</li>	
 		@if(count(auth()->user()->userOrganizations()->get()))
@@ -19,7 +19,7 @@
 			    <a href="{{ route('organization.invite') }}" class="pl-4 nav-link">
 			    	<i class="nav-icon fa fa-user-plus"></i>
 			      	<p>
-			        	{{ __('orgmgmt::organization.header.invite_org') }}
+			        	{{ __('orgmgmt')['header']['invite_org'] }}
 			    	</p>
 			    </a>
 			</li>
@@ -28,7 +28,7 @@
 		    <a href="{{ route('organization.join.list') }}" class="pl-4 nav-link">		    	
 		    	<i class="nav-icon fa fa-university"></i>
 		      	<p>
-		        	{{ __('orgmgmt::organization.header.join_organization') }}
+		        	{{ __('orgmgmt')['header']['join_organization'] }}
 		    	</p>
 		    </a>
 		</li>
@@ -37,7 +37,7 @@
 			    <a href="{{ route('organization.request.list') }}" class="pl-4 nav-link">		    	
 			    	<i class="nav-icon fa fa-list"></i>
 			      	<p>
-			        	{{ __('orgmgmt::organization.header.join_requests') }}		        	
+			        	{{ __('orgmgmt')['header']['join_requests'] }}		        	
 			    	</p>
 			    </a>
 			</li>
@@ -45,7 +45,7 @@
 			    <a href="{{ route('organization.members') }}" class="pl-4 nav-link">
 			    	<i class="nav-icon fa fa-user-friends"></i>
 			      	<p>
-			        	{{ __('orgmgmt::organization.header.org_members') }}
+			        	{{ __('orgmgmt')['header']['org_members'] }}
 			    	</p>
 			    </a>
 			</li>		
@@ -55,7 +55,7 @@
 		    <a href="{{ route('organization.list') }}" class="pl-4 nav-link">
 		    	<i class="nav-icon fa fa-user-friends"></i>
 		      	<p>
-		        	{{ __('orgmgmt::organization.header.org_list') }}
+		        	{{ __('orgmgmt')['header']['org_list'] }}
 		    	</p>
 		    </a>
 		</li>		

@@ -286,6 +286,9 @@
   var short_name_error = "{{ __('orgmgmt')['form']['short_name_not_available'] }}";
   var select_image_file = "{{ __('orgmgmt')['validation']['select_image_file'] }}";
   var errIcon = "{{ __('orgmgmt')['form']['error'] }}";
+  var emailNotVerified = "{{ __('orgmgmt')['validation']['email_not_verified'] }}";
+  var sessionExpiredMsg = "{{ __('orgmgmt')['validation']['session_expired']}}";  
+  var errorOccurredMsg = "{{ __('orgmgmt')['notification']['error_occurred']}}";
   var lang = {!! $lang !!}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" crossorigin="anonymous"></script>

@@ -5,6 +5,7 @@ $(document).ready(function() {
         scrollX: true,
         fixedColumns: true,
         language: lang,
+        order: [[0, 'asc']],
         ajax: {
             url: memberListUrl,
             type: 'GET',
@@ -18,20 +19,20 @@ $(document).ready(function() {
         },
         columns: [{
                 data: 'name',
-                name: 'users.name'
+                name: 'users.name',
             },
             {
                 data: 'email',
                 name: 'users.email'
             },
             {
-                "searching": false,
                 data: 'member_type',
-                name: 'access_type'
+                name: 'member_type'
             },
             {
                 data: 'actions',
-                name: 'actions'
+                name: 'actions',
+                orderable: false
             },
         ],
     });

@@ -35,7 +35,7 @@ class OrganizationController extends Controller
   public function settings(Request $request)
   {
       if (!auth()->user()->can('organization_settings_view')) {
-        return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_view_set_perm')]);
+        return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_view_set_perm']]);
       }
 
       $org = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->first();
@@ -55,7 +55,13 @@ class OrganizationController extends Controller
       ];
 
       $messages = [
-        'logo.max' => 'The logo must not be greater than 2MB size.'
+        'logo.max' => __('orgmgmt')['validation']['logo']['max'],
+        'name.max' => __('validation')['max']['string'],
+        'name.required' => __('validation')['required'],
+        'short_name.max' => __('validation')['max']['string'],
+        'short_name.required_with' => __('validation')['required_with'],
+        'email_forward.required' => __('validation')['required'],
+        'email_forward.regex' => __('validation')['regex'],
       ];
 
       $validation = Validator::make($request->all(), $rules, $messages);
@@ -108,12 +114,12 @@ class OrganizationController extends Controller
 
           if($r)
           {
-              $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
+              $result = ['status' => true, 'message' =>__('orgmgmt')['notification']['org_add_success']];
               return response()->json($result);
           }
           else
           {
-              $result = ['status' => false, 'message' =>trans('orgmgmt::organization.notification.org_add_fail')];
+              $result = ['status' => false, 'message' =>__('orgmgmt')['notification']['org_add_fail']];
               return response()->json($result);
           }
         }
@@ -123,7 +129,7 @@ class OrganizationController extends Controller
           if(count($orgs) >= 2)
           {
             // return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.already_two_org_created')]);
-            return response()->json(['message' => trans('orgmgmt::organization.notification.already_two_org_created')], 422);
+            return response()->json(['message' => __('orgmgmt')['notification']['already_two_org_created']], 422);
           }
 
           $image_name = '';
@@ -184,12 +190,12 @@ class OrganizationController extends Controller
 
           if($r)
           {
-              $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
+              $result = ['status' => true, 'message' =>__('orgmgmt')['notification']['org_add_success']];
               return response()->json($result);
           }
           else
           {
-              $result = ['status' => false, 'message' =>trans('orgmgmt::organization.notification.org_add_fail')];
+              $result = ['status' => false, 'message' =>__('orgmgmt')['notification']['org_add_fail']];
               return response()->json($result);
           }
       }
@@ -227,12 +233,12 @@ class OrganizationController extends Controller
   public function invite(Request $request)
   {
     if (!auth()->user()->can('invite_to_organization')) {
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_invite_org_perm')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_invite_org_perm']]);
     }
 
     if(!auth()->user()->isOwnerOfOrganization())
     {
-      return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['update_org_settings']]);
     }    
 
     return view('orgmgmt::organizations.invite');
@@ -241,7 +247,7 @@ class OrganizationController extends Controller
   public function sendInvite(Request $request)
   {
     if (!auth()->user()->can('invite_to_organization')) {      
-      return response()->json(['message' => trans('orgmgmt::organization.notification.no_invite_org_perm')], 422);
+      return response()->json(['message' => __('orgmgmt')['notification']['no_invite_org_perm']], 422);
     }
 
     $rules = [
@@ -250,7 +256,9 @@ class OrganizationController extends Controller
     ];
 
     $messages = [
-      'invite_message.required' => trans('orgmgmt::organization.validation.invite_message_required'),
+      'invite_message.required' => __('orgmgmt')['validation']['invite_message_required'],
+      'email.required' => __('orgmgmt')['validation']['required'],
+      'email.email' => __('orgmgmt')['validation']['email'],
     ];
 
     $validation = Validator::make($request->all(), $rules, $messages);
@@ -316,18 +324,18 @@ class OrganizationController extends Controller
 
         if($res)
         {          
-          $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.invi_sent'), 'data' => []];
+          $result = ['status' => true, 'message' => __('orgmgmt')['notification']['invi_sent'], 'data' => []];
           return response()->json($result);
         }
         else{
-          $result = ['status' => false, 'message' => 'Something went wrong', 'data' => []];
+          $result = ['status' => false, 'message' => __('orgmgmt')['notification']['something_wrong'], 'data' => []];
           return response()->json($result);   
         }
       }
 
       if($existingInvite)
       {        
-        return response()->json(['message' => trans('orgmgmt::organization.validation.already_sent')], 422);       
+        return response()->json(['message' => __('orgmgmt')['validation']['already_sent']], 422);       
       }
 
       if($org)
@@ -337,7 +345,7 @@ class OrganizationController extends Controller
         {
           if($user->email == $request->email)
           {
-            $validation->getMessageBag()->add('email', trans('orgmgmt::organization.validation.owner_org'));
+            $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['owner_org']);
             $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
             return response()->json($result); 
           }
@@ -347,7 +355,7 @@ class OrganizationController extends Controller
         $existCheck = UserOrganization::where('user_id',$toUser->id)->where('organization_id',$org->id)->first();
         if($existCheck)
         {
-          $validation->getMessageBag()->add('email', trans('orgmgmt::organization.validation.already_registered'));
+          $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['already_registered']);
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
           return response()->json($result);
         }
@@ -374,11 +382,11 @@ class OrganizationController extends Controller
         ];
         Mail::to($toEmail)->send(new InviteMail($data,$from));        
 
-        $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.invi_sent'), 'data' => []];
+        $result = ['status' => true, 'message' => __('orgmgmt')['notification']['invi_sent'], 'data' => []];
         return response()->json($result);
       }
       else{
-        $validation->getMessageBag()->add('email', trans('orgmgmt::organization.validation.org_text_1'));
+        $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['org_text_1']);
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
         return response()->json($result);   
       }
@@ -469,13 +477,13 @@ class OrganizationController extends Controller
   {
 
     if (!auth()->user()->can('organization_member_list')) {
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_member_view_perm']]);
     }
 
     if(!$this->isOrganizationAdmins())
     {      
       // return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_member_view_perm')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_member_view_perm']]);
     }
 
     $lang = $this->get_DataTable_LanguageBlock();
@@ -488,29 +496,29 @@ class OrganizationController extends Controller
              {
               // url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
               // url: '//cdn.datatables.net/plug-ins/1.11.4/i18n/de_de.json'
-              'sEmptyTable': '" . __('orgmgmt::event.table.empty') . "',
-              'sInfo': '" . __('orgmgmt::event.table.info.sh') . " ' + '_START_ ' + '" . __('orgmgmt::event.table.info.to') . " ' +
-                ' _END_' + ' " . __('orgmgmt::event.table.info.of') . " ' + '_TOTAL_' +
-                ' " . __('orgmgmt::event.table.info.ent') . "',
-              'sInfoEmpty': '" . __('orgmgmt::event.table.empty') . "',
-              'sInfoFiltered': '(" . __('orgmgmt::event.table.filter.pre') . " _MAX_ " . __('orgmgmt::event.table.filter.post') . ")',
+              'sEmptyTable': '" . __('orgmgmt')['event']['table']['empty'] . "',
+              'sInfo': '" . __('orgmgmt')['event']['table']['info']['sh'] . " ' + '_START_ ' + '" . __('orgmgmt')['event']['table']['info']['to'] . " ' +
+                ' _END_' + ' " . __('orgmgmt')['event']['table']['info']['of'] . " ' + '_TOTAL_' +
+                ' " . __('orgmgmt')['event']['table']['info']['ent'] . "',
+              'sInfoEmpty': '" . __('orgmgmt')['event']['table']['empty'] . "',
+              'sInfoFiltered': '(" . __('orgmgmt')['event']['table']['filter']['pre'] . " _MAX_ " . __('orgmgmt')['event']['table']['filter']['post'] . ")',
               'sInfoPostFix': '',
-              'sInfoThousands': '" . __('orgmgmt::event.table.thousand_separator') . "',
-              'sLengthMenu': '" . __('orgmgmt::event.table.info.length_a') . " ' + '_MENU_' +
-                ' " . __('orgmgmt::event.table.info.length_b') . "',
-              'sLoadingRecords': '" . __('orgmgmt::event.table.loading') . "',
-              'sProcessing': '" . __('orgmgmt::event.table.processing') . "',
-              'sSearch': '" . __('orgmgmt::event.table.sc') . "',
-              'sZeroRecords': '" . __('orgmgmt::event.table.nr') . "',
+              'sInfoThousands': '" . __('orgmgmt')['event']['table']['thousand_separator'] . "',
+              'sLengthMenu': '" . __('orgmgmt')['event']['table']['info']['length_a'] . " ' + '_MENU_' +
+                ' " . __('orgmgmt')['event']['table']['info']['length_b'] . "',
+              'sLoadingRecords': '" . __('orgmgmt')['event']['table']['loading'] . "',
+              'sProcessing': '" . __('orgmgmt')['event']['table']['processing'] . "',
+              'sSearch': '" . __('orgmgmt')['event']['table']['sc'] . "',
+              'sZeroRecords': '" . __('orgmgmt')['event']['table']['nr'] . "',
               'oPaginate': {
-                'sFirst': 'First',
-                'sLast': 'Last',
-                'sNext': '" . __('orgmgmt::event.table.paginate.next') . "',
-                'sPrevious': '" . __('orgmgmt::event.table.paginate.prev') . "',
+                'sFirst': '" . __('orgmgmt')['event']['table']['paginate']['first'] . "',
+                'sLast': '" . __('orgmgmt')['event']['table']['paginate']['last'] . "',
+                'sNext': '" . __('orgmgmt')['event']['table']['paginate']['next'] . "',
+                'sPrevious': '" . __('orgmgmt')['event']['table']['paginate']['prev'] . "',
               },
               'oAria': {
-                'sSortAscending': ': activate to sort column ascending',
-                'sSortDescending': ': activate to sort column descending'
+                'sSortAscending': '" . __('orgmgmt')['event']['table']['sort']['asc'] . "',
+                'sSortDescending': '" . __('orgmgmt')['event']['table']['sort']['desc'] . "'
               }
             }";
 
@@ -532,15 +540,25 @@ class OrganizationController extends Controller
         $org = Organization::where('user_id',$user->id)->first();
     }
 
+    $owner = __('orgmgmt')['form']['owner'];
+    $admin = __('orgmgmt')['form']['admin'];
+    $member = __('orgmgmt')['form']['member'];
+    $contributor = __('orgmgmt')['form']['contributor'];
+
     $result = DB::table('user_organizations')
             ->leftJoin('users','user_organizations.user_id','=','users.id')
             ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')            
             ->where('user_organizations.organization_id', $org->id)           
-            ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "OWNER" WHEN 3 THEN "ADMIN" WHEN 2 THEN "MEMBER" WHEN 4 THEN "CONTRIBUTOR" ELSE "" END) AS member_type'))
-            ->orderBy('users.name','asc');
+            ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "'.$owner.'" WHEN 3 THEN "'.$admin.'" WHEN 2 THEN "'.$member.'" WHEN 4 THEN "'.$contributor.'" ELSE "" END) AS member_type'));
+            
 
       if ($request->ajax()) {
-        return DataTables::queryBuilder($result)          
+        if ($request->has('order.0.column') && $request->input('order.0.column') == 2) { // Adjust the column index as per your 'member_type' column
+            $direction = $request->input('order.0.dir') === 'asc' ? 'ASC' : 'DESC';            
+            $result->orderBy('member_type', $direction);
+          }
+          
+        $dataTable = DataTables::queryBuilder($result)          
           ->addColumn('actions', function ($data) {
              $button = '';
             if (auth()->user()->can('member_type_change')) {
@@ -550,8 +568,16 @@ class OrganizationController extends Controller
             
             
             return $button;
-          })->rawColumns(['actions'])
-          ->toJson();
+          })->rawColumns(['actions']);
+
+          if ($request->has('search.value')) { // Adjust the column index as per your 'member_type' column
+              $searchValue = $request->input('search.value'); // Adjust the column index as per your 'member_type' column              
+              $dataTable->filterColumn('member_type', function ($query, $keyword) use ($searchValue, $owner, $admin, $member, $contributor) {
+                  $query->whereRaw('(CASE user_organizations.access_type WHEN 1 THEN "'.$owner.'" WHEN 3 THEN "'.$admin.'" WHEN 2 THEN "'.$member.'" WHEN 4 THEN "'.$contributor.'" ELSE "" END) LIKE ?', ["%$searchValue%"]);
+              });
+          }    
+
+          return $dataTable->toJson();
       }
   }
 
@@ -559,12 +585,12 @@ class OrganizationController extends Controller
   {
     if(!auth()->user()->can('member_type_change'))
     {
-      return response()->json(['message' => trans('orgmgmt::organization.notification.no_member_type_change_perm')], 422);
+      return response()->json(['message' => __('orgmgmt')['notification']['no_member_type_change_perm']], 422);
     }
 
     if(!auth()->user()->isOrganizationOwner(session('organization_id')))
     {
-      return response()->json(['message' => trans('orgmgmt::organization.notification.no_member_type_change_perm')], 422);
+      return response()->json(['message' => __('orgmgmt')['notification']['no_member_type_change_perm']], 422);
     }
     
     $rules = [
@@ -572,7 +598,7 @@ class OrganizationController extends Controller
     ];
 
     $messages = [
-      'member_type.required' => trans('orgmgmt::organization.validation.sel_mem_type'),
+      'member_type.required' => __('orgmgmt')['validation']['sel_mem_type'],
     ];
 
     $validation = Validator::make($request->all(), $rules, $messages);
@@ -592,7 +618,7 @@ class OrganizationController extends Controller
 
           if($org->user_id == $userOrg->user_id)
           {
-            $validation->getMessageBag()->add('member_type', trans('orgmgmt::organization.validation.org_val_1'));
+            $validation->getMessageBag()->add('member_type', __('orgmgmt')['validation']['org_val_1']);
             $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
             return response()->json($result);
           }
@@ -600,11 +626,11 @@ class OrganizationController extends Controller
           $userOrg->access_type = $request->member_type;
           $userOrg->save();
           
-          $result = ['status' => true, 'message' => trans('orgmgmt::organization.notification.mem_type_changed'), 'data' => []];
+          $result = ['status' => true, 'message' => __('orgmgmt')['notification']['mem_type_changed'], 'data' => []];
           return response()->json($result);
         }
       }
-      $result = ['status' => false, 'message' => trans('orgmgmt::organization.notification.mem_type_change_fail'), 'data' => []];
+      $result = ['status' => false, 'message' => __('orgmgmt')['notification']['mem_type_change_fail'], 'data' => []];
       return response()->json($result);
     }
   }
@@ -612,7 +638,7 @@ class OrganizationController extends Controller
   public function list(Request $request)
   {    
     if (!auth()->user()->can('organization_list')) {
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_org_list_perm')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_org_list_perm']]);
     }    
 
     $lang = $this->get_DataTable_LanguageBlock();
@@ -674,7 +700,7 @@ class OrganizationController extends Controller
   public function edit(Request $request)
   {
       if (!auth()->user()->can('organization_edit')) {
-        return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_org_edit_perm')]);
+        return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_org_edit_perm']]);
       }      
 
       if($request->name)
@@ -686,18 +712,18 @@ class OrganizationController extends Controller
           return view('orgmgmt::organizations.edit',compact('org'));
         }
 
-        return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_org_found')]);
+        return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_org_found']]);
       }
       else
       {
-        return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.form.error')]);
+        return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['organization']['form']['error']]);
       }
   }
 
   public function editUpdate(Request $request)
   {
     if (!auth()->user()->can('organization_edit')) {
-      return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_edit_perm')], 422);
+      return response()->json(['message' => __('orgmgmt')['notification']['no_org_edit_perm']], 422);
     }
 
     $rules = [
@@ -709,7 +735,13 @@ class OrganizationController extends Controller
       ];
 
       $messages = [
-        'logo.max' => 'The logo must not be greater than 2MB size.'
+        'logo.max' => __('orgmgmt')['validation']['logo']['max'],
+        'name.required' => __('validation')['required'],
+        'name.max' => __('validation')['max']['string'],
+        'short_name.max' => __('validation')['max']['string'],
+        'short_name.required_with' => __('validation')['required_with'],
+        'email_forward.required' => __('validation')['required'],
+        'email_forward.regex' => __('validation')['regex'],
       ];
 
       $validation = Validator::make($request->all(), $rules, $messages);
@@ -758,12 +790,12 @@ class OrganizationController extends Controller
 
           if($r)
           {
-              $result = ['status' => true, 'message' =>trans('orgmgmt::organization.notification.org_add_success')];
+              $result = ['status' => true, 'message' =>__('orgmgmt')['notification']['org_add_success']];
               return response()->json($result);
           }
           else
           {
-              $result = ['status' => false, 'message' =>trans('orgmgmt::organization.notification.org_add_fail')];
+              $result = ['status' => false, 'message' =>__('orgmgmt')['notification']['org_add_fail']];
               return response()->json($result);
           }
       }
@@ -772,7 +804,7 @@ class OrganizationController extends Controller
   public function memberlist(Request $request)
   {
     if (!auth()->user()->can('members_list')) {
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_mem_list_perm')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_mem_list_perm']]);
     }      
 
     if($request->name)
@@ -785,11 +817,11 @@ class OrganizationController extends Controller
         return view('orgmgmt::organizations.member-list',compact('org','lang'));
       }
 
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.no_org_found')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_org_found']]);
     }
     else
     {
-      return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.form.error')]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['form']['error']]);
     }
   }
 
@@ -825,7 +857,7 @@ class OrganizationController extends Controller
     {
       if(!$this->isOrganizationAdmins($request->id) && !auth()->user()->can('organization_edit'))
       {
-        return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_edit_perm')], 422);
+        return response()->json(['message' => __('orgmgmt')['notification']['no_org_edit_perm']], 422);
       }
 
       $model = Organization::find($request->id);
@@ -835,7 +867,7 @@ class OrganizationController extends Controller
 
     }
     else{
-      return response()->json(['message' => trans('orgmgmt::organization.notification.no_org_found')], 422);
+      return response()->json(['message' => __('orgmgmt')['notification']['no_org_found']], 422);
     }
 
   }

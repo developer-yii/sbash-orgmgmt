@@ -91,6 +91,7 @@
   var errIcon = "{{ __('orgmgmt')['form']['error'] }}";  
   var inviteText = "{{ __('orgmgmt')['form']['invite'] }}";
   var invitingText = "{{ __('orgmgmt')['form']['inviting'] }}";
+  var emailNotVerified = "{{ __('orgmgmt')['validation']['email_not_verified'] }}";
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-invite.js')}}"></script>

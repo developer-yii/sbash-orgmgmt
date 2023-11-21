@@ -1,0 +1,198 @@
+{
+  "orgmgmt" : {
+    "alert" : {
+      "are_you_sure" : "Are you sure to remove user from Organiziation?",
+      "are_you_sure_sub" : "You wont be able to reverse this!",
+      "confirm_btn" : "Yes, Remove User"
+    },
+    "event" : {
+      "table" : {
+        "empty" : "No data available in table",
+        "filter" : {
+          "post" : " Entries",
+          "pre" : "filter result from "
+        },
+        "info" : {
+          "ent" : "entries",
+          "length_a" : "Show",
+          "length_b" : "entries per page",
+          "of" : "of",
+          "sh" : "Showing",
+          "to" : "to"
+        },
+        "loading" : "Loading...",
+        "nr" : "No matching records found",
+        "paginate" : {
+          "first" : "First",
+          "last" : "Last",
+          "next" : "Next",
+          "prev" : "Previous"
+        },
+        "processing" : "Processing...",
+        "sc" : "Search",
+        "sort" : {
+          "asc" : ": activate to sort column ascending",
+          "desc" : ": activate to sort column descending"
+        },
+        "thousand_separator" : ","
+      }
+    },
+    "form" : {
+      "add_note" : "Add Note",
+      "admin" : "Admin",
+      "approval" : "Approval",
+      "approve" : "Approve",
+      "cancel" : "Cancel",
+      "change" : "Change",
+      "close" : "Close",
+      "contributor" : "Contributor",
+      "default_footer" : "Default Footer",
+      "description" : "Description",
+      "double_optin" : "Opt In for Mail Communication",
+      "email" : "Email",
+      "email_forward" : "Email Forward",
+      "enter_email" : "Enter Email",
+      "enter_organization_name" : "Enter Organization Name",
+      "enter_short_name" : "Enter Short Name",
+      "error" : "Error",
+      "invite" : "Invite",
+      "invite_note" : "Invite Note",
+      "inviting" : "Inviting",
+      "member" : "Member",
+      "organizationinfo" : "Display Organiziation Information",
+      "organization_name" : "Organization Name",
+      "owner" : "Owner",
+      "owner_note" : "Owner Note",
+      "pending" : "Pending",
+      "processing" : "Processing",
+      "public_pages" : "Public pages",
+      "reject" : "Reject",
+      "request" : "Send Request",
+      "requesting" : "Sending Request",
+      "save" : "Save",
+      "short_name" : "Short Name",
+      "short_name_available" : "Short name available",
+      "short_name_not_available" : "Entered short name is not available",
+      "signin" : "Sign in",
+      "success" : "Success",
+      "upload_logo" : "Upload Logo",
+      "user_note" : "User Note"
+    },
+    "header" : {
+      "invite_org" : "Invite to Organization",
+      "join_organization" : "Join Organization",
+      "join_requests" : "Join Requests",
+      "my_org_list" : "My Organizations",
+      "organization" : "Organization",
+      "org_list" : "Organization List",
+      "org_members" : "Organization Members",
+      "org_setting" : "Organization Settings",
+      "settings" : "Settings"
+    },
+    "label" : {
+      "org_edit" : "Organization Edit"
+    },
+    "mails" : {
+      "btn" : {
+        "accept" : "Accept",
+        "join_request" : "Join Requests",
+        "register" : "Register",
+        "reject" : "Reject"
+      },
+      "by" : "by",
+      "following_is_inviter_note" : "following is inviter's note",
+      "has_been" : "has been",
+      "has_been_recieved_from" : "has been received from",
+      "hello" : "Hello",
+      "invitation_register_text1" : "To join, please register on our system using the button below",
+      "invitation_register_text2" : "If you have any questions, please contact us at",
+      "invitation_to_join" : "Your invitation to Join",
+      "invited_to_join" : "You have been invited to join",
+      "kindly_take_action" : "Kindly take necessary action on same",
+      "owners_note" : "following is owners note",
+      "request_to_join" : "Request to Join",
+      "team" : "Team",
+      "thanks" : "Thanks",
+      "your_request_to_join" : "Your request to Join"
+    },
+    "notification" : {
+      "already_member" : "You are already member of requested Organization",
+      "already_requested" : "You have already requested to join this Organization",
+      "already_two_org_created" : "You can not create more than 2 Organization",
+      "cant_remove_owner" : "You cant remove Organization owner",
+      "error_occurred" : "An error occurred while processing your request.",
+      "invi_sent" : "Invitation link sent",
+      "join_request" : "Organization Join request Sent",
+      "join_request_failed" : "Organization Join request failed",
+      "member_remove_failed" : "Member removal failed",
+      "member_remove_success" : "Member Successfully removed from Organiziation",
+      "mem_type_changed" : "Member type changed",
+      "mem_type_change_fail" : "Member type change failed",
+      "no_invite_org_perm" : "You dont have permission for invite to Organization",
+      "no_member_remove_perm" : "You dont have permission to remove Member",
+      "no_member_type_change_perm" : "You dont have permission to change member type",
+      "no_member_view_perm" : "You dont have permission to view Organization members",
+      "no_mem_list_perm" : "You dont have permission to list Members",
+      "no_org_edit_perm" : "You dont have permission to edit Organizations",
+      "no_org_found" : "Organization not found!",
+      "no_org_list_perm" : "You dont have permission to view Organizations",
+      "no_view_set_perm" : "You dont have permission to view settings",
+      "org_add_fail" : "Organization update failed",
+      "org_add_success" : "Organization update success",
+      "request_approved" : "Request Approved",
+      "request_rejected" : "Request Rejected",
+      "something_wrong" : "Something went wrong",
+      "status_update_fail" : "Status change failed",
+      "update_org_settings" : "Set up your organization first!"
+    },
+    "orgjoin" : {
+      "copyright" : "Copyright",
+      "right_reserved" : "All rights reserved",
+      "text-1" : "You have successfully joined Organization",
+      "text-3" : "Already Member of Organization",
+      "text-4" : "is already member of",
+      "text-5" : "Login to Website, click below link",
+      "text-6" : "Organization Joining Request Rejected!",
+      "text-7" : "Organization Joining Request Already Rejected!"
+    },
+    "page" : {
+      "add_organization" : "Add Organization"
+    },
+    "table" : {
+      "access_type" : "Access Type",
+      "action" : "Action",
+      "created" : "Created At",
+      "member_type" : "Member Type",
+      "status" : "Status",
+      "user" : "User",
+      "user_email" : "User Email",
+      "user_name" : "User Name"
+    },
+    "title" : {
+      "organizationinfo" : "Display organization info on events page"
+    },
+    "validation" : {
+      "already_registered" : "Email already member of organization",
+      "already_sent" : "Invite Already sent for joining organization",
+      "email" : "The :attribute must be a valid email address.",
+      "email_not_verified" : "Email address not verified. Please check your email address and try again.",
+      "invite_message_required" : "Invite note is required",
+      "logo" : {
+        "max" : "The logo must not be greater than 2MB size."
+      },
+      "max" : {
+        "string" : "The :attribute must not be greater than :max characters."
+      },
+      "org_text_1" : "Organization not created, Please save Organization details in Organization/settings",
+      "org_val_1" : "You can not change organizations main owners type",
+      "owner_org" : "You are already owner of organization",
+      "regex" : "The :attribute format is invalid.",
+      "required" : "The :attribute field is required.",
+      "required_with" : "The :attribute field is required when :values is present.",
+      "select_image_file" : "Please select an image file.",
+      "sel_mem_type" : "Select member type",
+      "session_expired" : "Your session has expired. Please refresh the page.",
+      "update_status" : "Please update status"
+    }
+  }
+}

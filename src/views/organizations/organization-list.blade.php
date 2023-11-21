@@ -5,13 +5,13 @@
   <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-    <h1>{{ __('orgmgmt::organization.header.org_list') }}</h1>
+    <h1>{{ __('orgmgmt')['header']['org_list'] }}</h1>
     </div>
     <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home"></i></a></li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.organization') }}</li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.org_list') }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['organization'] }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['org_list'] }}</li>
     </ol>
     </div>
   </div>  
@@ -30,9 +30,9 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>{{ __('orgmgmt::organization.form.short_name') }}</th>
+                  <th>{{ __('orgmgmt')['form']['short_name'] }}</th>
                   <th>Email</th>                  
-                  <th>{{ __('orgmgmt::organization.table.action') }}</th>
+                  <th>{{ __('orgmgmt')['table']['action'] }}</th>
                 </tr>
               </thead>
             </table>
@@ -49,7 +49,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title mt-0" id="myModalLabel">{{ __('orgmgmt::organization.form.add_note') }}</h5>
+        <h5 class="modal-title mt-0" id="myModalLabel">{{ __('orgmgmt')['form']['add_note'] }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -69,8 +69,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="btn-close" class="btn btn-secondary waves-effect"
-            data-dismiss="modal">{{ __('orgmgmt::organization.form.close') }}</button>
-          <button type="submit" class="btn btn-success">{{ __('orgmgmt::organization.form.request') }}</button>
+            data-dismiss="modal">{{ __('orgmgmt')['form']['close'] }}</button>
+          <button type="submit" class="btn btn-success">{{ __('orgmgmt')['form']['request'] }}</button>
         </div>
       </form>
     </div><!-- /.modal-content -->
@@ -82,8 +82,8 @@
 @section('app-js')
 <script>
   var organizationGetUrl = "{{ route('organizations.join.get') }}";    
-  var inviteText = "{{ __('orgmgmt::organization.form.request') }}";
-  var invitingText = "{{ __('orgmgmt::organization.form.requesting') }}";
+  var inviteText = "{{ __('orgmgmt')['form']['request'] }}";
+  var invitingText = "{{ __('orgmgmt')['form']['requesting'] }}";
   var inviteUrl = "{{ route('organization.send.invite')}}";
   var lang = {!! $lang !!}
 </script>

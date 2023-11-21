@@ -5,13 +5,13 @@
   <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-    <h1>{{ __('orgmgmt::organization.header.join_requests') }}</h1>
+    <h1>{{ __('orgmgmt')['header']['join_requests'] }}</h1>
     </div>
     <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fa fa-home"></i></a></li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.organization') }}</li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.join_requests') }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['organization'] }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['join_requests'] }}</li>
     </ol>
     </div>
   </div>  
@@ -29,12 +29,12 @@
             <table id="datatable" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
               <thead>
                 <tr>
-                  <th>{{ __('orgmgmt::organization.table.user_name') }}</th>                  
-                  <th>{{ __('orgmgmt::organization.table.user_email') }}</th>
-                  <th>{{ __('orgmgmt::organization.form.organization_name') }}</th>                                    
-                  <th>{{ __('orgmgmt::organization.table.created') }}</th>
-                  <th>{{ __('orgmgmt::organization.table.status') }}</th>
-                  <th>{{ __('orgmgmt::organization.table.action') }}</th>
+                  <th>{{ __('orgmgmt')['table']['user_name'] }}</th>                  
+                  <th>{{ __('orgmgmt')['table']['user_email'] }}</th>
+                  <th>{{ __('orgmgmt')['form']['organization_name'] }}</th>                                    
+                  <th>{{ __('orgmgmt')['table']['created'] }}</th>
+                  <th>{{ __('orgmgmt')['table']['status'] }}</th>
+                  <th>{{ __('orgmgmt')['table']['action'] }}</th>
                 </tr>
               </thead>
             </table>
@@ -51,7 +51,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title mt-0" id="myModalLabel">{{ __('orgmgmt::organization.form.approval') }}</h5>
+        <h5 class="modal-title mt-0" id="myModalLabel">{{ __('orgmgmt')['form']['approval'] }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -63,11 +63,11 @@
           <div class="form-group">
             <div class="row g-3 align-items-center">                
               <div class="col-md-12">
-                <label for="status">{{ __('orgmgmt::organization.table.status') }}</label>
+                <label for="status">{{ __('orgmgmt')['table']['status'] }}</label>
                 <select name="status" id="status" class="form-control">
-                  <option value="0">{{ __('orgmgmt::organization.form.pending') }}</option>
-                  <option value="1">{{ __('orgmgmt::organization.form.approve') }}</option>
-                  <option value="2">{{ __('orgmgmt::organization.form.reject') }}</option>
+                  <option value="0">{{ __('orgmgmt')['form']['pending'] }}</option>
+                  <option value="1">{{ __('orgmgmt')['form']['approve'] }}</option>
+                  <option value="2">{{ __('orgmgmt')['form']['reject'] }}</option>
                 </select>
                 <span class="status_change error"></span>
               </div>              
@@ -76,7 +76,7 @@
           <div class="form-group">
             <div class="row g-3 align-items-center">                
               <div class="col-md-12">
-                <label for="user_note">{{ __('orgmgmt::organization.form.user_note') }}</label>
+                <label for="user_note">{{ __('orgmgmt')['form']['user_note'] }}</label>
                 <textarea name="user_note" id="user_note" class="form-control" readonly></textarea>
                 <span class="error"></span>
               </div>              
@@ -85,7 +85,7 @@
           <div class="form-group">
             <div class="row g-3 align-items-center">                
               <div class="col-md-12">
-                <label for="owner_note">{{ __('orgmgmt::organization.form.owner_note') }}</label>
+                <label for="owner_note">{{ __('orgmgmt')['form']['owner_note'] }}</label>
                 <textarea name="owner_note" id="owner_note" class="form-control"></textarea>
                 <span class="error"></span>
               </div>              
@@ -94,8 +94,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="btn-close" class="btn btn-secondary waves-effect"
-            data-dismiss="modal">{{ __('orgmgmt::organization.form.close') }}</button>
-          <button type="submit" class="btn btn-success">{{ __('orgmgmt::organization.form.save') }}</button>
+            data-dismiss="modal">{{ __('orgmgmt')['form']['close'] }}</button>
+          <button type="submit" class="btn btn-success">{{ __('orgmgmt')['form']['save'] }}</button>
         </div>
       </form>
     </div><!-- /.modal-content -->
@@ -107,8 +107,8 @@
 @section('app-js')
 <script>
   var organizationGetUrl = "{{ route('organizations.request.get') }}";    
-  var inviteText = "{{ __('orgmgmt::organization.form.save') }}";
-  var invitingText = "{{ __('orgmgmt::organization.form.processing') }}";
+  var inviteText = "{{ __('orgmgmt')['form']['save'] }}";
+  var invitingText = "{{ __('orgmgmt')['form']['processing'] }}";
   var inviteUrl = "{{ route('organization.send.invite')}}";
   var getRequestDetails = "{{ route('organization.request.details')}}";
   var lang = {!! $lang !!}

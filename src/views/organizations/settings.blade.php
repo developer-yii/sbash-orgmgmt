@@ -11,13 +11,13 @@
   <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-    <h1>{{ __('orgmgmt::organization.header.org_setting') }}</h1>
+    <h1>{{ __('orgmgmt')['header']['org_setting'] }}</h1>
     </div>
     <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ url('administrator/dashboard') }}"><i class="fa fa-home"></i></a></li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.organization') }}</li>
-      <li class="breadcrumb-item active">{{ __('orgmgmt::organization.header.settings') }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['organization'] }}</li>
+      <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['settings'] }}</li>
     </ol>
     </div>
   </div>
@@ -43,10 +43,10 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
-                  <label for="inputPassword6" class="col-form-label">{{ __('orgmgmt::organization.form.organization_name') }}</label>
+                  <label for="inputPassword6" class="col-form-label">{{ __('orgmgmt')['form']['organization_name'] }}</label>
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('orgmgmt::organization.form.enter_organization_name') }}" value="{{ ($org)?$org->name:"" }}">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('orgmgmt')['form']['enter_organization_name'] }}" value="{{ ($org)?$org->name:"" }}">
                   <span class="error"></span>
                 </div>              
               </div>
@@ -54,16 +54,16 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
-                  <label for="inputPassword6" class="col-form-label">{{ __('orgmgmt::organization.form.short_name') }}</label>
+                  <label for="inputPassword6" class="col-form-label">{{ __('orgmgmt')['form']['short_name'] }}</label>
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" id="short_name" name="short_name" placeholder="{{ __('orgmgmt::organization.form.enter_short_name') }}" value="{{ ($org)?$org->short_name:"" }}">
+                  <input type="text" class="form-control" id="short_name" name="short_name" placeholder="{{ __('orgmgmt')['form']['enter_short_name'] }}" value="{{ ($org)?$org->short_name:"" }}">
                   <span class="error short_name_error"></span>                
                 </div>              
                 <div class="col-3">
                   <div class="custom-control custom-checkbox">
                     <input class="custom-control-input custom-control-input-success" type="checkbox" id="short_name_available" name="short_name_available" checked="" readonly onclick="return false;" onkeydown="e = e || window.event; if(e.keyCode !== 9) return false;">
-                    <label for="short_name_available" class="custom-control-label">{{ __('orgmgmt::organization.form.short_name_available') }}</label>
+                    <label for="short_name_available" class="custom-control-label">{{ __('orgmgmt')['form']['short_name_available'] }}</label>
                   </div>
                   {{-- <div class="form-check">
                     @if($org)
@@ -86,7 +86,7 @@
                 <div class="col-6">
                   <div class="row">
                     <div class="col-3">
-                      {{ __('orgmgmt::organization.form.public_pages') }}
+                      {{ __('orgmgmt')['form']['public_pages'] }}
                     </div>
                     <div class="col-auto">
                       @php
@@ -101,7 +101,7 @@
                   </div>
                   <div class="row">
                     <div class="col-3">
-                      {{ __('orgmgmt::organization.form.email') }}
+                      {{ __('orgmgmt')['form']['email'] }}
                     </div>
                     <div class="col-auto">
                       <span id="email">{{ ($org)?($org->short_name."@sbash.io"):""}}</span>
@@ -115,10 +115,10 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
-                  <label for="email_forward" class="col-form-label">{{ __('orgmgmt::organization.form.email_forward') }}</label>
+                  <label for="email_forward" class="col-form-label">{{ __('orgmgmt')['form']['email_forward'] }}</label>
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" id="email_forward" name="email_forward" placeholder="{{ __('orgmgmt::organization.form.email_forward') }}" value="{{ ($org)?$org->email_forward:"" }}">
+                  <input type="text" class="form-control" id="email_forward" name="email_forward" placeholder="{{ __('orgmgmt')['form']['email_forward'] }}" value="{{ ($org)?$org->email_forward:"" }}">
                   <span class="error"></span>
                 </div>              
               </div>
@@ -126,7 +126,7 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
-                  <label for="double_optin" class="">{{ __('orgmgmt::organization.form.double_optin') }}
+                  <label for="double_optin" class="">{{ __('orgmgmt')['form']['double_optin'] }}
                   </label>
                 </div>
                 <div class="col-4"> 
@@ -140,7 +140,7 @@
             <div class="form-group">
               <div class="row g-3 align-items-center">
                 <div class="col-2">
-                  <label for="logo" class="col-form-label">{{ __('orgmgmt::organization.form.upload_logo') }}</label>
+                  <label for="logo" class="col-form-label">{{ __('orgmgmt')['form']['upload_logo'] }}</label>
                 </div>
                 <div class="col-4">
                   <input type="file" id="logo" name="logo">
@@ -165,8 +165,8 @@
               <div class="row">
                 <div class="col-2"></div>
                 <div class="col-4 text-right">
-                  <a href="{{ route('home')}}" type="button" class="btn btn-secondary cancel-btn">{{ __('orgmgmt::organization.form.cancel') }}</a>
-                  <button type="submit" class="btn btn-success">{{ __('orgmgmt::organization.form.save') }}</button>
+                  <a href="{{ route('home')}}" type="button" class="btn btn-secondary cancel-btn">{{ __('orgmgmt')['form']['cancel'] }}</a>
+                  <button type="submit" class="btn btn-success">{{ __('orgmgmt')['form']['save'] }}</button>
                 </div>
               </div>
             </div>
@@ -182,9 +182,9 @@
 @section('app-js')
 <script>
   var addUpdateUrl = "{{ route('organization.addUpdate')}}";
-  var short_name_error = "{{ __('orgmgmt::organization.form.short_name_not_available') }}";
-  var successMsg = "{{ __('orgmgmt::organization.form.success') }}";
-  var errIcon = "{{ __('orgmgmt::organization.form.error') }}";
+  var short_name_error = "{{ __('orgmgmt')['form']['short_name_not_available'] }}";
+  var successMsg = "{{ __('orgmgmt')['form']['success'] }}";
+  var errIcon = "{{ __('orgmgmt')['form']['error'] }}";
   var checkNameUrl = "{{ route('organization.checkName')}}"
 </script>
 

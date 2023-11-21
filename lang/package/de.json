@@ -1,0 +1,198 @@
+{
+  "orgmgmt" : {
+    "alert" : {
+      "are_you_sure" : "Sind Sie sicher, den Benutzer aus der Organisation zu entfernen?",
+      "are_you_sure_sub" : "Dies kann nicht rückgängig gemacht werden!",
+      "confirm_btn" : "Ja, Benutzer entfernen"
+    },
+    "event" : {
+      "table" : {
+        "empty" : "Keine Daten in der Tabelle verfügbar",
+        "filter" : {
+          "post" : " Einträge",
+          "pre" : "Filterergebnis von "
+        },
+        "info" : {
+          "ent" : "Einträge",
+          "length_a" : "Anzeigen",
+          "length_b" : "Einträge pro Seite",
+          "of" : "von",
+          "sh" : "Anzeigen",
+          "to" : "zu"
+        },
+        "loading" : "Laden...",
+        "nr" : "Keine übereinstimmenden Datensätze gefunden",
+        "paginate" : {
+          "first" : "Erste",
+          "last" : "Letzte",
+          "next" : "Weiter",
+          "prev" : "Zurück"
+        },
+        "processing" : "Verarbeitung...",
+        "sc" : "Suche",
+        "sort" : {
+          "asc" : ": aktivieren, um Spalte aufsteigend zu sortieren",
+          "desc" : ": aktivieren, um Spalte absteigend zu sortieren"
+        },
+        "thousand_separator" : "."
+      }
+    },
+    "form" : {
+      "add_note" : "Notiz hinzufügen",
+      "admin" : "Administrator",
+      "approval" : "Genehmigung",
+      "approve" : "Genehmigen",
+      "cancel" : "Abbrechen",
+      "change" : "Ändern",
+      "close" : "Schließen",
+      "contributor" : "Mitwirkender",
+      "default_footer" : "Standard-Fußzeile",
+      "description" : "Beschreibung",
+      "double_optin" : "Opt-in für E-Mail-Kommunikation",
+      "email" : "E-Mail",
+      "email_forward" : "E-Mail weiterleiten",
+      "enter_email" : "E-Mail eingeben",
+      "enter_organization_name" : "Organisationsname eingeben",
+      "enter_short_name" : "Geben Sie den Kurznamen ein",
+      "error" : "Fehler",
+      "invite" : "Einladen",
+      "invite_note" : "Einladungsnotiz",
+      "inviting" : "Einladen",
+      "member" : "Mitglied",
+      "organizationinfo" : "Organisationsinformationen anzeigen",
+      "organization_name" : "Organisationsname",
+      "owner" : "Besitzer",
+      "owner_note" : "Notiz des Besitzers",
+      "pending" : "Ausstehend",
+      "processing" : "Verarbeitung",
+      "public_pages" : "Öffentliche Seiten",
+      "reject" : "Abweisen",
+      "request" : "Anfrage senden",
+      "requesting" : "Anfrage wird gesendet",
+      "save" : "Speichern",
+      "short_name" : "Kurzname",
+      "short_name_available" : "Kurzname verfügbar",
+      "short_name_not_available" : "Der eingegebene Kurzname ist nicht verfügbar",
+      "signin" : "Anmelden",
+      "success" : "Erfolg",
+      "upload_logo" : "Logo hochladen",
+      "user_note" : "Benutzerhinweis"
+    },
+    "header" : {
+      "invite_org" : "Zur Organisation einladen",
+      "join_organization" : "Organisation beitreten",
+      "join_requests" : "Beitrittsanfragen",
+      "my_org_list" : "Meine Organisationen",
+      "organization" : "Organization",
+      "org_list" : "Organisationsliste",
+      "org_members" : "Organisationsmitglieder",
+      "org_setting" : "Organisationseinstellungen",
+      "settings" : "Einstellungen"
+    },
+    "label" : {
+      "org_edit" : "Organisation bearbeiten"
+    },
+    "mails" : {
+      "btn" : {
+        "accept" : "Akzeptieren",
+        "join_request" : "Beitrittsanfragen",
+        "register" : "Registrieren",
+        "reject" : "Abweisen"
+      },
+      "by" : "von",
+      "following_is_inviter_note" : "Nachfolgend finden Sie die Notiz des Einladenden",
+      "has_been" : "wurde",
+      "has_been_recieved_from" : "wurde empfangen von",
+      "hello" : "Hallo",
+      "invitation_register_text1" : "Um beizutreten, registrieren Sie sich bitte auf unserem System mit dem unten stehenden Button",
+      "invitation_register_text2" : "Wenn Sie Fragen haben, kontaktieren Sie uns bitte unter",
+      "invitation_to_join" : "Deine Einladung zum Beitritt",
+      "invited_to_join" : "Du wurdest eingeladen, beizutreten",
+      "kindly_take_action" : "Bitte ergreifen Sie die erforderlichen Maßnahmen",
+      "owners_note" : "Nachfolgend finden Sie die Notiz des Eigentümers",
+      "request_to_join" : "Beitrittsanfrage",
+      "team" : "Team",
+      "thanks" : "Danke",
+      "your_request_to_join" : "Deine Beitrittsanfrage"
+    },
+    "notification" : {
+      "already_member" : "Du bist bereits Mitglied der angeforderten Organisation",
+      "already_requested" : "Du hast bereits eine Anfrage gestellt, um dieser Organisation beizutreten",
+      "already_two_org_created" : "Sie können nicht mehr als 2 Organisationen erstellen",
+      "cant_remove_owner" : "Sie können den Eigentümer der Organisation nicht entfernen",
+      "error_occurred" : "Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten.",
+      "invi_sent" : "Einladungslink gesendet",
+      "join_request" : "Organisationsbeitrittsanfrage gesendet",
+      "join_request_failed" : "Organisationsbeitrittsanfrage fehlgeschlagen",
+      "member_remove_failed" : "Entfernen des Mitglieds fehlgeschlagen",
+      "member_remove_success" : "Mitglied erfolgreich aus Organisation entfernt",
+      "mem_type_changed" : "Mitgliedertyp geändert",
+      "mem_type_change_fail" : "Mitgliedertypänderung fehlgeschlagen",
+      "no_invite_org_perm" : "Sie haben keine Berechtigung, um zur Organisation einzuladen",
+      "no_member_remove_perm" : "Sie haben keine Berechtigung, Mitglieder zu entfernen",
+      "no_member_type_change_perm" : "Sie haben keine Berechtigung, den Mitgliedstyp zu ändern",
+      "no_member_view_perm" : "Sie haben keine Berechtigung, Mitglieder der Organisation anzuzeigen",
+      "no_mem_list_perm" : "Sie haben keine Berechtigung, Mitglieder aufzulisten",
+      "no_org_edit_perm" : "Sie haben keine Berechtigung, Organisationen zu bearbeiten",
+      "no_org_found" : "Organisation nicht gefunden!",
+      "no_org_list_perm" : "Sie haben keine Berechtigung, Organisationen anzuzeigen",
+      "no_view_set_perm" : "Sie haben keine Berechtigung, die Einstellungen anzuzeigen",
+      "org_add_fail" : "Organisationsaktualisierung fehlgeschlagen",
+      "org_add_success" : "Organisationsaktualisierung erfolgreich",
+      "request_approved" : "Anfrage genehmigt",
+      "request_rejected" : "Anfrage abgelehnt",
+      "something_wrong" : "Etwas ist schiefgelaufen",
+      "status_update_fail" : "Statusänderung fehlgeschlagen",
+      "update_org_settings" : "Richten Sie zuerst Ihre Organisation ein!"
+    },
+    "orgjoin" : {
+      "copyright" : "Urheberrecht",
+      "right_reserved" : "Alle Rechte vorbehalten",
+      "text-1" : "Sie haben erfolgreich der Organisation beigetreten",
+      "text-3" : "Bereits Mitglied der Organisation",
+      "text-4" : "ist bereits Mitglied von",
+      "text-5" : "Melden Sie sich auf der Website an und klicken Sie auf den unten stehenden Link",
+      "text-6" : "Organisationsbeitrittsanfrage abgelehnt!",
+      "text-7" : "Organisationsbeitrittsanfrage bereits abgelehnt!"
+    },
+    "page" : {
+      "add_organization" : "Organisation hinzufügen"
+    },
+    "table" : {
+      "access_type" : "Zugriffstyp",
+      "action" : "Aktion",
+      "created" : "Erstellt am",
+      "member_type" : "Mitgliedertyp",
+      "status" : "Status",
+      "user" : "Benutzer",
+      "user_email" : "Benutzer-E-Mail",
+      "user_name" : "Benutzername"
+    },
+    "title" : {
+      "organizationinfo" : "Organisationsinformationen auf der Veranstaltungsseite anzeigen"
+    },
+    "validation" : {
+      "already_registered" : "E-Mail ist bereits Mitglied der Organisation",
+      "already_sent" : "Einladung zur Teilnahme an der Organisation wurde bereits gesendet",
+      "email" : "Die :attribute muss eine gültige E-Mail-Adresse sein.",
+      "email_not_verified" : "E-Mail-Adresse nicht verifiziert. Bitte überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut.",
+      "invite_message_required" : "Einladungsnotiz ist erforderlich",
+      "logo" : {
+        "max" : "Das Logo darf nicht größer als 2 MB sein."
+      },
+      "max" : {
+        "string" : "Das Feld :attribute darf nicht mehr als :max Zeichen enthalten."
+      },
+      "org_text_1" : "Organisation nicht erstellt, bitte speichern Sie die Organisationseinstellungen unter Organisation/Einstellungen",
+      "org_val_1" : "Sie können den Hauptbesitzertyp der Organisation nicht ändern",
+      "owner_org" : "Du bist bereits Besitzer der Organisation",
+      "regex" : "Das :attribute-Format ist ungültig.",
+      "required" : "Das Feld :attribute ist erforderlich.",
+      "required_with" : "Das Feld :attribute ist erforderlich, wenn :values vorhanden ist.",
+      "select_image_file" : "Bitte wählen Sie eine Bilddatei aus.",
+      "sel_mem_type" : "Mitgliedertyp auswählen",
+      "session_expired" : "Ihre Sitzung ist abgelaufen. Bitte aktualisieren Sie die Seite.",
+      "update_status" : "Bitte aktualisieren Sie den Status"
+    }
+  }
+}

@@ -41,9 +41,9 @@ $(document).ready(function() {
             type: 'GET',
             error: function(xhr, textStatus, error) {            
                 if (xhr.status == 401) {
-                    alert('Your session has expired. Please refresh the page.');
+                    alert(sessionExpiredMsg);
                 } else {
-                    alert('An error occurred while processing your request.');
+                    alert(errorOccurredMsg);
                 }
             }
         },
@@ -282,7 +282,7 @@ $(document).ready(function() {
                     return;
                 }
                 if (xhr.status === 554) {
-                    toastr.error("Email address not verified. Please check your email address and try again.");
+                    toastr.error(emailNotVerified);
                     return;
                 }
                 $this.find('button[type="submit"]').html(buttonSave);

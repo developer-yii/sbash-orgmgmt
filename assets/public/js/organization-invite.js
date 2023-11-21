@@ -40,7 +40,7 @@ $(document).ready(function() {
               return;
           }
           if (error.status === 554) {
-              toastr.error("Email address not verified. Please check your email address and try again.");
+              toastr.error(emailNotVerified);
               return;
           }
         	$this.find('button[type="submit"]').html(buttonSave);

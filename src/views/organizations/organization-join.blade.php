@@ -20,16 +20,16 @@
   </div>
   <!-- User name -->
   @if($joinSuccess && !$exists && $action == 'approve')
-    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-1') }}</h2></div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt')['orgjoin']['text-1'] }}</h2></div>
     <div class="lockscreen-name">{{ $email.' joined '.$org }}</div>
   @elseif(!$exists && $alreadyAction)
-    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-7') }}</h2></div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt')['orgjoin']['text-7'] }}</h2></div>
   @elseif(!$exists && !$joinSuccess && $action == 'reject')
     {{-- <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-2') }}</h2></div> --}}
-    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-6') }}</h2></div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt')['orgjoin']['text-6'] }}</h2></div>
   @else
-    <div class="lockscreen-name"><h2>{{ __('orgmgmt::organization.orgjoin.text-3') }}</h2></div>
-    <div class="lockscreen-name">{{$email}} {{ __('orgmgmt::organization.orgjoin.text-4') }} {{ $org}}</div>
+    <div class="lockscreen-name"><h2>{{ __('orgmgmt')['orgjoin']['text-3'] }}</h2></div>
+    <div class="lockscreen-name">{{$email}} {{ __('orgmgmt')['orgjoin']['text-4'] }} {{ $org}}</div>
   @endif
 
   <!-- START LOCK SCREEN ITEM -->
@@ -42,16 +42,16 @@
   <!-- /.lockscreen-item -->
   @if($action != 'reject' || $exists)
   <div class="help-block text-center">
-    {{ __('orgmgmt::organization.orgjoin.text-5') }}
+    {{ __('orgmgmt')['orgjoin']['text-5'] }}
   </div>
   
   <div class="text-center">
-    <a href="{{ route('login')}}">{{ __('orgmgmt::organization.form.signin') }}</a>
+    <a href="{{ route('login')}}">{{ __('orgmgmt')['form']['signin'] }}</a>
   </div>
   @endif
   <div class="lockscreen-footer text-center">
-    {{ __('orgmgmt::organization.orgjoin.copyright') }} &copy; 2022-{{ date('Y')}} <b><a href="https://sbash.io" class="text-black">SBash.io</a></b><br>
-    {{ __('orgmgmt::organization.orgjoin.right_reserved') }}
+    {{ __('orgmgmt')['orgjoin']['copyright'] }} &copy; 2022-{{ date('Y')}} <b><a href="https://sbash.io" class="text-black">SBash.io</a></b><br>
+    {{ __('orgmgmt')['orgjoin']['right_reserved'] }}
   </div>
 </div>
 <!-- /.center -->
