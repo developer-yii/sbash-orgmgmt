@@ -56,12 +56,12 @@ class OrganizationController extends Controller
 
       $messages = [
         'logo.max' => __('orgmgmt')['validation']['logo']['max'],
-        'name.max' => __('validation')['max']['string'],
-        'name.required' => __('validation')['required'],
-        'short_name.max' => __('validation')['max']['string'],
-        'short_name.required_with' => __('validation')['required_with'],
-        'email_forward.required' => __('validation')['required'],
-        'email_forward.regex' => __('validation')['regex'],
+        'name.max' => __('orgmgmt')['validation']['max']['string'],
+        'name.required' => __('orgmgmt')['validation']['required'],
+        'short_name.max' => __('orgmgmt')['validation']['max']['string'],
+        'short_name.required_with' => __('orgmgmt')['validation']['required_with'],
+        'email_forward.required' => __('orgmgmt')['validation']['required'],
+        'email_forward.regex' => __('orgmgmt')['validation']['regex'],
       ];
 
       $validation = Validator::make($request->all(), $rules, $messages);
@@ -736,12 +736,12 @@ class OrganizationController extends Controller
 
       $messages = [
         'logo.max' => __('orgmgmt')['validation']['logo']['max'],
-        'name.required' => __('validation')['required'],
-        'name.max' => __('validation')['max']['string'],
-        'short_name.max' => __('validation')['max']['string'],
-        'short_name.required_with' => __('validation')['required_with'],
-        'email_forward.required' => __('validation')['required'],
-        'email_forward.regex' => __('validation')['regex'],
+        'name.required' => __('orgmgmt')['validation']['required'],
+        'name.max' => __('orgmgmt')['validation']['max']['string'],
+        'short_name.max' => __('orgmgmt')['validation']['max']['string'],
+        'short_name.required_with' => __('orgmgmt')['validation']['required_with'],
+        'email_forward.required' => __('orgmgmt')['validation']['required'],
+        'email_forward.regex' => __('orgmgmt')['validation']['regex'],
       ];
 
       $validation = Validator::make($request->all(), $rules, $messages);
