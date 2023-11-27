@@ -19,6 +19,7 @@ use Sbash\Orgmgmt\Models\InvitedUser;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use DataTables;
 use DB;
 
@@ -173,6 +174,7 @@ class OrganizationController extends Controller
             $directory->organization_id = $r->id;
             $directory->responsible_person = \Auth::user()->id;
             $directory->type = 'default';
+            $directory->directory_guid = Str::uuid();
             $directory->status = 0;
             $directory->is_protected = 1;
             $directory->created_by = \Auth::user()->id;
@@ -182,6 +184,7 @@ class OrganizationController extends Controller
             $branch->text = $request->name;
             $branch->organization_id = $r->id;                
             $branch->type = 'default';   
+            $branch->branch_guid = Str::uuid();
             $branch->is_protected = 1;             
             $branch->responsible_person = \Auth::user()->id;
             $branch->created_by = \Auth::user()->id;
