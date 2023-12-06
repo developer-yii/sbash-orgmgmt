@@ -153,7 +153,7 @@ $(document).ready(function() {
                 if(result.status){                            
                     $('#setting_form').find('#name').val(result.detail.name);
                     $('#setting_form').find('#short_name').val(result.detail.short_name);
-                    var publicpages = url + '/events/' + result.detail.short_name;                    
+                    var publicpages = baseUrl + '/events/' + result.detail.short_name;                    
                     $('#public_page').html(publicpages);
                     $('#email').html(result.detail.email);
                     $('#email_forward').val(result.detail.email_forward);

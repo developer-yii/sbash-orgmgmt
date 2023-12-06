@@ -289,6 +289,7 @@
   var emailNotVerified = "{{ __('orgmgmt')['validation']['email_not_verified'] }}";
   var sessionExpiredMsg = "{{ __('orgmgmt')['validation']['session_expired']}}";  
   var errorOccurredMsg = "{{ __('orgmgmt')['notification']['error_occurred']}}";
+  var baseUrl = "{{url('/')}}";
   var lang = {!! $lang !!}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" crossorigin="anonymous"></script>
