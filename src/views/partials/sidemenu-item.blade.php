@@ -24,6 +24,7 @@
 			    </a>
 			</li>
 		@endif
+		@if(config('app.project_alias') == null)
 		<li class="nav-item">
 		    <a href="{{ route('organization.join.list') }}" class="pl-4 nav-link">		    	
 		    	<i class="nav-icon fa fa-university"></i>
@@ -32,6 +33,7 @@
 		    	</p>
 		    </a>
 		</li>
+		@endif
 		@if(count(auth()->user()->userOrganizations()->get()))
 			<li class="nav-item">
 			    <a href="{{ route('organization.request.list') }}" class="pl-4 nav-link">		    	
