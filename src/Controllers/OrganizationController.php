@@ -673,9 +673,9 @@ class OrganizationController extends Controller
 
   public function orgJoinList(Request $request)
   {
-    if (config('app.project_alias')) {
-      return redirect('/');
-    }
+    return redirect('/');
+    // if (config('app.project_alias')) {
+    // }
 
     $lang = $this->get_DataTable_LanguageBlock();
     return view('orgmgmt::organizations.organization-list',compact('lang')); 
