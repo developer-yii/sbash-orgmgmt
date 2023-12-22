@@ -29,9 +29,9 @@
             <table id="datatable" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>{{ __('orgmgmt')['table']['name'] }}</th>
                   <th>{{ __('orgmgmt')['form']['short_name'] }}</th>
-                  <th>Email</th>
+                  <th>{{ __('orgmgmt')['form']['email'] }}</th>
                   <th>{{ __('orgmgmt')['form']['email_forward'] }}</th>
                   <th>{{ __('orgmgmt')['table']['user'] }}</th>                  
                   <th>{{ __('orgmgmt')['table']['created'] }}</th>

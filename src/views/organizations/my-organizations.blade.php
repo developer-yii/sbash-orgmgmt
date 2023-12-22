@@ -36,9 +36,9 @@
             <table id="datatable" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>{{ __('orgmgmt')['table']['name'] }}</th>
                   <th>{{ __('orgmgmt')['form']['short_name'] }}</th>
-                  <th>Email</th>
+                  <th>{{ __('orgmgmt')['form']['email'] }}</th>
                   <th>{{ __('orgmgmt')['form']['email_forward'] }}</th>    
                   <th>{{ __('orgmgmt')['table']['access_type'] }}</th>                             
                   <th>{{ __('orgmgmt')['table']['created'] }}</th>
@@ -238,6 +238,9 @@
   var select_image_file = "{{ __('orgmgmt')['validation']['select_image_file'] }}";
   var successMsg = "{{ __('orgmgmt')['form']['success'] }}";
   var errIcon = "{{ __('orgmgmt')['form']['error'] }}";
+  var addOrgLang = "{{ __('orgmgmt')['page']['add_organization'] }}";
+  var editOrgLang = "{{ __('orgmgmt')['page']['edit_organization'] }}";
+  var chooseFileLang = "{{ __('orgmgmt')['choose_file'] }}";
   var checkNameUrl = "{{ route('organization.checkName')}}";
   var logoUrl = "{{ asset('img/uploads/org_logo')}}";
   var url = "{{url('')}}";

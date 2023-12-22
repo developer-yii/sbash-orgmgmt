@@ -5,6 +5,7 @@
       "are_you_sure_sub" : "You wont be able to reverse this!",
       "confirm_btn" : "Yes, Remove User"
     },
+    "choose_file" : "Choose File",
     "event" : {
       "table" : {
         "empty" : "No data available in table",
@@ -39,6 +40,7 @@
     },
     "form" : {
       "add_note" : "Add Note",
+      "add_user" : "Add User",
       "admin" : "Admin",
       "approval" : "Approval",
       "approve" : "Approve",
@@ -49,6 +51,7 @@
       "default_footer" : "Default Footer",
       "description" : "Description",
       "double_optin" : "Opt In for Mail Communication",
+      "edit_member_type" : "Edit Member type",
       "email" : "Email",
       "email_forward" : "Email Forward",
       "enter_email" : "Enter Email",
@@ -156,17 +159,20 @@
       "text-7" : "Organization Joining Request Already Rejected!"
     },
     "page" : {
-      "add_organization" : "Add Organization"
+      "add_organization" : "Add Organization",
+      "edit_organization" : "Edit Organization"
     },
     "table" : {
       "access_type" : "Access Type",
       "action" : "Action",
       "created" : "Created At",
       "member_type" : "Member Type",
+      "name" : "Name",
       "status" : "Status",
       "user" : "User",
       "user_email" : "User Email",
-      "user_name" : "User Name"
+      "user_name" : "User Name",
+      "view" : "View"
     },
     "title" : {
       "organizationinfo" : "Display organization info on events page"

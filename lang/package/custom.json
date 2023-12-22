@@ -1,0 +1,204 @@
+{
+  "orgmgmt" : {
+    "alert" : {
+      "are_you_sure" : "-- translated --",
+      "are_you_sure_sub" : "-- translated --",
+      "confirm_btn" : "-- translated --"
+    },
+    "choose_file" : "-- translated --",
+    "event" : {
+      "table" : {
+        "empty" : "-- translated --",
+        "filter" : {
+          "post" : "-- translated --",
+          "pre" : "-- translated --"
+        },
+        "info" : {
+          "ent" : "-- translated --",
+          "length_a" : "-- translated --",
+          "length_b" : "-- translated --",
+          "of" : "-- translated --",
+          "sh" : "-- translated --",
+          "to" : "-- translated --"
+        },
+        "loading" : "-- translated --",
+        "nr" : "-- translated --",
+        "paginate" : {
+          "first" : "-- translated --",
+          "last" : "-- translated --",
+          "next" : "-- translated --",
+          "prev" : "-- translated --"
+        },
+        "processing" : "-- translated --",
+        "sc" : "-- translated --",
+        "sort" : {
+          "asc" : "-- translated --",
+          "desc" : "-- translated --"
+        },
+        "thousand_separator" : "-- translated --"
+      }
+    },
+    "form" : {
+      "add_note" : "-- translated --",
+      "add_user" : "-- translated --",
+      "admin" : "-- translated --",
+      "approval" : "-- translated --",
+      "approve" : "-- translated --",
+      "cancel" : "-- translated --",
+      "change" : "-- translated --",
+      "close" : "-- translated --",
+      "contributor" : "-- translated --",
+      "default_footer" : "-- translated --",
+      "description" : "-- translated --",
+      "double_optin" : "-- translated --",
+      "edit_member_type" : "-- translated --",
+      "email" : "-- translated --",
+      "email_forward" : "-- translated --",
+      "enter_email" : "-- translated --",
+      "enter_organization_name" : "-- translated --",
+      "enter_short_name" : "-- translated --",
+      "error" : "-- translated --",
+      "invite" : "-- translated --",
+      "invite_note" : "-- translated --",
+      "inviting" : "-- translated --",
+      "member" : "-- translated --",
+      "organizationinfo" : "-- translated --",
+      "organization_name" : "-- translated --",
+      "owner" : "-- translated --",
+      "owner_note" : "-- translated --",
+      "pending" : "-- translated --",
+      "processing" : "-- translated --",
+      "public_pages" : "-- translated --",
+      "reject" : "-- translated --",
+      "request" : "-- translated --",
+      "requesting" : "-- translated --",
+      "save" : "-- translated --",
+      "short_name" : "-- translated --",
+      "short_name_available" : "-- translated --",
+      "short_name_not_available" : "-- translated --",
+      "signin" : "-- translated --",
+      "success" : "-- translated --",
+      "upload_logo" : "-- translated --",
+      "user_note" : "-- translated --"
+    },
+    "header" : {
+      "invite_org" : "-- translated --",
+      "join_organization" : "-- translated --",
+      "join_requests" : "-- translated --",
+      "my_org_list" : "-- translated --",
+      "organization" : "-- translated --",
+      "org_list" : "-- translated --",
+      "org_members" : "-- translated --",
+      "org_setting" : "-- translated --",
+      "settings" : "-- translated --"
+    },
+    "label" : {
+      "org_edit" : "-- translated --"
+    },
+    "mails" : {
+      "btn" : {
+        "accept" : "-- translated --",
+        "join_request" : "-- translated --",
+        "register" : "-- translated --",
+        "reject" : "-- translated --"
+      },
+      "by" : "-- translated --",
+      "following_is_inviter_note" : "-- translated --",
+      "has_been" : "-- translated --",
+      "has_been_recieved_from" : "-- translated --",
+      "hello" : "-- translated --",
+      "invitation_register_text1" : "-- translated --",
+      "invitation_register_text2" : "-- translated --",
+      "invitation_to_join" : "-- translated --",
+      "invited_to_join" : "-- translated --",
+      "kindly_take_action" : "-- translated --",
+      "owners_note" : "-- translated --",
+      "request_to_join" : "-- translated --",
+      "team" : "-- translated --",
+      "thanks" : "-- translated --",
+      "your_request_to_join" : "-- translated --"
+    },
+    "notification" : {
+      "already_member" : "-- translated --",
+      "already_requested" : "-- translated --",
+      "already_two_org_created" : "-- translated --",
+      "cant_remove_owner" : "-- translated --",
+      "error_occurred" : "-- translated --",
+      "invi_sent" : "-- translated --",
+      "join_request" : "-- translated --",
+      "join_request_failed" : "-- translated --",
+      "member_remove_failed" : "-- translated --",
+      "member_remove_success" : "-- translated --",
+      "mem_type_changed" : "-- translated --",
+      "mem_type_change_fail" : "-- translated --",
+      "no_invite_org_perm" : "-- translated --",
+      "no_member_remove_perm" : "-- translated --",
+      "no_member_type_change_perm" : "-- translated --",
+      "no_member_view_perm" : "-- translated --",
+      "no_mem_list_perm" : "-- translated --",
+      "no_org_edit_perm" : "-- translated --",
+      "no_org_found" : "-- translated --",
+      "no_org_list_perm" : "-- translated --",
+      "no_view_set_perm" : "-- translated --",
+      "org_add_fail" : "-- translated --",
+      "org_add_success" : "-- translated --",
+      "request_approved" : "-- translated --",
+      "request_rejected" : "-- translated --",
+      "something_wrong" : "-- translated --",
+      "status_update_fail" : "-- translated --",
+      "update_org_settings" : "-- translated --"
+    },
+    "orgjoin" : {
+      "copyright" : "-- translated --",
+      "right_reserved" : "-- translated --",
+      "text-1" : "-- translated --",
+      "text-3" : "-- translated --",
+      "text-4" : "-- translated --",
+      "text-5" : "-- translated --",
+      "text-6" : "-- translated --",
+      "text-7" : "-- translated --"
+    },
+    "page" : {
+      "add_organization" : "-- translated --",
+      "edit_organization" : "-- translated --"
+    },
+    "table" : {
+      "access_type" : "-- translated --",
+      "action" : "-- translated --",
+      "created" : "-- translated --",
+      "member_type" : "-- translated --",
+      "name" : "-- translated --",
+      "status" : "-- translated --",
+      "user" : "-- translated --",
+      "user_email" : "-- translated --",
+      "user_name" : "-- translated --",
+      "view" : "-- translated --"
+    },
+    "title" : {
+      "organizationinfo" : "-- translated --"
+    },
+    "validation" : {
+      "already_registered" : "-- translated --",
+      "already_sent" : "-- translated --",
+      "email" : "-- translated --",
+      "email_not_verified" : "-- translated --",
+      "invite_message_required" : "-- translated --",
+      "logo" : {
+        "max" : "-- translated --"
+      },
+      "max" : {
+        "string" : "-- translated --"
+      },
+      "org_text_1" : "-- translated --",
+      "org_val_1" : "-- translated --",
+      "owner_org" : "-- translated --",
+      "regex" : "-- translated --",
+      "required" : "-- translated --",
+      "required_with" : "-- translated --",
+      "select_image_file" : "-- translated --",
+      "sel_mem_type" : "-- translated --",
+      "session_expired" : "-- translated --",
+      "update_status" : "-- translated --"
+    }
+  }
+}

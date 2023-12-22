@@ -86,7 +86,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.edit', function() {
         $('#forms').attr('action', changeMemTypeUrl);
-        $('#myModalLabel').html('Edit Member type');
+        $('#myModalLabel').html(editMemberTypeText);
         let id = $(this).attr('id');
         let memType = $(this).attr('data-member');
         

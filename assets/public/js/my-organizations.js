@@ -1,4 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function() {    
+    $('#logo').inputFileText({
+        text: chooseFileLang
+    });
 
     const params = new URLSearchParams(window.location.search);
     if (params.has('modal') && params.get('modal') === 'open') {
@@ -79,7 +82,7 @@ $(document).ready(function() {
         $('.error').html("");        
         $('#edit_id').val(0);
         $('#setting_form')[0].reset();
-        $('#myModalLabel').html('Add Organization');
+        $('#myModalLabel').html(addOrgLang);
         CKEDITOR.instances.default_footer.setData('');
         CKEDITOR.instances.description.setData('');
         $('#uploadImages').html('');
@@ -263,7 +266,7 @@ $(document).ready(function() {
         e.preventDefault();
         var id = $(this).attr('data-id');
         $('#edit_id').val(id);
-        $('#myModalLabel').html('Edit Organization');
+        $('#myModalLabel').html(editOrgLang);
 
         $.ajax({
             url: detailUrl+'?id='+id,

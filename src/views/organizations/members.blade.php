@@ -30,8 +30,8 @@
             <table id="datatable" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
+                  <th>{{ __('orgmgmt')['table']['name'] }}</th>
+                  <th>{{ __('orgmgmt')['form']['email'] }}</th>
                   <th>{{ __('orgmgmt')['table']['member_type'] }}</th>
                   <th>{{ __('orgmgmt')['table']['action'] }}</th>
                 </tr>
@@ -49,7 +49,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title mt-0" id="myModalLabel">Add User</h5>
+        <h5 class="modal-title mt-0" id="myModalLabel">{{ __('orgmgmt')['form']['add_user'] }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -94,6 +94,7 @@
   var cancelText = "{{ __('orgmgmt')['form']['cancel'] }}";
   var confirmText = "{{ __('orgmgmt')['alert']['confirm_btn'] }}";
   var ErrorText = "{{ __('orgmgmt')['form']['error'] }}";
+  var editMemberTypeText = "{{ __('orgmgmt')['form']['edit_member_type'] }}";
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-members.js')}}"></script>

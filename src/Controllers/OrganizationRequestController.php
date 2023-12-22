@@ -130,7 +130,7 @@ class OrganizationRequestController extends Controller
 
         return DataTables::of($results)                            
                 ->addColumn('actions', function ($data) {                   
-                    $button = '<a class="btn btn-warning waves-effect waves-light ml-1 view-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->createId.'" data-status-id="'.$data->is_approved.'" title="Request">View</a>';                        
+                    $button = '<a class="btn btn-warning waves-effect waves-light ml-1 view-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->createId.'" data-status-id="'.$data->is_approved.'" title="Request">'.__('orgmgmt')['table']['view'].'</a>';                        
                 return $button;
             })->rawColumns(['actions'])
           ->toJson();       

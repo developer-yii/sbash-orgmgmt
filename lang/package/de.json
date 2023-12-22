@@ -5,6 +5,7 @@
       "are_you_sure_sub" : "Dies kann nicht rückgängig gemacht werden!",
       "confirm_btn" : "Ja, Benutzer entfernen"
     },
+    "choose_file" : "Datei auswählen",
     "event" : {
       "table" : {
         "empty" : "Keine Daten in der Tabelle verfügbar",
@@ -39,6 +40,7 @@
     },
     "form" : {
       "add_note" : "Notiz hinzufügen",
+      "add_user" : "Benutzer hinzufügen",
       "admin" : "Administrator",
       "approval" : "Genehmigung",
       "approve" : "Genehmigen",
@@ -49,6 +51,7 @@
       "default_footer" : "Standard-Fußzeile",
       "description" : "Beschreibung",
       "double_optin" : "Opt-in für E-Mail-Kommunikation",
+      "edit_member_type" : "Mitgliedertyp bearbeiten",
       "email" : "E-Mail",
       "email_forward" : "E-Mail weiterleiten",
       "enter_email" : "E-Mail eingeben",
@@ -80,7 +83,7 @@
     },
     "header" : {
       "invite_org" : "Zur Organisation einladen",
-      "join_organization" : "Organisation beitreten",
+      "join_organization" : "Einer Organisation beitreten",
       "join_requests" : "Beitrittsanfragen",
       "my_org_list" : "Meine Organisationen",
       "organization" : "Organization",
@@ -148,7 +151,7 @@
     "orgjoin" : {
       "copyright" : "Urheberrecht",
       "right_reserved" : "Alle Rechte vorbehalten",
-      "text-1" : "Sie haben erfolgreich der Organisation beigetreten",
+      "text-1" : "Sie sind erfolgreich der Organisation beigetreten",
       "text-3" : "Bereits Mitglied der Organisation",
       "text-4" : "ist bereits Mitglied von",
       "text-5" : "Melden Sie sich auf der Website an und klicken Sie auf den unten stehenden Link",
@@ -156,17 +159,20 @@
       "text-7" : "Organisationsbeitrittsanfrage bereits abgelehnt!"
     },
     "page" : {
-      "add_organization" : "Organisation hinzufügen"
+      "add_organization" : "Organisation hinzufügen",
+      "edit_organization" : "Organisation bearbeiten"
     },
     "table" : {
       "access_type" : "Zugriffstyp",
       "action" : "Aktion",
       "created" : "Erstellt am",
       "member_type" : "Mitgliedertyp",
+      "name" : "Name",
       "status" : "Status",
       "user" : "Benutzer",
       "user_email" : "Benutzer-E-Mail",
-      "user_name" : "Benutzername"
+      "user_name" : "Benutzername",
+      "view" : "Ansicht"
     },
     "title" : {
       "organizationinfo" : "Organisationsinformationen auf der Veranstaltungsseite anzeigen"
