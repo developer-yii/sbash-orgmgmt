@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    $('#logo').inputFileText({
+        text: chooseFileLang
+    });
+    
     $('#logo').change(function(){
 
         var file = this.files[0];
@@ -95,7 +99,7 @@ $(document).ready(function() {
         $('.error').html("");        
         $('#edit_id').val(0);
         $('#setting_form')[0].reset();
-        $('#myModalLabel').html('Add Organization');
+        $('#myModalLabel').html(addOrgText);
         CKEDITOR.instances.default_footer.setData('');
         CKEDITOR.instances.description.setData('');
         $('#uploadImages').html('');
@@ -143,7 +147,7 @@ $(document).ready(function() {
         e.preventDefault();
         var id = $(this).attr('data-id');
         $('#edit_id').val(id);
-        $('#myModalOrgLabel').html('Edit Organization');
+        $('#myModalOrgLabel').html(editOrgText);
 
         $.ajax({
             url: detailUrl+'?id='+id,
@@ -293,7 +297,7 @@ $(document).ready(function() {
     })
 
     $(document).on('click', '.invite-btn', function() {
-        $('#myModalLabel').html('Invite to Organization');
+        $('#myModalLabel').html(inviteToOrgText);
         let id = $(this).attr('data-id');                                        
         $('#id_edit').val(id);        
     })

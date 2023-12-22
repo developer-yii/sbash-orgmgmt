@@ -30,8 +30,8 @@
             <table id="datatable" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
+                  <th>{{ __('orgmgmt')['table']['name'] }}</th>
+                  <th>{{ __('orgmgmt')['form']['email'] }}</th>
                   <th>{{ __('orgmgmt')['table']['member_type'] }}</th>
                   <th>{{ __('orgmgmt')['table']['action'] }}</th>
                 </tr>
@@ -87,6 +87,7 @@
   var changeMemTypeUrl = "{{ route('organization.changeMemberType') }}";  
   var btnChange = "{{ __('orgmgmt')['form']['change'] }}";
   var btnProcessing = "{{ __('orgmgmt')['form']['processing'] }}";
+  var editMemberTypeText = "{{ __('orgmgmt')['form']['edit_member_type'] }}";
   var lang = {!! $lang !!}
 </script>
 

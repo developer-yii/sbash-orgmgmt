@@ -289,6 +289,10 @@
   var emailNotVerified = "{{ __('orgmgmt')['validation']['email_not_verified'] }}";
   var sessionExpiredMsg = "{{ __('orgmgmt')['validation']['session_expired']}}";  
   var errorOccurredMsg = "{{ __('orgmgmt')['notification']['error_occurred']}}";
+  var addOrgText = "{{__('orgmgmt')['page']['add_organization'] }}";
+  var editOrgText = "{{__('orgmgmt')['page']['edit_organization'] }}";
+  var inviteToOrgText = "{{ __('orgmgmt')['header']['invite_org'] }}";
+  var chooseFileLang = "{{ __('orgmgmt')['choose_file'] }}";
   var baseUrl = "{{url('/')}}";
   var lang = {!! $lang !!}
 </script>
