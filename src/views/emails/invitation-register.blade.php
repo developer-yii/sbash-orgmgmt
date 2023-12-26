@@ -3,8 +3,10 @@
 
 {{__('orgmgmt')['mails']['invited_to_join']}} {{ $data['organization_name'] }} {{__('orgmgmt')['mails']['by']}} {{ $data['user_name'] }}. 
 
+@if($data['invite_message'])
 <p>{{__('orgmgmt')['mails']['following_is_inviter_note']}}:</p>                           
 <p><i>{{$data['invite_message']}}<i></p> 
+@endif
 
 {{__('orgmgmt')['mails']['invitation_register_text1']}}:
 

@@ -1,10 +1,12 @@
 @component('mail::message')
 # {{__('orgmgmt')['mails']['hello']}},
 
-{{__('orgmgmt')['mails']['invitation_to_join']}} {{ $data['organization_name'] }} {{__('orgmgmt')['mails']['by']}} {{ $data['user_name'] }}.
+{{__('orgmgmt')['mails']['invited_to_join']}} {{ $data['organization_name'] }} {{__('orgmgmt')['mails']['by']}} {{ $data['user_name'] }}.
 
+@if($data['invite_message'])
 <p>{{__('orgmgmt')['mails']['following_is_inviter_note']}}:</p>                           
 <p><i>{{$data['invite_message']}}<i></p> 
+@endif
 
 {{__('orgmgmt')['mails']['kindly_take_action']}}
 

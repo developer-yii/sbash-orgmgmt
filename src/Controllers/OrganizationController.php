@@ -255,11 +255,11 @@ class OrganizationController extends Controller
 
     $rules = [
       'email' => 'required|email',
-      'invite_message' => 'required'
+      // 'invite_message' => 'required'
     ];
 
     $messages = [
-      'invite_message.required' => __('orgmgmt')['validation']['invite_message_required'],
+      // 'invite_message.required' => __('orgmgmt')['validation']['invite_message_required'],
       'email.required' => __('orgmgmt')['validation']['required'],
       'email.email' => __('orgmgmt')['validation']['email'],
     ];
