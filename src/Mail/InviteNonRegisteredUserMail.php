@@ -21,7 +21,8 @@ class InviteNonRegisteredUserMail extends Mailable
 
     public function build()
     {        
-        $subject1 = 'Invitation to Join '.$this->data['organization_name'].'.';
+        $subject1 = str_replace('<<Organization Name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_subject']);
+        
         return $this->from($this->data['organization_email'])
                ->subject($subject1)
                ->markdown('orgmgmt::emails.invite')
