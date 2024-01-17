@@ -1784,9 +1784,11 @@
                       <tbody>
                         <tr>                          
                           <th>
+                            @if(config('app.project_alias') == 'sFlow')
                             <p class="text-center" style="padding-top: 1rem;">
-                              {{__('orgmgmt')['mails']['invite_footer_block1']}} <a href="#">{{__('orgmgmt')['mails']['invite_footer_block2']}}</a>
+                              {{__('orgmgmt')['mails']['invite_footer_block1']}} <a href="{{route('user.preferences.index')}}">{{__('orgmgmt')['mails']['invite_footer_block2']}}</a>
                             </p>
+                            @endif
                             <p class="text-center">
                               <a href="javascript:void(0)">{{ __('copyright')}} &copy; {{ date('Y') }}</a>
                               &nbsp;&nbsp;
