@@ -22,6 +22,7 @@ class InviteMail extends Mailable
     public function build()
     {        
         $subject1 = str_replace('<<Organization Name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_subject']);
+        
         return $this->from($this->data['organization_email'])
                ->subject($subject1)
                ->markdown('orgmgmt::emails.invite')
