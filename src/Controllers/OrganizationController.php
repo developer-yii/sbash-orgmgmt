@@ -372,6 +372,10 @@ class OrganizationController extends Controller
         $orgInvitation->save();
 
         // Email user a mail for invitation
+        $translationString = __('orgmgmt')['mails']['invite_block1'];
+        $translatedText = str_replace('<<Organization name>>', $org->name, $translationString);
+        $msgblock1 = str_replace('<<Invitee name>>', $user->name, $translatedText);
+
         $toEmail = $request->email;
         $from = $user->email;
         $data = [
@@ -379,6 +383,7 @@ class OrganizationController extends Controller
             'organization_name' => $org->name,
             'organization_email' => $org->email,
             'user_name' => $user->name,
+            'msgblock1' => $msgblock1,
             'invite_message' => $request->invite_message,
             'urlApprove' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
             'urlReject' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
