@@ -16,10 +16,14 @@ use Auth;
 
 class OrganizationInviteActionConttoller extends Controller
 {
-	public function rejectJoin(Request $request, $org, $email, $action)
+	public function rejectJoin(Request $request, $locale, $org, $email, $action)
 	{
 		if($email && $org)
 	    {
+	    	if($locale){
+	    		app()->setLocale($locale);
+	    	}
+
 	      	$user = User::where('email',$email)->first();
 	      	$organization = Organization::where('short_name',$org)->where('deleted_at',null)->first();
 	      	$existCheck = '';

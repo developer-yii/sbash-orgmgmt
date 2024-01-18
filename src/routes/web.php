@@ -58,6 +58,6 @@ Route::group(['middleware' => ['web','signed']], function() {
 });
 
 Route::group(['middleware' => ['web','signed']], function() {
-    Route::get('invite-rejected/{org}/{email}/{action}', [OrganizationInviteActionConttoller::class,'rejectJoin'])
+    Route::get('invite-rejected/{locale}/{org}/{email}/{action}', [OrganizationInviteActionConttoller::class,'rejectJoin'])
    ->name('invite-rejected');   
 });

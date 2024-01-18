@@ -317,6 +317,8 @@ class OrganizationController extends Controller
 
         $toEmail = $request->email;
         $from = $user->email;
+
+        $locale = app()->getLocale();
         
         $data = [
             'organization_id' => $org->id,
@@ -327,7 +329,7 @@ class OrganizationController extends Controller
             'msgblock1' => $msgblock2,
             'email' => $request->email,
             'urlApprove' => URL::temporarySignedRoute('register-signed', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
-            'urlReject' => URL::temporarySignedRoute('invite-rejected', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
+            'urlReject' => URL::temporarySignedRoute('invite-rejected', now()->addDays(5), ['locale' => $locale, 'org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
         ];
         Mail::to($toEmail)->send(new InviteNonRegisteredUserMail($data,$from));      
 
