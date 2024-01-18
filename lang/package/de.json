@@ -121,6 +121,8 @@
       "invite_response_footer" : "Vielen Dank,<br>\nTeam <<Organization name>>",
       "invite_response_reject_block1" : "Deine Einladung zur Teilnahme an <<Organization name>> wurde von <<first name>> abgelehnt.",
       "invite_response_salutation" : "Hallo <<invitee name>>,",
+      "invite_response_subject_accepted" : "Genehmigte Einladung zur Teilnahme an <<Organization name>>",
+      "invite_response_subject_rejected" : "Abgelehnte Einladung zur Teilnahme an <<Organization name>>",
       "invite_response_title" : "Einladungsantwort",
       "invite_salutation" : "Hallo <<Firstname>>,",
       "invite_subject" : "Einladung zur Teilnahme an <<Organization Name>>",

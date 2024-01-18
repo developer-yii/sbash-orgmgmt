@@ -20,11 +20,12 @@ class InvitationActionMail extends Mailable
     }
 
     public function build()
-    {        
+    {
         if($this->data['action'] == 'reject')
-            $subject1 = 'Invitation to Join '.$this->data['organization_name'].' Rejected';
+            $subject1 = str_replace('<<Organization name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_response_subject_rejected']);
         elseif($this->data['action'] == 'approve')
-            $subject1 = 'Invitation to Join '.$this->data['organization_name'].' Approved';
+            $subject1 = str_replace('<<Organization name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_response_subject_accepted']);
+        
         return $this->from($this->fromEmail)
                ->subject($subject1)
                ->markdown('orgmgmt::emails.invitation-action')

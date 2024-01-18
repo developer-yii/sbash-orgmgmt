@@ -121,6 +121,8 @@
       "invite_response_footer" : "Thanks,<br>\nTeam <<Organization name>>",
       "invite_response_reject_block1" : "Your invitation to join <<Organization name>> has been rejected by <<first name>>.",
       "invite_response_salutation" : "Hello <<invitee name>>,",
+      "invite_response_subject_accepted" : "Invitation to Join <<Organization name>> Approved",
+      "invite_response_subject_rejected" : "Invitation to Join <<Organization name>> Rejected",
       "invite_response_title" : "Invitation Response",
       "invite_salutation" : "Hello <<Firstname>>,",
       "invite_subject" : "Invitation to Join <<Organization Name>>",
