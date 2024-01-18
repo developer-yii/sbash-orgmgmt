@@ -61,6 +61,10 @@ class OrganizationInviteActionConttoller extends Controller
 	          	foreach($userOrgs as $uorg)
 	          	{
 	              	$userObj = User::find($uorg->user_id);
+
+	              	$translationString1 = __('orgmgmt')['mails']['invite_response_reject_block1'];
+                    $translatedText1 = str_replace('<<Organization name>>', $orgObj->name, $translationString1);
+                    $msgblock1 = str_replace('<<first name>>', $email, $translatedText1);
 	              	// Email organization owner for notification
 	              	$from = $orgObj->email;              
 	              	$data = [
@@ -68,6 +72,7 @@ class OrganizationInviteActionConttoller extends Controller
 	                  	'organization_email' => $orgObj->email,
 	                  	'sender_name' => $email,
 	                  	'user_name' => $userObj->name,
+	                  	'msgblock1' => $msgblock1,
 	                  	'action' => $action
 	              	];
 	              	Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));        
