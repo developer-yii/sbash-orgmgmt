@@ -1,5 +1,5 @@
 <li class="nav-item">
-	<a href="#" class="nav-link">
+	<a href="javascript:void(0)" class="nav-link">
 	  <i class="nav-icon fa fa-building"></i>
 	  <p>
 	    {{ __('orgmgmt')['header']['organization'] }}
