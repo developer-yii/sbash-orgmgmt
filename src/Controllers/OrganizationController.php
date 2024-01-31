@@ -241,7 +241,7 @@ class OrganizationController extends Controller
 
     if(!auth()->user()->isOwnerOfOrganization())
     {
-      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['update_org_settings']]);
+      return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['update_org_settings']]);
     }    
 
     return view('orgmgmt::organizations.invite');
