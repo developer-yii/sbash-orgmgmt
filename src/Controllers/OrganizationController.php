@@ -318,6 +318,12 @@ class OrganizationController extends Controller
         $toEmail = $request->email;
         $from = $user->email;
 
+        $toName = '';
+        $toUser = User::where('email', $request->email)->first();
+        if($toUser){
+          $toName = $toUser->name;
+        }
+
         $locale = app()->getLocale();
         
         $data = [
@@ -327,6 +333,7 @@ class OrganizationController extends Controller
             'user_name' => $user->name,
             'invite_message' => $request->invite_message,
             'msgblock1' => $msgblock2,
+            'toName' => $toName,
             'email' => $request->email,
             'urlApprove' => URL::temporarySignedRoute('register-signed', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
             'urlReject' => URL::temporarySignedRoute('invite-rejected', now()->addDays(5), ['locale' => $locale, 'org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
