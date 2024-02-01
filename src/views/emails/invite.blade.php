@@ -1731,7 +1731,7 @@
                             <table>
                               <tr>
                                 <th>
-                                    <p>{{ str_replace('<<Firstname>>', $data['user_name'], __('orgmgmt')['mails']['invite_salutation'])}}</p>
+                                    <p>{{ str_replace('<<Firstname>>', $data['toName'], __('orgmgmt')['mails']['invite_salutation'])}}</p>
 
                                     <p>{{$data['msgblock1']}}
                                     </p>
