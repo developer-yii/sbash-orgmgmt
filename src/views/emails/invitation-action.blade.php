@@ -995,7 +995,7 @@
       th,
       a {
         color: #0a0a0a;
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
         font-weight: normal;
         padding: 0;
         margin: 0;
@@ -1012,7 +1012,7 @@
       h6 {
         color: inherit;
         word-wrap: normal;
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
         font-weight: normal;
         margin-bottom: 10px;
         margin-bottom: 10px;
@@ -1172,7 +1172,7 @@
         border: 2px solid #2199e8;
       }
       table.button table td a {
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
         font-size: 16px;
         font-weight: bold;
         color: #fefefe;
@@ -1183,7 +1183,7 @@
         border-radius: 3px;
       }
       a.button {
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
         font-size: 16px;
         font-weight: bold;
         color: #fefefe;
