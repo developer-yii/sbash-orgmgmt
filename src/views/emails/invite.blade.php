@@ -1736,7 +1736,7 @@
                                     <p>{{$data['msgblock1']}}
                                     </p>
 
-                                    @if(!empty($data['user_name']))                                                                                
+                                    @if(!empty($data['user_name']) && $data['invite_message'])
                                         <p>{{ str_replace('<<Invitee name>>', $data['user_name'], __('orgmgmt')['mails']['invite_block2']) }}</p>
                                         <p style="background-color: #f0f0f0; padding: 10px; border-radius: 0.75rem;">
                                             {{$data['invite_message']}}
