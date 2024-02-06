@@ -25,8 +25,10 @@ class InviteMail extends Mailable
 
         $markDownView = 'orgmgmt::emails.invite';
 
-        if($this->data['organization_id'] && config('app.up_organization_id') && $this->data['organization_id'] == config('app.up_organization_id'))
+        if($this->data['organization_id'] && config('app.up_organization_id') && $this->data['organization_id'] == config('app.up_organization_id')){
+            app()->setLocale('de');
             $markDownView = 'orgmgmt::emails.uplandcare.invite';
+        }
         
         return $this->from($this->data['organization_email'])
                ->subject($subject1)

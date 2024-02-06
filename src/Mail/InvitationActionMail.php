@@ -29,8 +29,10 @@ class InvitationActionMail extends Mailable
 
         $markDownView = 'orgmgmt::emails.invitation-action';
 
-        if($this->data['organization_id'] && config('app.up_organization_id') && $this->data['organization_id'] == config('app.up_organization_id'))
+        if($this->data['organization_id'] && config('app.up_organization_id') && $this->data['organization_id'] == config('app.up_organization_id')){
+            app()->setLocale('de');
             $markDownView = 'orgmgmt::emails.uplandcare.invitation-action';
+        }
 
         return $this->from($this->fromEmail)
                ->subject($subject1)
