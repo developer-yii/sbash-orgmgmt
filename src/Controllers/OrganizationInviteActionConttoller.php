@@ -72,6 +72,7 @@ class OrganizationInviteActionConttoller extends Controller
 	              	// Email organization owner for notification
 	              	$from = $orgObj->email;              
 	              	$data = [
+	              		'organization_id' => $orgObj->id,
 	                  	'organization_name' => $orgObj->name,
 	                  	'organization_email' => $orgObj->email,
 	                  	'sender_name' => $email,

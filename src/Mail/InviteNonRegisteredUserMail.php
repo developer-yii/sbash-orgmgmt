@@ -22,10 +22,15 @@ class InviteNonRegisteredUserMail extends Mailable
     public function build()
     {        
         $subject1 = str_replace('<<Organization Name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_subject']);
+
+        $markDownView = 'orgmgmt::emails.invite';
+
+        if($this->data['organization_id'] && config('app.up_organization_id') && $this->data['organization_id'] == config('app.up_organization_id'))
+            $markDownView = 'orgmgmt::emails.uplandcare.invite';
         
         return $this->from($this->data['organization_email'])
                ->subject($subject1)
-               ->markdown('orgmgmt::emails.invite')
+               ->markdown($markDownView)
                ->with(['data' => $this->data]);
     }
 }

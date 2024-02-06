@@ -26,9 +26,15 @@ class InvitationActionMail extends Mailable
         elseif($this->data['action'] == 'approve')
             $subject1 = str_replace('<<Organization name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_response_subject_accepted']);
         
+
+        $markDownView = 'orgmgmt::emails.invitation-action';
+
+        if($this->data['organization_id'] && config('app.up_organization_id') && $this->data['organization_id'] == config('app.up_organization_id'))
+            $markDownView = 'orgmgmt::emails.uplandcare.invitation-action';
+
         return $this->from($this->fromEmail)
                ->subject($subject1)
-               ->markdown('orgmgmt::emails.invitation-action')
+               ->markdown($markDownView)
                ->with(['data' => $this->data]);
     }
 }
