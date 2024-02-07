@@ -310,7 +310,13 @@ class OrganizationController extends Controller
         $orgInvitation1->save();
 
         // Email user a mail for invitation
-        $translationString1 = __('orgmgmt')['mails']['invite_block1'];
+        $translationString1 = __('orgmgmt')['mails']['invite_block1'];        
+        if($org->id == config('app.up_organization_id')){          // for uplandcare email 'de' is by default
+          $tempLang = app()->getLocale();          
+          app()->setLocale('de');          
+          $translationString1 = __('orgmgmt')['mails']['invite_block1'];          
+          app()->setLocale($tempLang);
+        }
         $translatedText1 = str_replace('<<Organization name>>', $org->name, $translationString1);
         $msgblock2 = str_replace('<<Invitee name>>', $user->name, $translatedText1);
 
