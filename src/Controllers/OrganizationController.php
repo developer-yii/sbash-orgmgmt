@@ -386,8 +386,14 @@ class OrganizationController extends Controller
         $orgInvitation->invited_by = $user->id;
         $orgInvitation->save();
 
-        // Email user a mail for invitation
+        // Email user a mail for invitation        
         $translationString = __('orgmgmt')['mails']['invite_block1'];
+        if($org->id == config('app.up_organization_id')){          
+          $tempLang = app()->getLocale();
+          app()->setLocale('de');
+          $translationString = __('orgmgmt')['mails']['invite_block1'];
+          app()->setLocale($tempLang);
+        }
         $translatedText = str_replace('<<Organization name>>', $org->name, $translationString);
         $msgblock1 = str_replace('<<Invitee name>>', $user->name, $translatedText);
 
