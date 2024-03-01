@@ -18,7 +18,7 @@
   <div class="row mb-2">
     <div class="col-sm-12 right-title">
       <div class="dropdown content-right">        
-          <button type="button" class="btn btn-block btn-success btn-sm " id="btn-tambah" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square"></i> {{ __('orgmgmt')['page']['add_organization'] }}</button>        
+          <button type="button" class="btn btn-block btn-success btn-sm " @if($createButtonDisabled) {{'disabled'}} @endif id="btn-tambah" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square"></i> {{ __('orgmgmt')['page']['add_organization'] }}</button>        
         </div>
     </div>
   </div>

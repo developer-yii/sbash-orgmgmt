@@ -873,7 +873,16 @@ class OrganizationController extends Controller
   public function mylist(Request $request)
   {    
     $lang = $this->get_DataTable_LanguageBlock();
-    return view('orgmgmt::organizations.my-organizations',compact('lang')); 
+    $createButtonDisabled = false;
+
+    // to check if user exceeded organization creation limit
+    $orgs = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->get();
+    $projectAlias = config('app.project_alias');
+
+    if ($projectAlias != 'sFlow' && count($orgs) >= 1 || $projectAlias == 'sFlow' && count($orgs) >= 2) {            
+      $createButtonDisabled = true;
+    }    
+    return view('orgmgmt::organizations.my-organizations',compact('lang','createButtonDisabled')); 
   }
 
   public function getMyList(Request $request)
