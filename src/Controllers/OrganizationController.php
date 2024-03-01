@@ -127,6 +127,7 @@ class OrganizationController extends Controller
 
           $orgs = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->get();
           $projectAlias = config('app.project_alias');
+          $addButtonDisabled = false;
 
           if ($projectAlias != 'sFlow' && count($orgs) >= 1 || $projectAlias == 'sFlow' && count($orgs) >= 2) {
             return response()->json(['message' => __('orgmgmt')['organization_creation_limit_exceeded']], 422);
@@ -189,9 +190,13 @@ class OrganizationController extends Controller
             $branch->save();
           }
 
+          if ($projectAlias != 'sFlow' && count($orgs) >= 1 || $projectAlias == 'sFlow' && count($orgs) >= 2) {
+            $addButtonDisabled = true;
+          }
+
           if($r)
           {
-              $result = ['status' => true, 'message' =>__('orgmgmt')['notification']['org_add_success']];
+              $result = ['status' => true, 'message' =>__('orgmgmt')['notification']['org_add_success'], 'addButtonDisabled' => $addButtonDisabled];
               return response()->json($result);
           }
           else

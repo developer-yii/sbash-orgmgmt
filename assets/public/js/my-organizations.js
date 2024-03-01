@@ -238,6 +238,14 @@ $(document).ready(function() {
                 $('#setting_form')[0].reset();                
                 $('#myModal').modal('hide');
                 $("#datatable").DataTable().ajax.reload();
+                
+                if(res.addButtonDisabled)
+                {
+                    $('#btn-tambah').prop('disabled', true);
+                }else{
+                    $('#btn-tambah').prop('disabled', false);
+                }
+
                 if(!$('#edit_id').val())
                 {                    
                     setTimeout(function(){ location.reload() }, 1500);
