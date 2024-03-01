@@ -164,6 +164,7 @@
       "status_update_fail" : "-- translated --",
       "update_org_settings" : "-- translated --"
     },
+    "organization_creation_limit_exceeded" : "-- translated --",
     "orgjoin" : {
       "copyright" : "-- translated --",
       "right_reserved" : "-- translated --",

@@ -126,11 +126,10 @@ class OrganizationController extends Controller
         }
 
           $orgs = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->get();
+          $projectAlias = config('app.project_alias');
 
-          if(count($orgs) >= 2)
-          {
-            // return redirect()->back()->with(['flash_message_error' => trans('orgmgmt::organization.notification.already_two_org_created')]);
-            return response()->json(['message' => __('orgmgmt')['notification']['already_two_org_created']], 422);
+          if ($projectAlias != 'sFlow' && count($orgs) >= 1 || $projectAlias == 'sFlow' && count($orgs) >= 2) {
+            return response()->json(['message' => __('orgmgmt')['organization_creation_limit_exceeded']], 422);
           }
 
           $image_name = '';
@@ -165,8 +164,7 @@ class OrganizationController extends Controller
           $userOrg->access_type = 1; // 1 for owner, 2 for member
           $userOrg->save();         
 
-          // create default process and template on organization create
-          $projectAlias = config('app.project_alias');
+          // create default process and template on organization create          
           if($projectAlias !== null && $projectAlias == 'sFlow')
           {
             $directory = new \App\Models\Directory;

@@ -164,6 +164,7 @@
       "status_update_fail" : "Status change failed",
       "update_org_settings" : "Set up your organization first!"
     },
+    "organization_creation_limit_exceeded" : "Organization creation limit exceeded.",
     "orgjoin" : {
       "copyright" : "Copyright",
       "right_reserved" : "All rights reserved",

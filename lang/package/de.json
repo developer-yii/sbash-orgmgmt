@@ -69,7 +69,7 @@
       "pending" : "Ausstehend",
       "processing" : "Verarbeitung",
       "public_pages" : "Öffentliche Seiten",
-      "reject" : "Abweisen",
+      "reject" : "Ablehnen",
       "request" : "Anfrage senden",
       "requesting" : "Anfrage wird gesendet",
       "save" : "Speichern",
@@ -100,7 +100,7 @@
         "accept" : "Akzeptieren",
         "join_request" : "Beitrittsanfragen",
         "register" : "Registrieren",
-        "reject" : "Abweisen"
+        "reject" : "Ablehnen"
       },
       "by" : "von",
       "following_is_inviter_note" : "Nachfolgend finden Sie die Notiz des Einladenden",
@@ -164,6 +164,7 @@
       "status_update_fail" : "Statusänderung fehlgeschlagen",
       "update_org_settings" : "Richten Sie zuerst Ihre Organisation ein!"
     },
+    "organization_creation_limit_exceeded" : "Erstellungslimit für Organisationen überschritten.",
     "orgjoin" : {
       "copyright" : "Urheberrecht",
       "right_reserved" : "Alle Rechte vorbehalten",
