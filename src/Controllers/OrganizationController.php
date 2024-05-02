@@ -27,10 +27,10 @@ class OrganizationController extends Controller
 {
 
   public function __construct()
-  {   
-      if(class_exists('App\Http\Middleware\CheckSubscription') && class_exists('App\Http\Middleware\PreventBackHistory')){        
-        $this->middleware(['check.subscription', 'preventBackHistory']);        
-      }     
+  {
+      if(class_exists('App\Http\Middleware\PreventBackHistory')){
+        $this->middleware(['preventBackHistory']);
+      }
   }
 
   public function settings(Request $request)
@@ -52,7 +52,7 @@ class OrganizationController extends Controller
           'short_name_available' => 'sometimes',
           'short_name' => 'required_with:short_name_available,on|max:50|string|alpha_num',
           'email_forward' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
-          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2048'                      
+          'logo' => 'mimes:jpeg,jpg,png,gif|sometimes|max:2048'
       ];
 
       $messages = [
@@ -67,7 +67,7 @@ class OrganizationController extends Controller
 
       $validation = Validator::make($request->all(), $rules, $messages);
 
-      if ($validation->fails()) {      
+      if ($validation->fails()) {
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
           return response()->json($result);
       }
@@ -75,7 +75,7 @@ class OrganizationController extends Controller
       {
         if($request->id)
         {
-          $org = Organization::find($request->id);          
+          $org = Organization::find($request->id);
 
           $image_name = $org->logo;
 
@@ -95,20 +95,20 @@ class OrganizationController extends Controller
               $image->move($destinationPath, $image_name);
           }
 
-          $email = trim($request->short_name);                
+          $email = trim($request->short_name);
           $email = $email.'@sbash.io';
           $uId = \Auth::user()->id;
 
           $r = $org->update([
             'name' => $request->name,
             'short_name' => $request->short_name,
-            'email' => $email,              
-            'email_forward' => $request->email_forward,              
-            'short_name_available' => ($request->short_name_available) ? 1 : 0,   
+            'email' => $email,
+            'email_forward' => $request->email_forward,
+            'short_name_available' => ($request->short_name_available) ? 1 : 0,
             'double_optin' => ($request->double_optin) ? 1 : 0,
             'show_organization_info' => ($request->organizationinfo) ? true : false,
             'description' => $request->description,
-            'default_footer' => $request->default_footer,      
+            'default_footer' => $request->default_footer,
             'logo' => $image_name,
             'updated_by' => $uId,
           ]);
@@ -141,21 +141,21 @@ class OrganizationController extends Controller
               $image->move($destinationPath, $image_name);
           }
 
-          $email = trim($request->short_name);                
+          $email = trim($request->short_name);
           $email = $email.'@sbash.io';
 
           $r = Organization::create([
             'name' => $request->name,
             'short_name' => $request->short_name,
             'email' => $email,
-            'email_forward' => $request->email_forward,              
+            'email_forward' => $request->email_forward,
             'short_name_available' => ($request->short_name_available) ? 1 : 0,
             'double_optin' => ($request->double_optin) ? 1 : 0,
             'show_organization_info' => ($request->organizationinfo) ? true : false,
             'description' => $request->description,
             'default_footer' => $request->default_footer,
             'logo' => $image_name,
-            'user_id' => \Auth::user()->id,      
+            'user_id' => \Auth::user()->id,
           ]);
 
           $userOrg = new UserOrganization;
@@ -163,9 +163,9 @@ class OrganizationController extends Controller
           $userOrg->organization_id = $r->id;
           $userOrg->user_type = 'users';
           $userOrg->access_type = 1; // 1 for owner, 2 for member
-          $userOrg->save();         
+          $userOrg->save();
 
-          // create default process and template on organization create          
+          // create default process and template on organization create
           if($projectAlias !== null && $projectAlias == 'sFlow')
           {
             $directory = new \App\Models\Directory;
@@ -181,10 +181,10 @@ class OrganizationController extends Controller
 
             $branch = new \App\Models\Branch;
             $branch->text = $request->name;
-            $branch->organization_id = $r->id;                
-            $branch->type = 'default';   
+            $branch->organization_id = $r->id;
+            $branch->type = 'default';
             $branch->branch_guid = Str::uuid();
-            $branch->is_protected = 1;             
+            $branch->is_protected = 1;
             $branch->responsible_person = \Auth::user()->id;
             $branch->created_by = \Auth::user()->id;
             $branch->save();
@@ -217,7 +217,7 @@ class OrganizationController extends Controller
             if(\Auth::user()->id == $org->user_id)
             {
                 $result = ['status' => true, 'available' => true];
-                return response()->json($result);   
+                return response()->json($result);
             }
 
             $result = ['status' => true, 'available' => false];
@@ -245,14 +245,14 @@ class OrganizationController extends Controller
     if(!auth()->user()->isOwnerOfOrganization())
     {
       return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['update_org_settings']]);
-    }    
+    }
 
     return view('orgmgmt::organizations.invite');
   }
 
   public function sendInvite(Request $request)
   {
-    if (!auth()->user()->can('invite_to_organization')) {      
+    if (!auth()->user()->can('invite_to_organization')) {
       return response()->json(['message' => __('orgmgmt')['notification']['no_invite_org_perm']], 422);
     }
 
@@ -269,7 +269,7 @@ class OrganizationController extends Controller
 
     $validation = Validator::make($request->all(), $rules, $messages);
 
-    if ($validation->fails()) {      
+    if ($validation->fails()) {
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
         return response()->json($result);
     }
@@ -293,16 +293,16 @@ class OrganizationController extends Controller
       // Check if invited email is registered or not
       $existingUser = User::where('email',$request->email)->first();
 
-      $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$org->id)->where('is_registered',0)->first();      
+      $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$org->id)->where('is_registered',0)->first();
 
       if(!$existingUser && !$existingInvite)
       {
         $invitedUsr = new InvitedUser;
         $invitedUsr->email = $request->email;
         $invitedUsr->invite_message = $request->invite_message;
-        $invitedUsr->organization_id = $org->id;        
+        $invitedUsr->organization_id = $org->id;
         $invitedUsr->invited_by = $user->id;
-        $res = $invitedUsr->save();        
+        $res = $invitedUsr->save();
 
         $orgInvitation1 = new OrgInvitationLog;
         $orgInvitation1->organization_id = $org->id;
@@ -313,11 +313,11 @@ class OrganizationController extends Controller
         $orgInvitation1->save();
 
         // Email user a mail for invitation
-        $translationString1 = __('orgmgmt')['mails']['invite_block1'];        
+        $translationString1 = __('orgmgmt')['mails']['invite_block1'];
         if($org->id == config('app.up_organization_id')){          // for uplandcare email 'de' is by default
-          $tempLang = app()->getLocale();          
-          app()->setLocale('de');          
-          $translationString1 = __('orgmgmt')['mails']['invite_block1'];          
+          $tempLang = app()->getLocale();
+          app()->setLocale('de');
+          $translationString1 = __('orgmgmt')['mails']['invite_block1'];
           app()->setLocale($tempLang);
         }
         $translatedText1 = str_replace('<<Organization name>>', $org->name, $translationString1);
@@ -334,7 +334,7 @@ class OrganizationController extends Controller
         }
 
         $locale = app()->getLocale();
-        
+
         $data = [
             'organization_id' => $org->id,
             'organization_name' => $org->name,
@@ -347,22 +347,22 @@ class OrganizationController extends Controller
             'urlApprove' => URL::temporarySignedRoute('register-signed', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
             'urlReject' => URL::temporarySignedRoute('invite-rejected', now()->addDays(5), ['locale' => $locale, 'org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
         ];
-        Mail::to($toEmail)->send(new InviteNonRegisteredUserMail($data,$from));      
+        Mail::to($toEmail)->send(new InviteNonRegisteredUserMail($data,$from));
 
         if($res)
-        {          
+        {
           $result = ['status' => true, 'message' => __('orgmgmt')['notification']['invi_sent'], 'data' => []];
           return response()->json($result);
         }
         else{
           $result = ['status' => false, 'message' => __('orgmgmt')['notification']['something_wrong'], 'data' => []];
-          return response()->json($result);   
+          return response()->json($result);
         }
       }
 
       if($existingInvite)
-      {        
-        return response()->json(['message' => __('orgmgmt')['validation']['already_sent']], 422);       
+      {
+        return response()->json(['message' => __('orgmgmt')['validation']['already_sent']], 422);
       }
 
       if($org)
@@ -374,7 +374,7 @@ class OrganizationController extends Controller
           {
             $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['owner_org']);
             $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
-            return response()->json($result); 
+            return response()->json($result);
           }
         }
 
@@ -395,9 +395,9 @@ class OrganizationController extends Controller
         $orgInvitation->invited_by = $user->id;
         $orgInvitation->save();
 
-        // Email user a mail for invitation        
+        // Email user a mail for invitation
         $translationString = __('orgmgmt')['mails']['invite_block1'];
-        if($org->id == config('app.up_organization_id')){          
+        if($org->id == config('app.up_organization_id')){
           $tempLang = app()->getLocale();
           app()->setLocale('de');
           $translationString = __('orgmgmt')['mails']['invite_block1'];
@@ -425,7 +425,7 @@ class OrganizationController extends Controller
             'urlApprove' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
             'urlReject' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'reject']),
         ];
-        Mail::to($toEmail)->send(new InviteMail($data,$from));        
+        Mail::to($toEmail)->send(new InviteMail($data,$from));
 
         $result = ['status' => true, 'message' => __('orgmgmt')['notification']['invi_sent'], 'data' => []];
         return response()->json($result);
@@ -433,7 +433,7 @@ class OrganizationController extends Controller
       else{
         $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['org_text_1']);
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
-        return response()->json($result);   
+        return response()->json($result);
       }
     }
   }
@@ -447,7 +447,7 @@ class OrganizationController extends Controller
 
       $exists = false;
       $joinSuccess = false;
-      $alreadyAction = false;       
+      $alreadyAction = false;
       $existCheck = UserOrganization::where('user_id',$user->id)->where('organization_id',$organization->id)->first();
 
       if($existCheck)
@@ -473,10 +473,10 @@ class OrganizationController extends Controller
 
       $invLog = OrgInvitationLog::where('organization_id',$organization->id)
                           ->where('to_email',$email)
-                          ->update(['invitation_status' => ($action == 'approve' ? 1 : 2)]);      
+                          ->update(['invitation_status' => ($action == 'approve' ? 1 : 2)]);
 
       if($action == 'approve')
-      {        
+      {
         $userOrg = new UserOrganization;
         $userOrg->user_id = $user->id;
         $userOrg->organization_id = $organization->id;
@@ -484,19 +484,19 @@ class OrganizationController extends Controller
         $userOrg->access_type = $invLogCheckZero->member_type ?? 2; // 1 for owner, 2 for member
         if($userOrg->save())
           $joinSuccess = true;
-      }      
+      }
 
-      $userOrgs = UserOrganization::where('organization_id',$organization->id)->where('access_type',1)->get();      
+      $userOrgs = UserOrganization::where('organization_id',$organization->id)->where('access_type',1)->get();
 
       if(count($userOrgs))
       {
           $orgObj = Organization::find($organization->id);
-          
+
           foreach($userOrgs as $uorg)
           {
               $userObj = User::find($uorg->user_id);
               // Email organization owner for notification
-              $from = $orgObj->email;              
+              $from = $orgObj->email;
               $data = [
                   'organization_id' => $orgObj->id,
                   'organization_name' => $orgObj->name,
@@ -505,18 +505,18 @@ class OrganizationController extends Controller
                   'user_name' => $userObj->name,
                   'action' => $action
               ];
-              Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));        
+              Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));
           }
       }
 
       if($joinSuccess)
-      {        
+      {
         return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction'));
       }
       else{
-        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction')); 
+        return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction'));
       }
-    }    
+    }
   }
 
   public function members(Request $request)
@@ -527,7 +527,7 @@ class OrganizationController extends Controller
     }
 
     if(!$this->isOrganizationAdmins())
-    {      
+    {
       // return redirect()->back()->with(['flash_message_error' => trans('usermgmt::notification.update_org_settings')]);
       return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_member_view_perm']]);
     }
@@ -578,7 +578,7 @@ class OrganizationController extends Controller
       $org = Organization::where('short_name',$request->name)->first();
     }
     else
-    {      
+    {
       $user = \Auth::user();
       if(session('organization_id'))
         $org = Organization::find(session('organization_id'));
@@ -593,35 +593,35 @@ class OrganizationController extends Controller
 
     $result = DB::table('user_organizations')
             ->leftJoin('users','user_organizations.user_id','=','users.id')
-            ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')            
-            ->where('user_organizations.organization_id', $org->id)           
+            ->leftJoin('organizations','user_organizations.organization_id','=','organizations.id')
+            ->where('user_organizations.organization_id', $org->id)
             ->select('user_organizations.id','users.name','users.email','user_organizations.access_type',DB::raw('(CASE user_organizations.access_type WHEN 1 THEN "'.$owner.'" WHEN 3 THEN "'.$admin.'" WHEN 2 THEN "'.$member.'" WHEN 4 THEN "'.$contributor.'" ELSE "" END) AS member_type'));
-            
+
 
       if ($request->ajax()) {
         if ($request->has('order.0.column') && $request->input('order.0.column') == 2) { // Adjust the column index as per your 'member_type' column
-            $direction = $request->input('order.0.dir') === 'asc' ? 'ASC' : 'DESC';            
+            $direction = $request->input('order.0.dir') === 'asc' ? 'ASC' : 'DESC';
             $result->orderBy('member_type', $direction);
           }
-          
-        $dataTable = DataTables::queryBuilder($result)          
+
+        $dataTable = DataTables::queryBuilder($result)
           ->addColumn('actions', function ($data) {
              $button = '';
             if (auth()->user()->can('member_type_change')) {
-              $button .= '<button class="btn btn-primary waves-effect waves-light edit" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="Edit type" data-member="'.$data->access_type.'"><i class="fa fa-edit"></i></button>';           
-              $button .= '<button class="btn btn-danger waves-effect waves-light ml-2 remove" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="remove from member"><i class="fa-solid fa-right-from-bracket"></i></button>';           
+              $button .= '<button class="btn btn-primary waves-effect waves-light edit" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="Edit type" data-member="'.$data->access_type.'"><i class="fa fa-edit"></i></button>';
+              $button .= '<button class="btn btn-danger waves-effect waves-light ml-2 remove" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="remove from member"><i class="fa-solid fa-right-from-bracket"></i></button>';
             }
-            
-            
+
+
             return $button;
           })->rawColumns(['actions']);
 
           if ($request->has('search.value')) { // Adjust the column index as per your 'member_type' column
-              $searchValue = $request->input('search.value'); // Adjust the column index as per your 'member_type' column              
+              $searchValue = $request->input('search.value'); // Adjust the column index as per your 'member_type' column
               $dataTable->filterColumn('member_type', function ($query, $keyword) use ($searchValue, $owner, $admin, $member, $contributor) {
                   $query->whereRaw('(CASE user_organizations.access_type WHEN 1 THEN "'.$owner.'" WHEN 3 THEN "'.$admin.'" WHEN 2 THEN "'.$member.'" WHEN 4 THEN "'.$contributor.'" ELSE "" END) LIKE ?', ["%$searchValue%"]);
               });
-          }    
+          }
 
           return $dataTable->toJson();
       }
@@ -638,9 +638,9 @@ class OrganizationController extends Controller
     {
       return response()->json(['message' => __('orgmgmt')['notification']['no_member_type_change_perm']], 422);
     }
-    
+
     $rules = [
-      'member_type' => 'required',                              
+      'member_type' => 'required',
     ];
 
     $messages = [
@@ -649,18 +649,18 @@ class OrganizationController extends Controller
 
     $validation = Validator::make($request->all(), $rules, $messages);
 
-    if ($validation->fails()) {      
+    if ($validation->fails()) {
         $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
         return response()->json($result);
     }
     else
     {
       if($request->id_edit)
-      {        
+      {
         $userOrg = UserOrganization::find($request->id_edit);
         if($userOrg)
-        {         
-          $org = Organization::find($userOrg->organization_id);          
+        {
+          $org = Organization::find($userOrg->organization_id);
 
           if($org->user_id == $userOrg->user_id)
           {
@@ -671,7 +671,7 @@ class OrganizationController extends Controller
 
           $userOrg->access_type = $request->member_type;
           $userOrg->save();
-          
+
           $result = ['status' => true, 'message' => __('orgmgmt')['notification']['mem_type_changed'], 'data' => []];
           return response()->json($result);
         }
@@ -682,32 +682,32 @@ class OrganizationController extends Controller
   }
 
   public function list(Request $request)
-  {    
+  {
     if (!auth()->user()->can('organization_list')) {
       return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_org_list_perm']]);
-    }    
+    }
 
     $lang = $this->get_DataTable_LanguageBlock();
-    return view('orgmgmt::organizations.list',compact('lang')); 
+    return view('orgmgmt::organizations.list',compact('lang'));
   }
 
   public function get(Request $request)
   {
-    $results = Organization::with('user')          
-            ->where('deleted_at',null)          
+    $results = Organization::with('user')
+            ->where('deleted_at',null)
             ->get();
 
-    return DataTables::of($results)        
-      ->addColumn('user_name', function($data){          
+    return DataTables::of($results)
+      ->addColumn('user_name', function($data){
           return $data->user->name ?? '';
-      })  
-      ->addColumn('actions', function ($data) {        
+      })
+      ->addColumn('actions', function ($data) {
         $listRoute = route('org.members.list').'?name='.$data->short_name;
         $button = '<a class="btn btn-primary waves-effect waves-light edit" target="_blank" data-id="'.$data->id.'" data-toggle="tooltip" data-placement="right" title="Edit"><i class="fa fa-edit"></i></a>';
         $button .= '<a class="btn btn-success waves-effect waves-light ml-1" target="_blank" href="' . $listRoute . '" data-toggle="tooltip" data-placement="right" title="members"><i class="fa fa-users"></i></a>';
         if (auth()->user()->can('invite_to_organization')) {
           $button .= '<a class="btn btn-warning waves-effect waves-light ml-1 invite-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->id.'" data-placement="right" title="Invite"><i class="fa fa-paper-plane"></i></a>';
-        }            
+        }
         return $button;
       })->rawColumns(['actions'])
       ->toJson();
@@ -721,26 +721,26 @@ class OrganizationController extends Controller
     // }
 
     $lang = $this->get_DataTable_LanguageBlock();
-    return view('orgmgmt::organizations.organization-list',compact('lang')); 
+    return view('orgmgmt::organizations.organization-list',compact('lang'));
   }
 
   public function getOrgs(Request $request)
   {
-    $results = Organization::with('user')          
-            ->where('deleted_at',null)          
+    $results = Organization::with('user')
+            ->where('deleted_at',null)
             ->get();
 
-    return DataTables::of($results)        
-      ->addColumn('user_name', function($data){          
+    return DataTables::of($results)
+      ->addColumn('user_name', function($data){
           return $data->user->name ?? '';
       })
       ->addColumn('organization_name', function ($data){
           return $data->name ?? '';
-      })  
-      ->addColumn('actions', function ($data) {       
-        
+      })
+      ->addColumn('actions', function ($data) {
+
           $button = '<a class="btn btn-warning waves-effect waves-light ml-1 request-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->id.'" title="Request">Join</a>';
-                    
+
         return $button;
       })->rawColumns(['actions'])
       ->toJson();
@@ -751,7 +751,7 @@ class OrganizationController extends Controller
   {
       if (!auth()->user()->can('organization_edit')) {
         return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_org_edit_perm']]);
-      }      
+      }
 
       if($request->name)
       {
@@ -796,13 +796,13 @@ class OrganizationController extends Controller
 
       $validation = Validator::make($request->all(), $rules, $messages);
 
-      if ($validation->fails()) {      
+      if ($validation->fails()) {
           $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
           return response()->json($result);
       }
       else
       {
-          $org = Organization::find($request->id);          
+          $org = Organization::find($request->id);
 
           $image_name = $org->logo;
 
@@ -822,16 +822,16 @@ class OrganizationController extends Controller
               $image->move($destinationPath, $image_name);
           }
 
-          $email = trim($request->short_name);                
+          $email = trim($request->short_name);
           $email = $email.'@sbash.io';
           $uId = \Auth::user()->id;
 
           $r = $org->update([
             'name' => $request->name,
             'short_name' => $request->short_name,
-            'email' => $email,              
-            'email_forward' => $request->email_forward,              
-            'short_name_available' => ($request->short_name_available) ? 1 : 0,              
+            'email' => $email,
+            'email_forward' => $request->email_forward,
+            'short_name_available' => ($request->short_name_available) ? 1 : 0,
             'logo' => $image_name,
             'updated_by' => $uId,
             'double_optin' => ($request->double_optin) ? 1 : 0,
@@ -855,7 +855,7 @@ class OrganizationController extends Controller
   {
     if (!auth()->user()->can('members_list')) {
       return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_mem_list_perm']]);
-    }      
+    }
 
     if($request->name)
     {
@@ -876,7 +876,7 @@ class OrganizationController extends Controller
   }
 
   public function mylist(Request $request)
-  {    
+  {
     $lang = $this->get_DataTable_LanguageBlock();
     $createButtonDisabled = false;
 
@@ -884,10 +884,10 @@ class OrganizationController extends Controller
     $orgs = Organization::where('user_id',\Auth::user()->id)->where('deleted_at',null)->get();
     $projectAlias = config('app.project_alias');
 
-    if ($projectAlias != 'sFlow' && count($orgs) >= 1 || $projectAlias == 'sFlow' && count($orgs) >= 2) {            
+    if ($projectAlias != 'sFlow' && count($orgs) >= 1 || $projectAlias == 'sFlow' && count($orgs) >= 2) {
       $createButtonDisabled = true;
-    }    
-    return view('orgmgmt::organizations.my-organizations',compact('lang','createButtonDisabled')); 
+    }
+    return view('orgmgmt::organizations.my-organizations',compact('lang','createButtonDisabled'));
   }
 
   public function getMyList(Request $request)
@@ -900,11 +900,11 @@ class OrganizationController extends Controller
                 $query->where('user_id', auth()->user()->id)
                       ->whereIn('access_type', [1, 3]);
             }])
-            ->get();           
+            ->get();
 
-    return DataTables::of($results)                
+    return DataTables::of($results)
       ->addColumn('actions', function ($data) {
-        $button = '<a class="btn btn-primary waves-effect waves-light edit" data-id="'.$data->id.'" target="_blank" href="javascript:void(0)" title="Edit"><i class="fa fa-edit"></i></a>';                    
+        $button = '<a class="btn btn-primary waves-effect waves-light edit" data-id="'.$data->id.'" target="_blank" href="javascript:void(0)" title="Edit"><i class="fa fa-edit"></i></a>';
         return $button;
       })->rawColumns(['actions'])
       ->toJson();
@@ -933,7 +933,7 @@ class OrganizationController extends Controller
 
   public function isOrganizationAdmins($organizationId = null)
   {
-    $organizationId = $organizationId ?? session('organization_id');    
+    $organizationId = $organizationId ?? session('organization_id');
 
     $orgAdmin = UserOrganization::where('organization_id', $organizationId)->where('user_id', auth()->user()->id)->whereIn('access_type', [1,3])->first();
     if($orgAdmin)

@@ -20,10 +20,10 @@ use Auth;
 class OrganizationRequestController extends Controller
 {
     public function __construct()
-    {   
-        if(class_exists('App\Http\Middleware\CheckSubscription') && class_exists('App\Http\Middleware\PreventBackHistory')){        
-            $this->middleware(['check.subscription', 'preventBackHistory']);        
-        }     
+    {
+        if(class_exists('App\Http\Middleware\PreventBackHistory')){
+            $this->middleware(['preventBackHistory']);
+        }
     }
 
     public function joinRequest(Request $request)
@@ -37,7 +37,7 @@ class OrganizationRequestController extends Controller
 
             $validation = Validator::make($request->all(), $rules);
 
-            if ($validation->fails()) {      
+            if ($validation->fails()) {
                 $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                 return response()->json($result);
             }
@@ -47,29 +47,29 @@ class OrganizationRequestController extends Controller
             if($exists)
             {
                 $validation->errors()->add('already_member',__('orgmgmt')['notification']['already_member']);
-                
+
                 $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                 return response()->json($result);
-            }            
+            }
 
             $checkReq = OrganizationJoinRequest::where('organization_id',$request->id)->where('user_id',$user->id)->first();
 
             if($checkReq)
             {
                 $validation->errors()->add('already_requested',__('orgmgmt')['notification']['already_requested']);
-                
+
                 $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                 return response()->json($result);
             }
 
             else
-            {                
+            {
                 $joinRequest = new OrganizationJoinRequest;
                 $joinRequest->organization_id = $request->id;
                 $joinRequest->user_id = $user->id;
                 $joinRequest->user_note = $request->note;
                 $r = $joinRequest->save();
-                
+
                 $userOrgs = UserOrganization::where('organization_id',$request->id)->where('access_type',1)->get();
 
                 if(count($userOrgs))
@@ -86,7 +86,7 @@ class OrganizationRequestController extends Controller
                             'sender_name' => $user->name,
                             'user_name' => $userObj->name,
                         ];
-                        Mail::to($userObj->email)->send(new ApprovalNotificationMail($data,$from));        
+                        Mail::to($userObj->email)->send(new ApprovalNotificationMail($data,$from));
                     }
                 }
 
@@ -104,11 +104,11 @@ class OrganizationRequestController extends Controller
     }
 
     public function index()
-    {        
+    {
         $x = new OrganizationController;
         $lang = $x->get_DataTable_LanguageBlock();
 
-        return view('orgmgmt::organizations.organization-requests',compact('lang')); 
+        return view('orgmgmt::organizations.organization-requests',compact('lang'));
     }
 
     public function getOrgRequests(Request $request)
@@ -122,24 +122,24 @@ class OrganizationRequestController extends Controller
                         ->where('user_organizations.access_type', '=', 1);
                 })
                 ->join('users', 'organization_join_requests.user_id', '=', 'users.id')
-                ->select('users.name as username','users.email as usermail','organizations.name as orgname','organization_join_requests.created_at as created','organization_join_requests.id as createId','organization_join_requests.is_approved',DB::raw("(CASE 
-                        WHEN organization_join_requests.is_approved = 1 THEN 'Approved' 
-                        WHEN organization_join_requests.is_approved = 2 THEN 'Rejected' 
+                ->select('users.name as username','users.email as usermail','organizations.name as orgname','organization_join_requests.created_at as created','organization_join_requests.id as createId','organization_join_requests.is_approved',DB::raw("(CASE
+                        WHEN organization_join_requests.is_approved = 1 THEN 'Approved'
+                        WHEN organization_join_requests.is_approved = 2 THEN 'Rejected'
                         ELSE 'Pending' END) as status"))
                 ->get();
 
-        return DataTables::of($results)                            
-                ->addColumn('actions', function ($data) {                   
-                    $button = '<a class="btn btn-warning waves-effect waves-light ml-1 view-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->createId.'" data-status-id="'.$data->is_approved.'" title="Request">'.__('orgmgmt')['table']['view'].'</a>';                        
+        return DataTables::of($results)
+                ->addColumn('actions', function ($data) {
+                    $button = '<a class="btn btn-warning waves-effect waves-light ml-1 view-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->createId.'" data-status-id="'.$data->is_approved.'" title="Request">'.__('orgmgmt')['table']['view'].'</a>';
                 return $button;
             })->rawColumns(['actions'])
-          ->toJson();       
+          ->toJson();
     }
 
     public function details(Request $request)
     {
         if ($request->ajax())
-        {            
+        {
             if($request->id)
             {
                 $user = Auth::user();
@@ -148,7 +148,7 @@ class OrganizationRequestController extends Controller
                     $detail = OrganizationJoinRequest::find($request->id);
 
                     if($detail)
-                    {                        
+                    {
                         $result = ['status' => true, 'detail' => $detail];
                         return response()->json($result);
                     }
@@ -157,7 +157,7 @@ class OrganizationRequestController extends Controller
             else{
                 $result = ['status' => false, 'detail' => null];
                 return response()->json($result);
-            }        
+            }
         }
     }
 
@@ -166,12 +166,12 @@ class OrganizationRequestController extends Controller
         if ($request->ajax())
         {
             $rules = [
-                'owner_note' => 'max:1000',                                    
+                'owner_note' => 'max:1000',
             ];
 
             $validation = Validator::make($request->all(), $rules);
 
-            if ($validation->fails()) {      
+            if ($validation->fails()) {
                 $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                 return response()->json($result);
             }
@@ -181,7 +181,7 @@ class OrganizationRequestController extends Controller
                 if($req->is_approved == $request->status)
                 {
                     $validation->errors()->add('status_change', __('orgmgmt')['validation']['update_status']);
-                    
+
                     $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
                     return response()->json($result);
                 }
@@ -212,21 +212,21 @@ class OrganizationRequestController extends Controller
 
                     if($res && $request->status == 1)
                     {
-                        $alreadyMember = UserOrganization::where('organization_id',$req->organization_id)->where('user_id',$req->user_id)->first();                       
+                        $alreadyMember = UserOrganization::where('organization_id',$req->organization_id)->where('user_id',$req->user_id)->first();
                         if(!$alreadyMember)
-                        {                            
+                        {
                             $userOrg = new UserOrganization;
                             $userOrg->user_id = $req->user_id;
                             $userOrg->organization_id = $req->organization_id;
                             $userOrg->user_type = 'users';
                             $userOrg->access_type = 2; // 1 for owner, 2 for member
                             $userOrg->save();
-                            
+
                             $subject = 'Your request to Join Organization has Approved';
                             $action = 'Approved';
 
                             // Email user a mail for invitation
-                            $toEmail = $request->email;                            
+                            $toEmail = $request->email;
                             $data = [
                                 'userName' => $userName,
                                 'name' => $name,
@@ -235,7 +235,7 @@ class OrganizationRequestController extends Controller
                                 'subject' => $subject,
                             ];
                             Mail::to($userObj->email)->send(new RequestActionMail($data,$from));
-                            // end                           
+                            // end
 
                         }
                     }
@@ -243,7 +243,7 @@ class OrganizationRequestController extends Controller
                     {
                         $subject = 'Your request to Join Organization has Rejected';
                         $action = 'Rejected';
-                        
+
                         $data = [
                             'userName' => $userName,
                             'name' => $name,
@@ -252,7 +252,7 @@ class OrganizationRequestController extends Controller
                             'subject' => $subject,
                         ];
 
-                        Mail::to($userObj->email)->send(new RequestActionMail($data,$from));                        
+                        Mail::to($userObj->email)->send(new RequestActionMail($data,$from));
                     }
                     // mail code ends
 
@@ -266,7 +266,7 @@ class OrganizationRequestController extends Controller
                         return response()->json($result);
                     }
                 }
-            }  
+            }
         }
     }
 }
