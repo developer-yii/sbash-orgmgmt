@@ -238,7 +238,7 @@ class OrganizationController extends Controller
 
   public function invite(Request $request)
   {
-    if (!auth()->user()->can('invite_to_organization')) {
+    if (!auth()->user()->can('invite_to_organization') || (!auth()->user()->isOrganizationOwner(session('organization_id')) && !auth()->user()->isOrganizationAdmin(session('organization_id')))) {
       return redirect()->back()->with(['flash_message_error' => __('orgmgmt')['notification']['no_invite_org_perm']]);
     }
 
@@ -252,7 +252,7 @@ class OrganizationController extends Controller
 
   public function sendInvite(Request $request)
   {
-    if (!auth()->user()->can('invite_to_organization')) {
+    if (!auth()->user()->can('invite_to_organization') || (!auth()->user()->isOrganizationOwner(session('organization_id')) && !auth()->user()->isOrganizationAdmin(session('organization_id')))) {
       return response()->json(['message' => __('orgmgmt')['notification']['no_invite_org_perm']], 422);
     }
 
