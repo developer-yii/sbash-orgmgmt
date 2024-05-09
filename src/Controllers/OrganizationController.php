@@ -290,12 +290,40 @@ class OrganizationController extends Controller
         }
       }
 
-      // Check if invited email is registered or not
-      $existingUser = User::where('email',$request->email)->first();
+      if($org)
+      {
+        //validation for own email
+        if(!isset($request->id_edit) && !$request->id_edit)
+        {
+          if($user->email == $request->email)
+          {
+            $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['owner_org']);
+            $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
+            return response()->json($result);
+          }
+        }
 
-      $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$org->id)->where('is_registered',0)->first();
+        $existCheck = '';
+        // Check if invited email is registered or not
+        $toUser = User::where('email',$request->email)->first();
+        if($toUser)
+          $existCheck = UserOrganization::where('user_id',$toUser->id)->where('organization_id',$org->id)->first();
 
-      if(!$existingUser && !$existingInvite)
+        // validation for already member of organization
+        if($existCheck)
+        {
+          $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['already_registered']);
+          $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
+          return response()->json($result);
+        }
+      }else{
+        return response()->json(['message' => __('orgmgmt')['notification']['something_wrong']], 422);
+      }
+
+      // $existingInvite = InvitedUser::where('email',$request->email)->where('organization_id',$org->id)->where('is_registered',0)->first();
+
+      // if(!$toUser && !$existingInvite) // removed as part of multiple invitation allowed sbas-378 same for above line
+      if(!$toUser)
       {
         $invitedUsr = new InvitedUser;
         $invitedUsr->email = $request->email;
@@ -326,12 +354,7 @@ class OrganizationController extends Controller
 
         $toEmail = $request->email;
         $from = $user->email;
-
-        $toName = '';
-        $toUser = User::where('email', $request->email)->first();
-        if($toUser){
-          $toName = $toUser->name;
-        }
+        $toName = ''; // as name would not be available from input or db
 
         $locale = app()->getLocale();
 
@@ -360,33 +383,14 @@ class OrganizationController extends Controller
         }
       }
 
-      if($existingInvite)
+      // removed as part of multiple invitation allowed sbas-378
+      // if($existingInvite)
+      // {
+      //   return response()->json(['message' => __('orgmgmt')['validation']['already_sent']], 422);
+      // }
+
+      if($toUser)
       {
-        return response()->json(['message' => __('orgmgmt')['validation']['already_sent']], 422);
-      }
-
-      if($org)
-      {
-        //validation for own email
-        if(!isset($request->id_edit) && !$request->id_edit)
-        {
-          if($user->email == $request->email)
-          {
-            $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['owner_org']);
-            $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
-            return response()->json($result);
-          }
-        }
-
-        $toUser = User::where('email',$request->email)->first();
-        $existCheck = UserOrganization::where('user_id',$toUser->id)->where('organization_id',$org->id)->first();
-        if($existCheck)
-        {
-          $validation->getMessageBag()->add('email', __('orgmgmt')['validation']['already_registered']);
-          $result = ['status' => false, 'message' => $validation->errors(), 'data' => []];
-          return response()->json($result);
-        }
-
         $orgInvitation = new OrgInvitationLog;
         $orgInvitation->organization_id = $org->id;
         $orgInvitation->to_email = $request->email;
@@ -407,11 +411,7 @@ class OrganizationController extends Controller
         $msgblock1 = str_replace('<<Invitee name>>', $user->name, $translatedText);
 
         $toEmail = $request->email;
-        $toName = '';
-        $toUser = User::where('email', $request->email)->first();
-        if($toUser){
-          $toName = $toUser->name;
-        }
+        $toName = $toUser->name;
 
         $from = $user->email;
         $data = [
@@ -459,9 +459,12 @@ class OrganizationController extends Controller
 
       // for invitation check
       $invLogCheck = OrgInvitationLog::where('organization_id',$organization->id)
-                          ->where('to_email',$email)->where('invitation_status','!=',0)->first();
+                          ->where('to_email',$email)->where('invitation_status','=',0)->first();
 
-      if($invLogCheck)
+      $invActRejLogCheck = OrgInvitationLog::where('organization_id',$organization->id)
+                          ->where('to_email',$email)->whereIn('invitation_status',[1,2])->first();
+
+      if(!$invLogCheck && $invActRejLogCheck)
       {
         $alreadyAction = true;
         return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
@@ -469,7 +472,7 @@ class OrganizationController extends Controller
 
       //to add member_type in User organization
       $invLogCheckZero = OrgInvitationLog::where('organization_id',$organization->id)
-                          ->where('to_email',$email)->where('invitation_status','=',0)->first();
+                          ->where('to_email',$email)->where('invitation_status','=',0)->latest()->first();
 
       $invLog = OrgInvitationLog::where('organization_id',$organization->id)
                           ->where('to_email',$email)
@@ -497,12 +500,19 @@ class OrganizationController extends Controller
               $userObj = User::find($uorg->user_id);
               // Email organization owner for notification
               $from = $orgObj->email;
+
+              $translationString1 = __('orgmgmt')['mails']['invite_response_accept_block1'];
+              $translatedText1 = str_replace('<<Organization name>>', $orgObj->name, $translationString1);
+              $msgblock1 = str_replace('<<first name>>', $user->name, $translatedText1);
+
+
               $data = [
                   'organization_id' => $orgObj->id,
                   'organization_name' => $orgObj->name,
                   'organization_email' => $orgObj->email,
                   'sender_name' => $user->name,
                   'user_name' => $userObj->name,
+                  'msgblock1' => $msgblock1,
                   'action' => $action
               ];
               Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));

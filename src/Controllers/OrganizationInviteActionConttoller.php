@@ -29,7 +29,7 @@ class OrganizationInviteActionConttoller extends Controller
 	      	$existCheck = '';
 	      	$exists = false;
 	      	$joinSuccess = false;
-	      	$alreadyAction = false;       
+	      	$alreadyAction = false;
 
 	      	if($user)
 	      	{
@@ -37,16 +37,19 @@ class OrganizationInviteActionConttoller extends Controller
 	      	}
 
 	      	if($existCheck)
-	      	{	
+	      	{
 	        	$exists = true;
 	        	$alreadyAction = true;
 	        	return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
 	      	}
 
 	      	$invLogCheck = OrgInvitationLog::where('organization_id',$organization->id)
-	                          ->where('to_email',$email)->where('invitation_status','!=',0)->first();
+	                          ->where('to_email',$email)->where('invitation_status','=',0)->first();
 
-	      	if($invLogCheck)
+			$invActRejLogCheck = OrgInvitationLog::where('organization_id',$organization->id)
+                          ->where('to_email',$email)->whereIn('invitation_status',[1,2])->first();
+
+			if(!$invLogCheck && $invActRejLogCheck)
 	      	{
 	        	$alreadyAction = true;
 	        	return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','action','exists','alreadyAction'));
@@ -54,14 +57,14 @@ class OrganizationInviteActionConttoller extends Controller
 
 	      	$invLog = OrgInvitationLog::where('organization_id',$organization->id)
 	                ->where('to_email',$email)
-	                ->update(['invitation_status' => 2]);      	      
+	                ->update(['invitation_status' => 2]);
 
-	      	$userOrgs = UserOrganization::where('organization_id',$organization->id)->where('access_type',1)->get();      
+	      	$userOrgs = UserOrganization::where('organization_id',$organization->id)->where('access_type',1)->get();
 
 	      	if(count($userOrgs))
 	      	{
 	          	$orgObj = Organization::find($organization->id);
-	          
+
 	          	foreach($userOrgs as $uorg)
 	          	{
 	              	$userObj = User::find($uorg->user_id);
@@ -70,7 +73,7 @@ class OrganizationInviteActionConttoller extends Controller
                     $translatedText1 = str_replace('<<Organization name>>', $orgObj->name, $translationString1);
                     $msgblock1 = str_replace('<<first name>>', $email, $translatedText1);
 	              	// Email organization owner for notification
-	              	$from = $orgObj->email;              
+	              	$from = $orgObj->email;
 	              	$data = [
 	              		'organization_id' => $orgObj->id,
 	                  	'organization_name' => $orgObj->name,
@@ -80,11 +83,11 @@ class OrganizationInviteActionConttoller extends Controller
 	                  	'msgblock1' => $msgblock1,
 	                  	'action' => $action
 	              	];
-	              	Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));        
+	              	Mail::to($userObj->email)->send(new InvitationActionMail($data,$from));
 	          	}
 	      	}
-	     
-	      	return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction')); 	      
+
+	      	return view('orgmgmt::organizations.organization-join',compact('email','org','joinSuccess','exists','action','alreadyAction'));
 	    }
-	}	
+	}
 }
