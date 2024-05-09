@@ -501,7 +501,10 @@ class OrganizationController extends Controller
               // Email organization owner for notification
               $from = $orgObj->email;
 
-              $translationString1 = __('orgmgmt')['mails']['invite_response_accept_block1'];
+              if($action == 'approve')
+                $translationString1 = __('orgmgmt')['mails']['invite_response_accept_block1'];
+              else
+                $translationString1 = __('orgmgmt')['mails']['invite_response_reject_block1'];
               $translatedText1 = str_replace('<<Organization name>>', $orgObj->name, $translationString1);
               $msgblock1 = str_replace('<<first name>>', $user->name, $translatedText1);
 
