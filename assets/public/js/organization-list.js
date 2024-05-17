@@ -2,11 +2,11 @@ $(document).ready(function() {
     $('#logo').inputFileText({
         text: chooseFileLang
     });
-    
+
     $('#logo').change(function(){
 
         var file = this.files[0];
-    
+
         // Check if the selected file is an image
         if (!file.type.startsWith('image/')) {
             // Handle the case where the selected file is not an image
@@ -14,24 +14,24 @@ $(document).ready(function() {
 
             // Reset the file input
             $('#logo').val('');
-            
+
             // Remove the file name from the input field
             $('.custom-file-label').text('Choose file');
-            
-            return;            
+
+            return;
         }
         // clear error if any
         $(this).closest('.form-group').find('.error').html('');
 
-        var cHtml = '<img id="preview-image" src="" alt="preview image" style="max-height: 100px;">';
+        var cHtml = '<img id="preview-image" src="" alt="preview image" style="max-height: 100px; object-fit: scale-down">';
         $('.upload_file').remove();
         $('#img-prv').html(cHtml);
-         
+
         let reader = new FileReader();
-        reader.onload = (e) => { 
-          $('#preview-image').attr('src', e.target.result); 
+        reader.onload = (e) => {
+          $('#preview-image').attr('src', e.target.result);
         }
-        reader.readAsDataURL(this.files[0]);           
+        reader.readAsDataURL(this.files[0]);
     });
 
     $('#datatable').DataTable({
@@ -43,7 +43,7 @@ $(document).ready(function() {
         ajax: {
             url: organizationGetUrl,
             type: 'GET',
-            error: function(xhr, textStatus, error) {            
+            error: function(xhr, textStatus, error) {
                 if (xhr.status == 401) {
                     alert(sessionExpiredMsg);
                 } else {
@@ -76,9 +76,9 @@ $(document).ready(function() {
                 render: function(_,_, full) {
                   var created_at = full['created_at'];
                   var created_at = moment(created_at).format('DD MMM YYYY hh:mm A');
-                  
+
                   if(created_at){
-                    return created_at;                                        
+                    return created_at;
                   }
                   return "";
                 }
@@ -90,13 +90,13 @@ $(document).ready(function() {
         ],
     });
 
-    $('#myModal').on('hidden.bs.modal', function(e) {        
-        $('.error').html("");        
+    $('#myModal').on('hidden.bs.modal', function(e) {
+        $('.error').html("");
         $('#forms')[0].reset();
     })
 
-    $('#myModalOrg').on('hidden.bs.modal', function(e) {        
-        $('.error').html("");        
+    $('#myModalOrg').on('hidden.bs.modal', function(e) {
+        $('.error').html("");
         $('#edit_id').val(0);
         $('#setting_form')[0].reset();
         $('#myModalLabel').html(addOrgText);
@@ -110,13 +110,13 @@ $(document).ready(function() {
 
     $(document).on('keyup','#short_name',function(e){
         e.preventDefault();
-        var name = $(this).val();       
-            
+        var name = $(this).val();
+
         $.ajax({
           url: checkNameUrl,
           type: "post",
           data: {
-            name: name,        
+            name: name,
           },
           success: function(result) {
             if (result.status) {
@@ -134,11 +134,11 @@ $(document).ready(function() {
                 console.warn('Failed');
             }
           },
-          error: function(xhr) {  
+          error: function(xhr) {
             if (xhr.status === 419) {
                 window.location.reload();
                 return;
-            }      
+            }
           }
         })
     });
@@ -153,22 +153,22 @@ $(document).ready(function() {
             url: detailUrl+'?id='+id,
             type: 'GET',
             dataType: 'json',
-            success: function(result) {                
-                if(result.status){                            
+            success: function(result) {
+                if(result.status){
                     $('#setting_form').find('#name').val(result.detail.name);
                     $('#setting_form').find('#short_name').val(result.detail.short_name);
-                    var publicpages = baseUrl + '/events/' + result.detail.short_name;                    
+                    var publicpages = baseUrl + '/events/' + result.detail.short_name;
                     $('#public_page').html(publicpages);
                     $('#email').html(result.detail.email);
                     $('#email_forward').val(result.detail.email_forward);
                     $('#default_footer').val(result.detail.default_footer);
-                    CKEDITOR.instances.default_footer.setData( result.default_footer );                    
+                    CKEDITOR.instances.default_footer.setData( result.default_footer );
                     CKEDITOR.instances.description.setData( result.detail.description );
                     if(result.detail.logo)
                     {
                         var htm = '';
                         var src = logoUrl + '/' + result.detail.logo;
-                        htm += '<img id="preview-image" src="'+src+'" alt="preview image" style="max-height: 100px;">';
+                        htm += '<img id="preview-image" src="'+src+'" alt="preview image" style="max-height: 100px; object-fit: scale-down">';
                         $('#img-prv').html(htm);
                     }
                     if(result.detail.double_optin)
@@ -179,12 +179,12 @@ $(document).ready(function() {
                     if(result.detail.show_organization_info)
                     {
                         $('#organizationinfo').prop('checked',true).trigger('change');
-                    }                    
+                    }
 
                     $('#myModalOrg').modal('show');
                 }
             },
-            error: function(xhr) {                
+            error: function(xhr) {
                 toastr.error(xhr.responseJSON.message)
             }
         });
@@ -195,14 +195,14 @@ $(document).ready(function() {
       event.preventDefault();
       $this = $(this);
 
-      
+
         if(!($('#short_name_available').is(':checked')))
         {
             $('.short_name_error').html(short_name_error);
             return;
-        }       
+        }
         $('.short_name_error').html('');
-                
+
           $.ajax({
             url: addUpdateUrl,
             type: 'POST',
@@ -216,21 +216,21 @@ $(document).ready(function() {
             },
             success: function(res, status) {
               $this.find('button[type="submit"]').prop('disabled', false);
-              if (res.status == true) {                                    
+              if (res.status == true) {
                 $('.error').html("");
                 toastr.success(res.message, successMsg);
-                $('#setting_form')[0].reset();                
+                $('#setting_form')[0].reset();
                 $('#myModalOrg').modal('hide');
                 $("#datatable").DataTable().ajax.reload();
                 if(!$('#edit_id').val())
-                {                    
+                {
                     setTimeout(function(){ location.reload() }, 1500);
                 }
-              }          
-              else{            
+              }
+              else{
                 first_input = "";
-                $('.error').html("");           
-                
+                $('.error').html("");
+
                 $.each(res.message, function(key) {
                     if(first_input==""){first_input=key};
                     $('#'+key).closest('.form-group').find('.error').html(res.message[key]);
@@ -256,7 +256,7 @@ $(document).ready(function() {
             url: $(this).attr('action'),
             type: $(this).attr('method'),
             typeData: "JSON",
-            data: $('#forms').serialize(),            
+            data: $('#forms').serialize(),
             beforeSend: function() {
               $this.find('button[type="submit"]').html(buttonLoading);
               $($this).find('button[type="submit"]').prop('disabled', true);
@@ -298,8 +298,8 @@ $(document).ready(function() {
 
     $(document).on('click', '.invite-btn', function() {
         $('#myModalLabel').html(inviteToOrgText);
-        let id = $(this).attr('data-id');                                        
-        $('#id_edit').val(id);        
+        let id = $(this).attr('data-id');
+        $('#id_edit').val(id);
     })
 
 });

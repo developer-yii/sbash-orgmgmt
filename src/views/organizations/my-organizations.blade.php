@@ -14,11 +14,11 @@
       <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['org_list'] }}</li>
     </ol>
     </div>
-  </div>  
+  </div>
   <div class="row mb-2">
     <div class="col-sm-12 right-title">
-      <div class="dropdown content-right">        
-          <button type="button" class="btn btn-block btn-success btn-sm " @if($createButtonDisabled) {{'disabled'}} @endif id="btn-tambah" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square"></i> {{ __('orgmgmt')['page']['add_organization'] }}</button>        
+      <div class="dropdown content-right">
+          <button type="button" class="btn btn-block btn-success btn-sm " @if($createButtonDisabled) {{'disabled'}} @endif id="btn-tambah" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square"></i> {{ __('orgmgmt')['page']['add_organization'] }}</button>
         </div>
     </div>
   </div>
@@ -39,8 +39,8 @@
                   <th>{{ __('orgmgmt')['table']['name'] }}</th>
                   <th>{{ __('orgmgmt')['form']['short_name'] }}</th>
                   <th>{{ __('orgmgmt')['form']['email'] }}</th>
-                  <th>{{ __('orgmgmt')['form']['email_forward'] }}</th>    
-                  <th>{{ __('orgmgmt')['table']['access_type'] }}</th>                             
+                  <th>{{ __('orgmgmt')['form']['email_forward'] }}</th>
+                  <th>{{ __('orgmgmt')['table']['access_type'] }}</th>
                   <th>{{ __('orgmgmt')['table']['created'] }}</th>
                   <th>{{ __('orgmgmt')['table']['action'] }}</th>
                 </tr>
@@ -64,7 +64,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{ route('organization.addUpdate')}}" method="post" id="setting_form"> 
+      <form action="{{ route('organization.addUpdate')}}" method="post" id="setting_form">
         @csrf
         <input type="hidden" id="edit_id" name="id" value="">
         <div class="modal-body">
@@ -76,7 +76,7 @@
                 <div class="col-4">
                   <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('orgmgmt')['form']['enter_organization_name'] }}" value="">
                   <span class="error"></span>
-                </div>              
+                </div>
               </div>
           </div>
           <div class="form-group">
@@ -86,20 +86,20 @@
               </div>
               <div class="col-4">
                 <input type="text" class="form-control" id="short_name" name="short_name" placeholder="{{ __('orgmgmt')['form']['enter_short_name'] }}" value="">
-                <span class="error short_name_error"></span>                
-              </div>              
+                <span class="error short_name_error"></span>
+              </div>
               <div class="col-3">
                 <div class="custom-control custom-checkbox">
                   <input class="custom-control-input custom-control-input-success" type="checkbox" id="short_name_available" name="short_name_available" checked="" readonly onclick="return false;" onkeydown="e = e || window.event; if(e.keyCode !== 9) return false;">
                   <label for="short_name_available" class="custom-control-label">{{ __('orgmgmt')['form']['short_name_available'] }}</label>
-                </div>                
+                </div>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row g-3 align-items-center">
               <div class="col-2">
-                
+
               </div>
               <div class="col-6">
                 <div class="row">
@@ -111,7 +111,7 @@
                     $url = '';
                       if(isset($org->short_name))
                       {
-                        $url = url("")."/events/".$org->short_name; 
+                        $url = url("")."/events/".$org->short_name;
                       }
                     @endphp
                     <span id="public_page"></span>
@@ -125,8 +125,8 @@
                     <span id="email"></span>
                   </div>
                 </div>
-              </div>              
-              <div class="col-3">                  
+              </div>
+              <div class="col-3">
               </div>
             </div>
           </div>
@@ -136,7 +136,7 @@
                 <label for="double_optin" class="">{{ __('orgmgmt')['form']['double_optin'] }}
                 </label>
               </div>
-              <div class="col-4"> 
+              <div class="col-4">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input custom-control-input-success" id="double_optin" name="double_optin">
                   <label for="double_optin" class="custom-control-label"></label>
@@ -152,7 +152,7 @@
               <div class="col-4">
                 <input type="text" class="form-control" id="email_forward" name="email_forward" placeholder="{{ __('orgmgmt')['form']['email_forward'] }}" value="">
                 <span class="error"></span>
-              </div>              
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -163,7 +163,7 @@
               <div class="col-8">
                 <textarea class="form-control ckeditor" id="default_footer" name="default_footer" placeholder="{{ __('orgmgmt')['form']['default_footer'] }}"></textarea>
                 <span class="error"></span>
-              </div>              
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -174,7 +174,7 @@
               <div class="col-8">
                 <textarea class="form-control ckeditor" id="description" name="description" placeholder="{{ __('orgmgmt')['form']['description'] }}"></textarea>
                 <span class="error"></span>
-              </div>              
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -183,7 +183,7 @@
                 <label for="organizationinfo" class="" title="{{ __('orgmgmt')['title']['organizationinfo']}}">{{ __('orgmgmt')['form']['organizationinfo'] }}
                 </label>
               </div>
-              <div class="col-4"> 
+              <div class="col-4">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input custom-control-input-success" id="organizationinfo" name="organizationinfo">
                   <label for="organizationinfo" class="custom-control-label"></label>
@@ -198,23 +198,23 @@
               </div>
               <div class="col-4">
                 <input type="file" id="logo" name="logo">
-              </div>              
+              </div>
             </div>
             <div class="row">
               <div class="col-2"></div>
-              <div class="col-4">     
+              <div class="col-4">
                 <div id="img-prv">
-                  
+
                 </div>
                 <div class="upload_file" id="uploadImages">
-                  
+
                   {{-- <img id="preview-image" src="" alt="preview image" style="max-height: 100px;"> --}}
-                  
-                </div>             
+
+                </div>
                 <span class="error"></span>
               </div>
             </div>
-          </div>            
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" id="btn-close" class="btn btn-secondary waves-effect"
@@ -230,7 +230,7 @@
 
 @section('app-js')
 <script>
-  var organizationGetUrl = "{{ route('organizations.getmylist') }}";        
+  var organizationGetUrl = "{{ route('organizations.getmylist') }}";
   var detailUrl = "{{ route('organization.details')}}";
   var checkNameUrl = "{{ route('organization.checkName')}}"
   var addUpdateUrl = "{{ route('organization.addUpdate')}}";
