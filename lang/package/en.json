@@ -138,6 +138,7 @@
       "already_member" : "You are already member of requested Organization",
       "already_requested" : "You have already requested to join this Organization",
       "already_two_org_created" : "You can not create more than 2 Organization",
+      "atleast_one_admin_member_required" : "At least one admin member required",
       "cant_remove_owner" : "You cant remove Organization owner",
       "error_occurred" : "An error occurred while processing your request.",
       "invi_sent" : "Invitation link sent",

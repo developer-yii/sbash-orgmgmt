@@ -647,7 +647,8 @@ class OrganizationController extends Controller
       return response()->json(['message' => __('orgmgmt')['notification']['no_member_type_change_perm']], 422);
     }
 
-    if(!auth()->user()->isOrganizationOwner(session('organization_id')))
+    // if(!auth()->user()->isOrganizationOwner(session('organization_id')))
+    if(!$this->isOrganizationAdmins(session('organization_id')))
     {
       return response()->json(['message' => __('orgmgmt')['notification']['no_member_type_change_perm']], 422);
     }
@@ -674,6 +675,12 @@ class OrganizationController extends Controller
         if($userOrg)
         {
           $org = Organization::find($userOrg->organization_id);
+
+          // sflow-252
+          $adminCount = UserOrganization::where('organization_id', $userOrg->organization_id)->where('access_type', 3)->count();
+          if($userOrg->access_type == 3 && $adminCount <= 1 && $request->member_type != 3){
+            return response()->json(['message' => __('orgmgmt')['notification']['atleast_one_admin_member_required']], 422);
+          }
 
           if($org->user_id == $userOrg->user_id)
           {

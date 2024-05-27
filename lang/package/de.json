@@ -138,6 +138,7 @@
       "already_member" : "Du bist bereits Mitglied der angeforderten Organisation",
       "already_requested" : "Du hast bereits eine Anfrage gestellt, um dieser Organisation beizutreten",
       "already_two_org_created" : "Sie können nicht mehr als 2 Organisationen erstellen",
+      "atleast_one_admin_member_required" : "Mindestens ein Administrator-Mitglied erforderlich",
       "cant_remove_owner" : "Sie können den Eigentümer der Organisation nicht entfernen",
       "error_occurred" : "Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten.",
       "invi_sent" : "Einladungslink gesendet",
