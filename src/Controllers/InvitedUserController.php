@@ -22,13 +22,13 @@ class InvitedUserController extends Controller
 {
 	public function remove(Request $request)
 	{
-		$user = Auth::user();		
+		$user = Auth::user();
 
 		if($request->id)
 		{
 			if($this->isOrganizationAdmins())
-			{				
-				$userOrganization = UserOrganization::find($request->id);				
+			{
+				$userOrganization = UserOrganization::find($request->id);
 
 				if($userOrganization->access_type == 1)
 				{
@@ -36,15 +36,21 @@ class InvitedUserController extends Controller
       				return response()->json($result);
 				}
 
+				// sflow-252
+				$adminCount = UserOrganization::where('organization_id', $userOrganization->organization_id)->where('access_type', 3)->count();
+				if($userOrganization->access_type == 3 && $adminCount <= 1){
+				  return response()->json(['message' => __('orgmgmt')['notification']['atleast_one_admin_member_required']], 422);
+				}
+
 				$r = $userOrganization->delete();
 
 				if($r)
 				{
 					$result = ['status' => true, 'message' => __('orgmgmt')['notification']['member_remove_success']];
-      				return response()->json($result);	
+      				return response()->json($result);
 				}else {
 					$result = ['status' => false, 'message' => __('orgmgmt')['notification']['member_remove_failed']];
-      				return response()->json($result);	
+      				return response()->json($result);
 				}
 			} else {
 				return response()->json(['message' => __('orgmgmt')['notification']['no_member_remove_perm']], 422);
