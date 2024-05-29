@@ -26,7 +26,7 @@ class InvitedUserController extends Controller
 
 		if($request->id)
 		{
-			if($this->isOrganizationAdmins())
+			if($this->isOrganizationAdmins() || $user->hasAnyRole(['level_2', 'level_3']))
 			{
 				$userOrganization = UserOrganization::find($request->id);
 

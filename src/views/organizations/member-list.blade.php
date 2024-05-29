@@ -14,7 +14,7 @@
       <li class="breadcrumb-item active">{{ __('orgmgmt')['header']['org_members'] }}</li>
     </ol>
     </div>
-  </div>  
+  </div>
   </div><!-- /.container-fluid -->
 </section>
 <button type="button" class="" style="display:none;"  id="btn-add" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-square"></i> Add User</button>
@@ -54,7 +54,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="#" method="post" id="forms"> 
+      <form action="#" method="post" id="forms">
         @csrf
         <input type="hidden" name="id_edit" id="id_edit" />
         <div class="modal-body">
@@ -63,8 +63,8 @@
             <select class="form-control" name="member_type" id="member_type">
               <option value="1">{{ __('orgmgmt')['form']['owner'] }}</option>
               <option value="3">{{ __('orgmgmt')['form']['admin'] }}</option>
-              <option value="2">{{ __('orgmgmt')['form']['member'] }}</option>  
-              <option value="4">{{ __('orgmgmt')['form']['contributor'] }}</option>            
+              <option value="2">{{ __('orgmgmt')['form']['member'] }}</option>
+              <option value="4">{{ __('orgmgmt')['form']['contributor'] }}</option>
             </select>
             <span class="error"></span>
           </div>
@@ -84,11 +84,18 @@
 @section('app-js')
 <script>
   var memberListUrl = "{{ route('organization.members.list')}}?name={{$org->short_name}}";
-  var changeMemTypeUrl = "{{ route('organization.changeMemberType') }}";  
+  var changeMemTypeUrl = "{{ route('organization.changeMemberType') }}";
   var btnChange = "{{ __('orgmgmt')['form']['change'] }}";
   var btnProcessing = "{{ __('orgmgmt')['form']['processing'] }}";
   var editMemberTypeText = "{{ __('orgmgmt')['form']['edit_member_type'] }}";
   var lang = {!! $lang !!}
+  var removeMemberUrl = "{{ route('organization.member.remove')}}";
+  var alert1 = "{{ __('orgmgmt')['alert']['are_you_sure'] }}";
+  var alertsub = "{{ __('orgmgmt')['alert']['are_you_sure_sub'] }}";
+  var cancelText = "{{ __('orgmgmt')['form']['cancel'] }}";
+  var confirmText = "{{ __('orgmgmt')['alert']['confirm_btn'] }}";
+  var ErrorText = "{{ __('orgmgmt')['form']['error'] }}";
+  var editMemberTypeText = "{{ __('orgmgmt')['form']['edit_member_type'] }}";
 </script>
 
 <script type="text/javascript" src="{{asset('/vendor/orgmgmt/js/organization-members.js')}}"></script>
