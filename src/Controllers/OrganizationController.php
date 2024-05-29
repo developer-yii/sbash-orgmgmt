@@ -253,7 +253,7 @@ class OrganizationController extends Controller
   public function sendInvite(Request $request)
   {
     // if user is organization owner or admin user with level_2 and level_3 role having permission invite_to_organization can invite user
-    if (!(auth()->user()->can('invite_to_organization') && auth()->user()->isOrganizationOwner(session('organization_id'))) || !(auth()->user()->can('invite_to_organization') && auth()->user()->hasAnyRole(['level_2', 'level_3']))) {
+    if (!(auth()->user()->can('invite_to_organization') && auth()->user()->isOrganizationOwner(session('organization_id'))) && !(auth()->user()->can('invite_to_organization') && auth()->user()->hasAnyRole(['level_2', 'level_3']))) {
       return response()->json(['message' => __('orgmgmt')['notification']['no_invite_org_perm']], 422);
     }
 
