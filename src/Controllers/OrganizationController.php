@@ -622,8 +622,8 @@ class OrganizationController extends Controller
           ->addColumn('actions', function ($data) {
              $button = '';
             if (auth()->user()->can('member_type_change')) {
-              $button .= '<button class="btn btn-primary waves-effect waves-light edit" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="Edit type" data-member="'.$data->access_type.'"><i class="fa fa-edit"></i></button>';
-              $button .= '<button class="btn btn-danger waves-effect waves-light ml-2 remove" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="remove from member"><i class="fa-solid fa-right-from-bracket"></i></button>';
+              $button .= '<button class="btn btn-primary waves-effect waves-light edit" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="'.getTranslation('orgmgmt.memberlist.tooltip.change_member_type').'" data-member="'.$data->access_type.'"><i class="fa fa-edit"></i></button>';
+              $button .= '<button class="btn btn-danger waves-effect waves-light ml-2 remove" id="' . $data->id . '" data-toggle="tooltip" data-placement="right" title="'.getTranslation('orgmgmt.memberlist.tooltip.remove_from_member').'"><i class="fa-solid fa-right-from-bracket"></i></button>';
             }
 
 
@@ -724,10 +724,10 @@ class OrganizationController extends Controller
       })
       ->addColumn('actions', function ($data) {
         $listRoute = route('org.members.list').'?name='.$data->short_name;
-        $button = '<a class="btn btn-primary waves-effect waves-light edit" target="_blank" data-id="'.$data->id.'" data-toggle="tooltip" data-placement="right" title="Edit"><i class="fa fa-edit"></i></a>';
-        $button .= '<a class="btn btn-success waves-effect waves-light ml-1" target="_blank" href="' . $listRoute . '" data-toggle="tooltip" data-placement="right" title="members"><i class="fa fa-users"></i></a>';
+        $button = '<a class="btn btn-primary waves-effect waves-light edit" target="_blank" data-id="'.$data->id.'" data-toggle="tooltip" data-placement="right" title="'.getTranslation('orgmgmt.organizationlist.tooltip.edit').'"><i class="fa fa-edit"></i></a>';
+        $button .= '<a class="btn btn-success waves-effect waves-light ml-1" target="_blank" href="' . $listRoute . '" data-toggle="tooltip" data-placement="right" title="'.getTranslation('orgmgmt.organizationlist.tooltip.members').'"><i class="fa fa-users"></i></a>';
         if (auth()->user()->can('invite_to_organization')) {
-          $button .= '<a class="btn btn-warning waves-effect waves-light ml-1 invite-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->id.'" data-placement="right" title="Invite"><i class="fa fa-paper-plane"></i></a>';
+          $button .= '<a class="btn btn-warning waves-effect waves-light ml-1 invite-btn" data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-id="'.$data->id.'" data-placement="right" title="'.getTranslation('orgmgmt.organizationlist.tooltip.invite').'"><i class="fa fa-paper-plane"></i></a>';
         }
         return $button;
       })->rawColumns(['actions'])
@@ -925,7 +925,7 @@ class OrganizationController extends Controller
 
     return DataTables::of($results)
       ->addColumn('actions', function ($data) {
-        $button = '<a class="btn btn-primary waves-effect waves-light edit" data-id="'.$data->id.'" target="_blank" href="javascript:void(0)" title="Edit"><i class="fa fa-edit"></i></a>';
+        $button = '<a class="btn btn-primary waves-effect waves-light edit" data-id="'.$data->id.'" target="_blank" href="javascript:void(0)" title="'.getTranslation('orgmgmt.mylist.tooltip.edit').'"><i class="fa fa-edit"></i></a>';
         return $button;
       })->rawColumns(['actions'])
       ->toJson();
