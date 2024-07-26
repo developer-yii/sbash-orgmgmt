@@ -20,7 +20,7 @@ class InviteMail extends Mailable
     }
 
     public function build()
-    {        
+    {
         $subject1 = str_replace('<<Organization Name>>', $this->data['organization_name'], __('orgmgmt')['mails']['invite_subject']);
 
         $markDownView = 'orgmgmt::emails.invite';
@@ -29,7 +29,14 @@ class InviteMail extends Mailable
             app()->setLocale('de');
             $markDownView = 'orgmgmt::emails.uplandcare.invite';
         }
-        
+
+        if(config('app.project_alias') == 'sFlow'){
+            return $this->from($this->data['organization_email'])
+               ->subject($subject1)
+               ->view('orgmgmt::emails.sFlow.invite')
+               ->with(['data' => $this->data]);
+        }
+
         return $this->from($this->data['organization_email'])
                ->subject($subject1)
                ->markdown($markDownView)

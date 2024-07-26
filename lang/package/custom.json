@@ -130,8 +130,15 @@
       "kindly_take_action" : "-- translated --",
       "owners_note" : "-- translated --",
       "request_to_join" : "-- translated --",
+      "sflow_invite_salutation" : "-- translated --",
+      "sflow_invite_text" : "-- translated --",
+      "sflow_invite_text1" : "-- translated --",
+      "sflow_invite_text2" : "-- translated --",
+      "sflow_team" : "-- translated --",
       "team" : "-- translated --",
       "thanks" : "-- translated --",
+      "thank_you" : "-- translated --",
+      "the" : "-- translated --",
       "your_request_to_join" : "-- translated --"
     },
     "notification" : {

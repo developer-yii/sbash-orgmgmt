@@ -103,6 +103,7 @@
         "reject" : "Reject"
       },
       "by" : "by",
+      "click_to_start_sflow_session" : "Click here to sign in and start your session in sflow",
       "following_is_inviter_note" : "following is inviter's note",
       "has_been" : "has been",
       "has_been_recieved_from" : "has been received from",
@@ -130,9 +131,27 @@
       "kindly_take_action" : "Kindly take necessary action on same",
       "owners_note" : "following is owners note",
       "request_to_join" : "Request to Join",
+      "sflow_invite_salutation" : "Hi <<Firstname>>,",
+      "sflow_invite_text" : "You got an invitation to join <<Organization name>> Organization in sflow from <<Invitee name>>:",
+      "sflow_invite_text1" : "By joining you can collaborate with others and work together on your processes and tasks.",
+      "sflow_invite_text2" : "Click on one of the buttons below to accept or reject the invitation:",
+      "sflow_team" : "sFlow Team",
       "team" : "Team",
       "thanks" : "Thanks",
+      "thank_you" : "Thank you",
+      "the" : "The",
       "your_request_to_join" : "Your request to Join"
+    },
+    "memberlist" : {
+      "tooltip" : {
+        "change_member_type" : "Change member type",
+        "remove_from_member" : "Remove from member"
+      }
+    },
+    "mylist" : {
+      "tooltip" : {
+        "edit" : "Edit"
+      }
     },
     "notification" : {
       "already_member" : "You are already member of requested Organization",
@@ -166,6 +185,13 @@
       "update_org_settings" : "Set up your organization first!"
     },
     "organization_creation_limit_exceeded" : "Organization creation limit exceeded.",
+    "organizationlist" : {
+      "tooltip" : {
+        "edit" : "Edit",
+        "invite" : "Invite",
+        "members" : "Members"
+      }
+    },
     "orgjoin" : {
       "copyright" : "Copyright",
       "right_reserved" : "All rights reserved",

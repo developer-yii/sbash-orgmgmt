@@ -352,6 +352,13 @@ class OrganizationController extends Controller
         $translatedText1 = str_replace('<<Organization name>>', $org->name, $translationString1);
         $msgblock2 = str_replace('<<Invitee name>>', $user->name, $translatedText1);
 
+        // for sflow new translation: sflow:381
+        $sflowInviteMsg = getTranslation('orgmgmt.mails.sflow_invite_text');
+        $sflowInviteMsg = strtr($sflowInviteMsg, [
+            '<<Organization name>>' => $org->name,
+            '<<Invitee name>>' => $user->name,
+        ]);
+
 
         $toEmail = $request->email;
         $from = $user->email;
@@ -366,6 +373,7 @@ class OrganizationController extends Controller
             'user_name' => $user->name,
             'invite_message' => $request->invite_message,
             'msgblock1' => $msgblock2,
+            'sflowInviteMsg' => $sflowInviteMsg,
             'toName' => $toName,
             'email' => $request->email,
             'urlApprove' => URL::temporarySignedRoute('register-signed', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
@@ -411,6 +419,13 @@ class OrganizationController extends Controller
         $translatedText = str_replace('<<Organization name>>', $org->name, $translationString);
         $msgblock1 = str_replace('<<Invitee name>>', $user->name, $translatedText);
 
+        // for sflow new translation: sflow:381
+        $sflowInviteMsg = getTranslation('orgmgmt.mails.sflow_invite_text');
+        $sflowInviteMsg = strtr($sflowInviteMsg, [
+            '<<Organization name>>' => $org->name,
+            '<<Invitee name>>' => $user->name,
+        ]);
+
         $toEmail = $request->email;
         $toName = $toUser->name;
 
@@ -421,6 +436,7 @@ class OrganizationController extends Controller
             'organization_email' => $org->email,
             'user_name' => $user->name,
             'msgblock1' => $msgblock1,
+            'sflowInviteMsg' => $sflowInviteMsg,
             'toName' => $toName,
             'invite_message' => $request->invite_message,
             'urlApprove' => URL::temporarySignedRoute('invite-link', now()->addDays(5), ['org' => $org->short_name,'email' => $request->email, 'action' => 'approve']),
