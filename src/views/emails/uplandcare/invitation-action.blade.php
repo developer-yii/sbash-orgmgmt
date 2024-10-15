@@ -76,13 +76,13 @@
                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 18px; font-weight: bold; margin-top: 0; text-align: left;">
                                             {{str_replace('<<invitee name>>', $data['user_name'], __('orgmgmt')['mails']['invite_response_salutation'])}}</h1>
                                         <p
-                                            style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">{{$data['msgblock1']}}</p>                                            
+                                            style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">{{$data['msgblock1']}}</p>
                                             <p
                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                            {!! str_replace('<<Organization name>>', $data['organization_name'], __('orgmgmt')['mails']['invite_response_footer'])!!}</p>                                        
+                                            {!! str_replace('<<Organization name>>', $data['organization_name'], __('orgmgmt')['mails']['invite_response_footer'])!!}</p>
                                         <!-- <p
                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                            {{ trans('mails_verify_thanks', [], $lang) }},<br>
+                                            {{ __('mails_verify_thanks') }}
                                             {{ $from }}</p> -->
                                     </td>
                                 </tr>
@@ -91,7 +91,7 @@
                                 margin: 0 auto !important;text-align: center;">
                                     <td>
                                         <div>
-                                                <div style="padding-top: 20px !important; 
+                                                <div style="padding-top: 20px !important;
                                                         width:100%;margin:0 auto !important;">
                                                     <label for="need-help">
                                                         <a href=""
@@ -121,7 +121,7 @@
                                                         {{ __('115 E- Main Street, Suite AIBI Buford, GA 30518') }}
                                                     </label>
                                                 </div>
-                                                <div style=" padding-bottom: 20px !important; 
+                                                <div style=" padding-bottom: 20px !important;
                                                         width:100%;margin:0 auto !important;">
                                                     <label for="need-help">
                                                         <a href=""
