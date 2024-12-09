@@ -17,13 +17,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "laravel/framework": "^8.12"
+        "laravel/framework": "^8.12 || ^9.0 || ^10.0"
     },
     "extra": {
         "laravel": {
-            "providers": [                
+            "providers": [
                 "Sbash\\Orgmgmt\\Providers\\OrganizationProvider"
-            ]            
+            ]
         }
-    }    
+    }
 }
